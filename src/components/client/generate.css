@@ -1,0 +1,47 @@
+@keyframes insertCoin {
+    0%   {opacity: 0;transform: translateY(-8rem);}
+    25%  {opacity: 100;}
+    50%  {transform: translateY(0);}
+  
+    100% {opacity:100; transform: translateY(6rem);}
+}
+@keyframes sendBox {
+    0%   {scale: 1; transform:translateY(12rem) ;opacity:1;}
+    50% {transform:translateY(5.5rem)}
+    90%{scale:1}
+    95%{opacity: 1;height:7rem}
+    100% { opacity: 1;height:7rem;z-index: 3;}
+}
+
+#coin{
+    position: relative;
+    transform: translateY(-10rem);
+    opacity: 0;
+    z-index:1;
+    animation-timing-function: ease-in;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+#pipe{
+    position: relative;
+    z-index: 2;
+}
+
+#box{
+    position: relative;
+    animation-delay: 1.5s;
+    opacity: 0;
+    z-index:1;
+    scale: 2.4;
+    animation-duration: 2s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards; /* Keep the final state */
+    animation-iteration-count: 1;
+}
+.insertCoin {
+    animation-name: insertCoin;
+}
+
+.sendBox {
+    animation-name: sendBox;
+}
