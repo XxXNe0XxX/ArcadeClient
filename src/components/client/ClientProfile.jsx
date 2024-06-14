@@ -25,17 +25,17 @@ const ClientProfile = () => {
   }, []);
 
   return (
-    <section className="bg-color2 h-[80vh] flex flex-col gap-1 w-full p-4 *:border">
-      <h1>Nombre {clientInfo?.ClientName}</h1>
-      <h1>Correo {clientInfo?.ClientEmail}</h1>
-      <h1>Contacto {clientInfo?.ClientContact}</h1>
-      <h1>Direccion {clientInfo?.ClientAddress}</h1>
-      <h1>Balance {clientInfo?.Credit_balance}</h1>
+    <section className="bg-color2 h-[80vh] flex flex-col gap-2 w-full p-4 ">
+      <h1>Nombre: {clientInfo?.ClientName}</h1>
+      <h1>Correo: {clientInfo?.ClientEmail}</h1>
+      <h1>Contacto: {clientInfo?.ClientContact}</h1>
+      <h1>Direccion: {clientInfo?.ClientAddress}</h1>
+      <h1>Balance: {clientInfo?.Credit_balance}</h1>
 
       {!changepassword && (
         <button
           onClick={() => setChangePassword(!changepassword)}
-          className="border border-color1 p-1"
+          className="border bg-color1 p-1"
         >
           Cambiar contraseña
         </button>

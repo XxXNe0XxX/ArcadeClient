@@ -25,21 +25,19 @@ const Public = () => {
   }, []);
 
   return (
-    <div>
-      <h1 className="text-center p-4 text-3xl text-color1 tracking-tighter font-press-start">
-        Bienvenid@
-      </h1>
-      <h1 className="font-pixel-emulator ">Welcome</h1>
-
-      <div className="flex *:border flex-col gap-2">
-        <Link className="hover:bg-blue-800 text-center" to={"/dash"}>
-          Admin
-        </Link>
-        <Link className="hover:bg-blue-800 text-center" to={"/clientdash"}>
-          Cliente
-        </Link>
+    <div className="flex flex-col">
+      <div className="relative flex justify-center pb-4">
+        <h1 className=" absolute top-5 rounded-3xl bg-black  text-center px-5 py-2 text-3xl text-color1 tracking-tighter font-press-start">
+          Bienvenid@
+        </h1>
+        <img
+          src="/src/assets/images/hero.png"
+          className="h-80 md:h-[600px] w-full object-cover "
+        ></img>
       </div>
-      <section>
+
+      <div className="flex *:border flex-col gap-2"></div>
+      <section className="p-2">
         <h1 className="font-press-start text-xl text-center text-color1 p-3">
           Juegos Disponibles
         </h1>
@@ -62,6 +60,14 @@ const Public = () => {
             })}
           </ul>
         )}
+        <div className=" overflow-hidden absolute bottom-0 right-0 -z-10">
+          <div className="relative rounded-full bg-color3 translate-x-[50px] translate-y-16">
+            <img
+              className="h-40 w-40"
+              src="/src/assets/icons/arcade-cabinet.png"
+            ></img>
+          </div>
+        </div>
       </section>
     </div>
   );

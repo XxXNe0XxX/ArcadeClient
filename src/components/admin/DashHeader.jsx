@@ -4,7 +4,10 @@ import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRightArrowLeft,
+  faCashRegister,
   faChartBar,
+  faCoins,
+  faGamepad,
   faHouseChimney,
   faMoneyBill,
   faPeopleArrows,
@@ -57,11 +60,23 @@ const DashHeader = () => {
               <FontAwesomeIcon icon={faPersonCirclePlus} /> Nuevo Cliente
             </li>
           </Link>
-          <Link to="editbalance">
+
+          <Link to="createarcade">
             <li className="hover:border-color1  hover:text-color1 border p-1 transition-all">
-              <FontAwesomeIcon icon={faMoneyCheckDollar} /> Editar Balance
+              <FontAwesomeIcon icon={faCoins} /> Crear Arcade
             </li>
           </Link>
+          <Link to="machines">
+            <li className="hover:border-color1  hover:text-color1 border p-1 transition-all">
+              <FontAwesomeIcon icon={faGamepad} /> Arcades
+            </li>
+          </Link>
+          <Link to="accounting">
+            <li className="hover:border-color1  hover:text-color1 border p-1 transition-all">
+              <FontAwesomeIcon icon={faCashRegister} /> Contabilidad
+            </li>
+          </Link>
+
           {/* <Link to="generate">
             <li className="hover:border-color1 hover:text-color1 border p-1 transition-all ">
               <FontAwesomeIcon icon={faQrcode} /> Generar QR

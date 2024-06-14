@@ -25,10 +25,6 @@ const PersistLogin = () => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(auth);
-  }, [isLoading]);
-
   return <>{!persist ? <Outlet /> : isLoading ? <p>Loading</p> : <Outlet />}</>;
 };
 

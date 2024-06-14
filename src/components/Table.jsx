@@ -1,22 +1,43 @@
-import { faEdit, faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEdit,
+  faSearch,
+  faTrash,
+  faChartBar,
+  faCheck,
+  faTimes,
+  faToggleOn,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
+import { useModal } from "../context/ModalProvider";
 
-const Table = ({ data, rowsPerPage = 10, title, onEdit = false }) => {
+const Table = ({
+  data,
+  rowsPerPage = 10,
+  title,
+  onEdit = false,
+  onDelete = false,
+  onStatistics = false,
+  onToggle = false,
+}) => {
   const [sortConfig, setSortConfig] = useState({
     key: null,
     direction: "ascending",
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+  const openModal = useModal();
 
-  if (!data || data.length === 0) return <p>No data available</p>;
+  if (!data || data.length === 0) return <p>No hay información disponible</p>;
 
   const columns = Object.keys(data[0]);
 
   const filteredData = data.filter((row) =>
-    columns.some((column) =>
-      row[column].toString().toLowerCase().includes(searchQuery.toLowerCase())
+    columns.some(
+      (column) =>
+        row[column] !== null &&
+        row[column] !== undefined &&
+        row[column].toString().toLowerCase().includes(searchQuery.toLowerCase())
     )
   );
 
@@ -58,6 +79,18 @@ const Table = ({ data, rowsPerPage = 10, title, onEdit = false }) => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
+  const handleDeleteClick = (item) => {
+    openModal({
+      type: "confirmation",
+      message: `Confirmar?`,
+      onConfirm: () => {
+        if (onDelete) {
+          onDelete(item);
+        }
+      },
+    });
+  };
+
   // Create placeholder rows if necessary
   const rowsToDisplay =
     currentData.length < rowsPerPage
@@ -67,25 +100,46 @@ const Table = ({ data, rowsPerPage = 10, title, onEdit = false }) => {
   return (
     <div className="flex flex-col items-center justify-between">
       <div className="flex px-2 justify-between items-center w-full">
-        <h1 className=" text w-[60vw] text-wrap ">{title}</h1>
-        <div className="flex  items-center gap-2   ">
+        <h1 className="text w-[60vw] text-wrap">{title}</h1>
+        <div className="flex items-center gap-2">
           <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
           <input
             type="text"
             placeholder="Buscar"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className=" my-2 rounded-md px-1 border max-w-[40vw]"
+            className="my-2 rounded-md px-1 border max-w-[40vw]"
           />
         </div>
       </div>
-      <div className=" overflow-scroll max-h-[70vh] w-screen">
-        <table className=" bg-white border border-gray-200 w-full p-1">
+      <div className="overflow-scroll h-[70vh] w-screen">
+        <table className="bg-white border border-gray-200 w-full h-full p-1">
           <thead>
             <tr>
+              {onToggle ? (
+                <th className="px-4 py-2 border-b border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer">
+                  <h1>{"Activar\nDesactivar"}</h1>
+                </th>
+              ) : (
+                <th></th>
+              )}
               {onEdit ? (
-                <th className="px-4 py-2 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer">
-                  <h1>Edit</h1>
+                <th className="px-4 py-2 border-b border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer">
+                  <h1>Editar</h1>
+                </th>
+              ) : (
+                <th></th>
+              )}
+              {onDelete ? (
+                <th className="px-4 py-2 border-b border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer">
+                  <h1>Eliminar</h1>
+                </th>
+              ) : (
+                <th></th>
+              )}
+              {onStatistics ? (
+                <th className="px-4 py-2 border-b border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer">
+                  <h1>Estadisticas</h1>
                 </th>
               ) : (
                 <th></th>
@@ -94,9 +148,9 @@ const Table = ({ data, rowsPerPage = 10, title, onEdit = false }) => {
                 <th
                   key={column}
                   onClick={() => handleColumnClick(column)}
-                  className="px-4 py-2 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
+                  className="px-4 py-2 border-b border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
                 >
-                  <h1 className="flex  gap-2">
+                  <h1 className="flex gap-2">
                     {column}
                     {sortConfig.key === column ? (
                       sortConfig.direction === "ascending" ? (
@@ -118,21 +172,88 @@ const Table = ({ data, rowsPerPage = 10, title, onEdit = false }) => {
                 key={rowIndex}
                 className={`${rowIndex % 2 === 0 ? "bg-color4" : ""}`}
               >
+                {onToggle && row ? (
+                  <td>
+                    <button
+                      className="text-color2 text-center w-full"
+                      onClick={() => onToggle(row)}
+                    >
+                      <FontAwesomeIcon
+                        className="text-color3 scale-125"
+                        icon={faToggleOn}
+                      />
+                    </button>
+                  </td>
+                ) : (
+                  <td></td>
+                )}
                 {onEdit && row ? (
                   <td>
                     <button
                       className="text-color2 text-center w-full"
                       onClick={() => onEdit(row)}
                     >
-                      <FontAwesomeIcon icon={faEdit} />
+                      <FontAwesomeIcon className="scale-125" icon={faEdit} />
                     </button>
                   </td>
                 ) : (
                   <td></td>
                 )}
+                {onDelete && row ? (
+                  <td>
+                    <button
+                      className="text-color2 text-center w-full"
+                      onClick={() => handleDeleteClick(row)}
+                    >
+                      <FontAwesomeIcon
+                        className="text-color1 scale-125"
+                        icon={faTrash}
+                      />
+                    </button>
+                  </td>
+                ) : (
+                  <td></td>
+                )}
+                {onStatistics && row ? (
+                  <td>
+                    <button
+                      className="text-color2 text-center w-full"
+                      onClick={() => onStatistics(row)}
+                    >
+                      <FontAwesomeIcon
+                        className="text-color3 scale-125"
+                        icon={faChartBar}
+                      />
+                    </button>
+                  </td>
+                ) : (
+                  <td></td>
+                )}
+
                 {columns.map((column) => (
-                  <td key={column} className="p-1 border-b text-color2">
-                    {row ? row[column] : <span>&nbsp;</span>}
+                  <td
+                    key={column}
+                    className="p-1 h-20 text-color2 text-sm text-center"
+                  >
+                    {row ? (
+                      typeof row[column] === "boolean" ? (
+                        row[column] ? (
+                          <FontAwesomeIcon
+                            className="text-green-600 scale-125"
+                            icon={faCheck}
+                          /> // Checkmark for true
+                        ) : (
+                          <FontAwesomeIcon
+                            className="text-red-600 scale-125"
+                            icon={faTimes}
+                          /> // Cross for false
+                        )
+                      ) : (
+                        row[column]
+                      )
+                    ) : (
+                      <span>&nbsp;</span>
+                    )}
                   </td>
                 ))}
               </tr>
@@ -140,23 +261,23 @@ const Table = ({ data, rowsPerPage = 10, title, onEdit = false }) => {
           </tbody>
         </table>
       </div>
-      <div className="flex max-w-[800px] justify-between items-center  w-screen p-2">
+      <div className="flex max-w-[800px] justify-between items-center w-screen p-2">
         <button
           onClick={handlePreviousPage}
           disabled={currentPage === 1}
           className="px-4 py-2 bg-gray-300 text-gray-700 rounded disabled:opacity-50"
         >
-          Previous
+          {"<"}
         </button>
         <span>
-          Page {currentPage} of {totalPages}
+          Pagina {currentPage} de {totalPages}
         </span>
         <button
           onClick={handleNextPage}
           disabled={currentPage === totalPages}
           className="px-4 py-2 bg-gray-300 text-gray-700 rounded disabled:opacity-50"
         >
-          Next
+          {">"}
         </button>
       </div>
     </div>

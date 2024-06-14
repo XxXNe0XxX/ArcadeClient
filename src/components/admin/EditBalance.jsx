@@ -1,134 +1,133 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { useModal } from "../../context/ModalProvider";
+import Form from "../Form";
+import Button from "../Button";
+import Input from "../Input";
+import { useParams } from "react-router-dom";
 
-const EditBalance = ({ email, setMsg }) => {
+const EditBalance = () => {
+  const { clientId } = useParams();
+  const [info, setInfo] = useState({});
   const axiosPrivate = useAxiosPrivate();
-  const [add, setAdd] = useState();
-  const [amount, setAmount] = useState();
-  const [subtract, setSubtract] = useState();
-  const [currency, setCurrency] = useState("");
+  const openModal = useModal();
+  const [refetch, setRefetch] = useState(false);
+  useEffect(() => {
+    let isMounted = false;
 
-  const addCredits = async (e) => {
-    if (!add || !amount || !currency) {
-      setMsg("Todos los campos son requeridos ");
-    }
-    e.preventDefault();
+    // Get client
+    const getClient = async () => {
+      try {
+        const response = await axiosPrivate.get(
+          `/api/clients/getClientById/${clientId}`
+        );
+        if (response?.status === 200) {
+          setInfo(response.data);
+        }
+      } catch (error) {
+        openModal({ message: error.message });
+      }
+    };
+    getClient();
+    return () => {
+      isMounted = false;
+    };
+  }, [refetch]);
+
+  // Add credits
+  const addCredits = async (formData) => {
     try {
       const response = await axiosPrivate.post(
-        `/api/credits/add-credits/${email}`,
+        `/api/credits/add-credits/${clientId}`,
         JSON.stringify({
-          CreditAmount: add,
-          AmountCharged: amount,
-          Currency: currency,
+          formData,
         })
       );
       if (response.statusText === "OK") {
-        setMsg("Creditos añadidos correctamente");
+        openModal({ message: "Creditos añadidos correctamente" });
       }
+      setRefetch(!refetch);
     } catch (error) {
+      openModal({ message: error.message });
       console.log(error);
     }
   };
-  const removeCredits = async (e) => {
-    if (!subtract) {
-      setMsg("Todos los campos son requeridos");
-    }
-    e.preventDefault();
+
+  // Remove credits
+  const removeCredits = async (formData) => {
     try {
       const response = await axiosPrivate.post(
-        `/api/credits/remove-credits/${email}`,
-        JSON.stringify({ CreditAmount: subtract })
+        `/api/credits/remove-credits/${clientId}`,
+        JSON.stringify({ formData })
       );
       if (response.statusText === "OK") {
-        setMsg("Creditos deducidos correctamente");
+        openModal({ message: "Creditos deducidos correctamente" });
       }
+      setRefetch(!refetch);
     } catch (error) {
-      console.log(error);
+      openModal({ message: error.message });
     }
   };
 
   return (
-    <section className="flex flex-col border-4 border-color1 p-2 gap-4">
-      <h1>Añadir creditos</h1>
-      <form className="flex  border rounded-md  ">
-        <div className="flex flex-col  w-full ">
-          <div className="flex ">
-            <img
-              className="h-12 w-12 object-cover p-1"
-              src="/src/assets/icons/cherries.png"
-            ></img>
-            <input
-              type="number"
-              placeholder="Creditos"
-              value={add}
-              onChange={(e) => setAdd(e.target.value)}
-              className="p-1 border w-60"
-              min="0"
-            />
-          </div>
-          <div className="flex ">
-            <img
-              className="h-12 w-12 object-cover p-1"
-              src="/src/assets/icons/coin.png"
-            ></img>
-            <input
-              type="number"
-              placeholder="Cantidad cobrada"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              className="p-1 border w-60"
-              min="0"
-            />
-          </div>
-          <div className="w-72 border-color1 border overflow-hidden">
-            <select
-              id="currency"
-              name="currency"
-              value={currency}
-              onChange={(e) => setCurrency(e.target.value)}
-              className="text-color3 p-1 w-full border bg-color4"
-              required
-            >
-              <option value="">Selecciona la moneda</option>
-              <option value="MLC">MLC</option>
-              <option value="USD">USD</option>
-              <option value="CUP">CUP</option>
-            </select>
-          </div>
-        </div>
-        <div className="w-full items-center flex justify-center">
-          <button
-            onClick={addCredits}
-            type="submit"
-            className="bg-color1 border p-4  rounded-md "
-          >
-            +
-          </button>
-        </div>
-      </form>
-      <h1>Deducir creditos</h1>
+    <>
+      <ul className="flex flex-col p-2 border gap-2 bg-color2">
+        <li>Cliente: {info.ClientName}</li>
+        <li>Correo: {info.ClientEmail}</li>
+        <li className="bg-color1 p-1 rounded-md w-fit">
+          Balance: {info.Credit_balance}
+        </li>
+      </ul>
 
-      <form className="flex py-2 border rounded-md  ">
-        <div className="flex p-2 flex-col items-center justify-center w-full *:border ">
-          <input
-            type="number"
-            placeholder="Deducir"
-            value={subtract}
-            onChange={(e) => setSubtract(e.target.value)}
-            className="p-1 py-2"
-          />
-        </div>
-        <div className="w-full  items-center flex justify-center">
-          <button
-            onClick={removeCredits}
-            type="submit"
-            className="bg-color1 border p-4 rounded-md "
-          >
-            -
-          </button>
-        </div>
-      </form>
-    </section>
+      <Form onSubmit={addCredits} title="Añadir" className="">
+        <Input
+          img="/src/assets/icons/cherries.png"
+          type="number"
+          name="add"
+          placeholder="Creditos"
+          value=""
+          min={1}
+          required
+          className=""
+        />
+
+        <Input
+          img="/src/assets/icons/coin.png"
+          name="amount"
+          type="number"
+          placeholder="$$$$$$$$"
+          value=""
+          min={1}
+          required
+          className=""
+        />
+        <Input
+          forCurrency={true}
+          options={[
+            { currency: "MLC" },
+            { currency: "USD" },
+            { currency: "CUP" },
+          ]}
+          type="select"
+          id="Moneda"
+          name="currency"
+          required
+          defaultValue={"Selecciona la moneda"}
+        ></Input>
+        <Button type="submit">+</Button>
+      </Form>
+
+      <Form onSubmit={removeCredits} title="Deducir">
+        <Input
+          img="/src/assets/icons/cherries.png"
+          type="number"
+          placeholder="Creditos"
+          value=""
+          name="subtract"
+        />
+        <Button type="submit">-</Button>
+      </Form>
+    </>
   );
 };
 

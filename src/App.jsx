@@ -23,6 +23,11 @@ import ClientQrCodes from "./components/client/ClientQrCodes";
 import ClientProfile from "./components/client/ClientProfile";
 import EditBalance from "./components/admin/EditBalance";
 import ClientChangePassword from "./components/client/ClientChangePassword";
+import CreateArcade from "./components/admin/CreateArcade";
+import Machines from "./components/admin/Machines";
+import EditMachine from "./components/admin/EditMachine";
+import MachineUsage from "./components/admin/MachineUsage";
+import Accounting from "./components/admin/Accounting";
 function App() {
   return (
     <Routes>
@@ -39,13 +44,15 @@ function App() {
           <Route element={<RequireAuth allowedRoles={["Admin"]} />}>
             <Route path="dash" element={<DashLayout />}>
               <Route index element={<Welcome />} />
-              <Route path="clients" element={<Clients />}></Route>
-              <Route
-                path="edit-client/:clientEmail/:clientName/:clientContact/:clientAddress"
-                element={<EditClient />}
-              />
+              <Route path="clients" element={<Clients />} />
+              <Route path="edit-client/:clientId" element={<EditClient />} />
               <Route path="createclient" element={<CreateClient />} />
-              <Route path="editbalance" element={<EditBalance />} />
+              <Route path="editbalance/:clientId" element={<EditBalance />} />
+              <Route path="createarcade" element={<CreateArcade />} />
+              <Route path="machines" element={<Machines />} />
+              <Route path="edit-machine/:machineId" element={<EditMachine />} />
+              <Route path="usage/:machineId" element={<MachineUsage />} />
+              <Route path="accounting" element={<Accounting />} />
             </Route>
             {/* End Dash */}
           </Route>

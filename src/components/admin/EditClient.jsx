@@ -1,96 +1,99 @@
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import DeleteClient from "./DeleteClient";
-import EditBalance from "./EditBalance";
-
+import { Link, useParams } from "react-router-dom";
+import Button from "../Button";
+import Input from "../Input";
+import Form from "../Form";
+import { useModal } from "../../context/ModalProvider";
 const EditClient = () => {
-  const { clientEmail, clientContact, clientAddress, clientName } = useParams();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [contact, setContact] = useState("");
-  const [address, setAddress] = useState("");
-  const [msg, setMsg] = useState("");
-  const [currentEmail, setCurrentEmail] = useState();
+  const { clientId } = useParams();
+  const [info, setInfo] = useState({});
   const axiosPrivate = useAxiosPrivate();
+  const openModal = useModal();
 
   useEffect(() => {
     let isMounted = true;
-    setName(clientName);
-    setEmail(clientEmail);
-    setCurrentEmail(clientEmail);
-    setContact(clientContact);
-    setAddress(clientAddress);
+    //Fetch client
+    const getClient = async () => {
+      try {
+        const response = await axiosPrivate.get(
+          `/api/clients/getClientById/${clientId}`
+        );
+        setInfo(response?.data);
+      } catch (error) {
+        openModal({
+          message: `${error.message}`,
+        });
+      }
+    };
+    getClient();
+
     return () => {
       isMounted = false;
     };
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  //Edit Client
+  const handleSubmit = async (formData) => {
     try {
       const response = await axiosPrivate.put(
-        `/api/clients/updateClient/${currentEmail}`,
-        JSON.stringify({
-          ClientName: name,
-          ClientEmail: email,
-          ClientContact: contact,
-          ClientAddress: address,
-        })
+        `/api/clients/updateClient/${clientId}`,
+        JSON.stringify({ formData })
       );
-      if (response?.statusText === "OK") {
-        setMsg("Cliente actualizado correctamente");
+      if (response.status === 200) {
+        openModal({ message: "Cliente actualizado" });
       }
     } catch (error) {
-      setMsg(error.message);
+      if (error.response.status === 409) {
+        openModal({ message: "Ya existe un cliente con ese correo" });
+      } else if (error.response.status === 400) {
+        openModal({ message: "Al menos un campo es requerido" });
+      } else {
+        openModal({ message: error.message });
+      }
     }
   };
+
   return (
-    <section className=" max-w-[600px] m-auto flex flex-col justify-center  gap-10 p-2">
-      <form className="flex flex-col h-full *:border *:p-1">
-        <h1 className="border-none text-center font-press-start text-3xl">
-          Editar Cliente
-        </h1>
-        {msg ? (
-          <h1 className="border text-center border-color1 p-1 my-2">{msg}</h1>
-        ) : (
-          ""
-        )}
-        <input
+    <section className="flex flex-col">
+      <Form onSubmit={handleSubmit} title="Editar Cliente">
+        <Input
+          id="Nombre"
           type="text"
-          placeholder="Name"
-          required
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          placeholder={info.ClientName}
+          name="name"
+          value=""
         />
 
-        <input
+        <Input
+          id="Correo electronico"
           type="email"
-          placeholder="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          placeholder={info.ClientEmail}
+          value=""
+          name="email"
         />
-        <input
+        <Input
+          id="Contacto"
           type="number"
-          placeholder="Contact"
-          required
-          value={contact}
-          onChange={(e) => setContact(e.target.value)}
+          placeholder={info.ClientContact}
+          value=""
+          name="contact"
         />
-        <input
+        <Input
+          id="Direccion"
           type="text"
-          placeholder="Address"
-          required
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
+          placeholder={info.ClientAddress}
+          value=""
+          name="address"
         />
-        <button onClick={handleSubmit} type="submit" className="bg-color1 ">
-          Editar
-        </button>
-      </form>
-      <DeleteClient email={currentEmail} setMsg={setMsg}></DeleteClient>
-      <EditBalance email={currentEmail} setMsg={setMsg}></EditBalance>
+        <Button type="submit">Editar</Button>
+      </Form>
+      <Link to={`/dash/editbalance/${clientId}`}>
+        <Button className=" flex gap-2 m-auto px-5 items-center justify-center rounded-full">
+          <h1>Administrar balance </h1>
+          <img className="w-8" src="/src/assets/icons/coin.png" alt="" />{" "}
+        </Button>
+      </Link>
     </section>
   );
 };

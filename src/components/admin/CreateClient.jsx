@@ -1,82 +1,81 @@
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-
+import Modal from "../Modal";
+import Button from "../Button";
+import Input from "../Input";
+import Form from "../Form";
 import { useState } from "react";
 
 const CreateClient = () => {
-  const [name, setName] = useState("");
-  const [password, setPasword] = useState("");
-  const [email, setEmail] = useState("");
-  const [contact, setContact] = useState("");
-  const [address, setAddress] = useState("");
-
-  const [success, setSuccess] = useState("");
-  const [error, setError] = useState("");
-
+  const [msg, setMsg] = useState("");
   const axiosPrivate = useAxiosPrivate();
-  const create = async (e) => {
-    e.preventDefault();
-    const clientInfo = {
-      ClientName: name,
-      ClientEmail: email,
-      ClientPassword: password,
-      ClientContact: contact,
-      ClientAddress: address,
-    };
+
+  const createClient = async (formData) => {
     try {
       const response = await axiosPrivate.post(
         "/api/clients/createClient",
-        JSON.stringify(clientInfo)
+        JSON.stringify({ formData })
       );
-      response?.status === 201 && setSuccess("Client created");
+      response?.status === 201 && setMsg("Cliente creado");
     } catch (error) {
-      console.log(error);
-      setError(error);
+      if (error.response.status === 409) {
+        setMsg("El correo ya existe");
+      } else {
+        setMsg(error.message);
+      }
     }
   };
 
+  const handleClose = () => {
+    setMsg("");
+  };
+
   return (
-    <form onSubmit={create} className="flex flex-col h-full *:border *:p-1">
-      {error ? <p>{error}</p> ? success : <p>{success}</p> : ""}
-      <h1 className="border-none">Create Client</h1>
-      <input
-        type="text"
-        placeholder="Name"
-        required
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="********"
-        required
-        value={password}
-        onChange={(e) => setPasword(e.target.value)}
-      />
-      <input
-        type="email"
-        placeholder="email"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="number"
-        placeholder="Contact"
-        required
-        value={contact}
-        onChange={(e) => setContact(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Address"
-        required
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
-      />
-      <button type="submit" className="bg-blue-500">
-        Create
-      </button>
-    </form>
+    <>
+      <Form onSubmit={createClient} title="Crear Cliente">
+        <Input
+          id="Nombre"
+          type="text"
+          placeholder="Nombre"
+          name="name"
+          required
+          value=""
+        />
+        <Input
+          id="Contraseña"
+          type="password"
+          placeholder="********"
+          required
+          value=""
+          name="password"
+        />
+        <Input
+          id="Correo electronico"
+          type="email"
+          placeholder="correo@mail.com"
+          required
+          value=""
+          name="email"
+        />
+        <Input
+          id="Contacto"
+          type="number"
+          placeholder="Contactar a"
+          required
+          value=""
+          name="contact"
+        />
+        <Input
+          id="Direccion"
+          type="text"
+          placeholder="Direccion"
+          required
+          value=""
+          name="address"
+        />
+        <Button type="submit">Crear</Button>
+      </Form>
+      <Modal message={msg} onClose={handleClose} />
+    </>
   );
 };
 

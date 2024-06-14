@@ -14,11 +14,7 @@ const Welcome = () => {
     <section className="h-full">
       <p>{today}</p>
       <h1>Bievenid@ {auth?.email}</h1>
-      <div className="flex gap-2">
-        <button className="border bg-blue-600 rounded-md p-1">
-          <Link to="clients">See Clients</Link>
-        </button>
-      </div>
+      <div className="flex gap-2"></div>
     </section>
   );
 };
