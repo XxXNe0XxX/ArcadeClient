@@ -4,6 +4,7 @@ import { useModal } from "../../context/ModalProvider";
 import Form from "../Form";
 import Button from "../Button";
 import Input from "../Input";
+import Select from "../Select";
 import { useParams } from "react-router-dom";
 
 const EditBalance = () => {
@@ -101,19 +102,18 @@ const EditBalance = () => {
           required
           className=""
         />
-        <Input
-          forCurrency={true}
+        <Select
           options={[
-            { currency: "MLC" },
-            { currency: "USD" },
-            { currency: "CUP" },
+            { value: "MLC", label: "MLC" },
+            { value: "USD", label: "USD" },
+            { value: "CUP", label: "CUP" },
+            { value: "", label: "Selecciona la Moneda" },
           ]}
-          type="select"
           id="Moneda"
           name="currency"
           required
-          defaultValue={"Selecciona la moneda"}
-        ></Input>
+          defaultValue={""}
+        ></Select>
         <Button type="submit">+</Button>
       </Form>
 

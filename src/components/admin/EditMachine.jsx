@@ -5,6 +5,7 @@ import Button from "../Button";
 import Input from "../Input";
 import Form from "../Form";
 import { useModal } from "../../context/ModalProvider";
+import Select from "../Select";
 
 const EditMachine = () => {
   const { machineId } = useParams();
@@ -86,17 +87,24 @@ const EditMachine = () => {
           placeholder={`${info.CreditsPerGame}`}
         ></Input>
         <Input
-          type="select"
+          min={1}
+          type="text"
+          id="Ubicacion"
+          name="location"
+          value=""
+          placeholder={`${info.Location}`}
+        ></Input>
+        <Select
           value=""
           id="Cliente"
           name="clientId"
-          options={clients}
-          label="ClientEmail"
+          options={clients?.map((each) => {
+            return { value: each.ClientID.toString(), label: each.ClientEmail };
+          })}
           defaultValue={
-            clients && info
-              ? clients?.find((each) => each.ClientID === info.ClientID)
-                  ?.ClientEmail
-              : ""
+            clients &&
+            info &&
+            clients?.find((each) => each.ClientID === info.ClientID)?.ClientID
           }
         />
         <Button type="submit">Editar</Button>

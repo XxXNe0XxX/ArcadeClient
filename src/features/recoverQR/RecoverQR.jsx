@@ -11,53 +11,57 @@ const RecoverQR = () => {
   const [showIdentifier, setShowIdentifier] = useState(false);
   const generateQR = async (e) => {
     e.preventDefault();
-    try {
-      function cleanAndFormatString(input) {
-        // Remove all whitespace characters and convert to lowercase
-        let cleanedString = input.replace(/\s+/g, "").toLowerCase();
 
-        // Check the length of the string
-        if (cleanedString.length !== 32 && cleanedString.length !== 36) {
-          return setMsg("Identificador invalido");
-        }
+    function cleanAndFormatString(input) {
+      // Remove all whitespace characters and convert to lowercase
+      let cleanedString = input.replace(/\s+/g, "").toLowerCase();
 
-        // Remove hyphens if the string already has them
-        if (cleanedString.length === 36) {
-          cleanedString = cleanedString.replace(/-/g, "");
-        }
-
-        // Ensure the string is now 32 characters long
-        if (cleanedString.length !== 32) {
-          return setMsg("Identificador invalido");
-        }
-
-        // Add hyphens in the corresponding positions
-        const formattedString = `${cleanedString.slice(
-          0,
-          8
-        )}-${cleanedString.slice(8, 12)}-${cleanedString.slice(
-          12,
-          16
-        )}-${cleanedString.slice(16, 20)}-${cleanedString.slice(20)}`;
-
-        return formattedString;
+      // Check the length of the string
+      if (cleanedString.length !== 32 && cleanedString.length !== 36) {
+        return setMsg("Identificador invalido");
       }
-      const response = await axios.post("/api/qr/get", {
-        identifier: cleanAndFormatString(identifier),
-      });
-      if (response.status === 200) {
-        setQr(response.data.qrCode);
-        setBalance(response.data.balance);
-        setMsg("");
+
+      // Remove hyphens if the string already has them
+      if (cleanedString.length === 36) {
+        cleanedString = cleanedString.replace(/-/g, "");
       }
-    } catch (error) {
-      setMsg(error.message);
+
+      // Ensure the string is now 32 characters long
+      if (cleanedString.length !== 32) {
+        return setMsg("Identificador invalido");
+      }
+
+      // Add hyphens in the corresponding positions
+      const formattedString = `${cleanedString.slice(
+        0,
+        8
+      )}-${cleanedString.slice(8, 12)}-${cleanedString.slice(
+        12,
+        16
+      )}-${cleanedString.slice(16, 20)}-${cleanedString.slice(20)}`;
+
+      return formattedString;
+    }
+
+    if (cleanAndFormatString(identifier)) {
+      try {
+        const response = await axios.post("/api/qr/get", {
+          identifier: cleanAndFormatString(identifier),
+        });
+        if (response.status === 200) {
+          setQr(response.data.qrCode);
+          setBalance(response.data.balance);
+          setMsg("");
+        }
+      } catch (error) {
+        setMsg(error.message);
+      }
     }
   };
   return (
     <form
       onSubmit={generateQR}
-      className="bg-color3 max-w-[600px] mx-auto flex flex-col p-6"
+      className="bg-color2 max-w-[600px] mx-auto flex flex-col p-6"
     >
       <h1 className="font-press-start text-center p-2 text-3xl">
         Recupera tu QR
@@ -75,13 +79,13 @@ const RecoverQR = () => {
           <FontAwesomeIcon
             icon={faEye}
             onClick={() => setShowIdentifier(!showIdentifier)}
-            className=" w-12 h-12 scale-75  "
+            className=" w-12 h-12 scale-50  "
           />
         ) : (
           <FontAwesomeIcon
             icon={faEyeSlash}
             onClick={() => setShowIdentifier(!showIdentifier)}
-            className=" w-12 h-12 scale-75  "
+            className=" w-12 h-12 scale-50  "
           />
         )}
       </div>
@@ -95,8 +99,9 @@ const RecoverQR = () => {
         alt=""
       />
       <div className="flex items-center justify-between">
-        <h1 className="">Balance disponible - - - - {"  "}</h1>
+        <h1 className="">Balance disponible -{"  "}</h1>
         <div className="flex items-center gap-2">
+          <span>-</span>
           <img className="h-8 w-8" src="/src/assets/icons/cherries.png"></img>
           <span className="text-2xl">x{balance}</span>
         </div>

@@ -102,7 +102,10 @@ const MachineUsage = () => {
 
     return { labels, data };
   };
-
+  const getTotalUses = () => {
+    return usageData.reduce((acc, curr) => acc + curr.usage_count, 0);
+  };
+  const totalUses = getTotalUses();
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -123,7 +126,7 @@ const MachineUsage = () => {
   return (
     <div className="flex flex-col">
       <h1 className="p-2">Estadisticas de uso maquina: {machineId}</h1>
-      <div className="flex gap-2 p-2">
+      <div className="flex gap-2 p-2 items-center">
         <Input
           id="Fecha"
           onChange={(e) => setDate(e.target.value)}
@@ -142,6 +145,9 @@ const MachineUsage = () => {
             <option value="year">Año</option>
           </select>
         </div>
+        <h1 className="p-2">
+          Total en el {period}: {totalUses}
+        </h1>
       </div>
 
       {usageData.length > 0 ? (

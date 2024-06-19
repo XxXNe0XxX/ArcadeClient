@@ -7,6 +7,7 @@ import {
   faChartBar,
   faHouseChimney,
   faQrcode,
+  faWrench,
 } from "@fortawesome/free-solid-svg-icons";
 const ClientDashHeader = () => {
   const [open, setIsOpen] = useState(false);
@@ -72,6 +73,11 @@ const ClientDashHeader = () => {
           <Link to="qrcodes">
             <li className="hover:border-color1 hover:text-color1 border p-1 transition-all ">
               <FontAwesomeIcon icon={faQrcode} /> Codigos QR
+            </li>
+          </Link>
+          <Link to="support">
+            <li className="hover:border-color1 hover:text-color1 border p-1 transition-all ">
+              <FontAwesomeIcon icon={faWrench} /> Soporte
             </li>
           </Link>
         </ul>

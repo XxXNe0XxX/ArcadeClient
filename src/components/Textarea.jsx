@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Input = ({
-  type = "text",
+const Textarea = ({
   value = "",
   onChange = () => {},
   placeholder = "",
@@ -21,21 +20,20 @@ const Input = ({
         </div>
       )}
       <label htmlFor={id}>{id}</label>
-      <input
+      <textarea
         id={id}
-        type={type}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
         className={`bg-color2 p-1 text-color4 w-full ${className}`}
         disabled={disabled}
         {...props}
-      />
+      ></textarea>
     </div>
   );
 };
 
-Input.propTypes = {
+Textarea.propTypes = {
   type: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
@@ -44,4 +42,4 @@ Input.propTypes = {
   disabled: PropTypes.bool,
 };
 
-export default Input;
+export default Textarea;

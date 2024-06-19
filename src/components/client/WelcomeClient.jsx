@@ -42,10 +42,8 @@ const WelcomeClient = () => {
         const response = await axiosPrivate.get(
           `/api/clients/expenses/${email}`
         );
-        console.log(response.data.totals);
         setExpenses(response.data.totals);
       } catch (error) {
-        console.log(error);
         setMsg(error.response.message);
       }
     };
@@ -54,7 +52,6 @@ const WelcomeClient = () => {
         const response = await axiosPrivate.get(
           `/api/clients/profits/${email}`
         );
-        console.log(response.data.totals);
 
         setProfits(response.data.totals);
       } catch (error) {

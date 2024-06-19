@@ -55,6 +55,14 @@ const CreateArcade = () => {
           placeholder="1"
           required
         ></Input>
+        <Input
+          type="text"
+          id="Ubicacion"
+          name="location"
+          value=""
+          placeholder="calle a entre b y c"
+          required
+        ></Input>
         <Button type="submit">Crear</Button>
       </Form>
     </>

@@ -10,6 +10,7 @@ import {
   faGamepad,
   faHouseChimney,
   faMoneyBill,
+  faMoneyBillTransfer,
   faPeopleArrows,
   faPerson,
   faPersonCirclePlus,
@@ -74,6 +75,16 @@ const DashHeader = () => {
           <Link to="accounting">
             <li className="hover:border-color1  hover:text-color1 border p-1 transition-all">
               <FontAwesomeIcon icon={faCashRegister} /> Contabilidad
+            </li>
+          </Link>
+          <Link to="transactions">
+            <li className="hover:border-color1  hover:text-color1 border p-1 transition-all">
+              <FontAwesomeIcon icon={faArrowRightArrowLeft} /> Transacciones
+            </li>
+          </Link>
+          <Link to="expense">
+            <li className="hover:border-color1  hover:text-color1 border p-1 transition-all">
+              <FontAwesomeIcon icon={faMoneyBillTransfer} /> Generar Gasto
             </li>
           </Link>
 

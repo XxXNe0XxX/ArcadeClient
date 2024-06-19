@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import RequireAuth from "./components/RequireAuth";
 import Layout from "./components/Layout";
@@ -22,12 +21,20 @@ import ClientMachineStatistics from "./components/client/ClientMachineStatistics
 import ClientQrCodes from "./components/client/ClientQrCodes";
 import ClientProfile from "./components/client/ClientProfile";
 import EditBalance from "./components/admin/EditBalance";
-import ClientChangePassword from "./components/client/ClientChangePassword";
 import CreateArcade from "./components/admin/CreateArcade";
 import Machines from "./components/admin/Machines";
 import EditMachine from "./components/admin/EditMachine";
 import MachineUsage from "./components/admin/MachineUsage";
 import Accounting from "./components/admin/Accounting";
+import GameInfo from "./components/GameInfo";
+import Contact from "./components/Contact";
+import EditTransaction from "./components/admin/EditTransaction";
+import Transactions from "./components/admin/Transactions";
+import CreateExpense from "./components/admin/CreateExpense";
+import HowItWorks from "./components/HowItWorks";
+import FAQ from "./components/FAQ";
+import StoreLocator from "./components/StoreLocator";
+import EmailContact from "./components/EmailContact";
 function App() {
   return (
     <Routes>
@@ -37,7 +44,15 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="unauthorized" element={<Unauthorized />} />
-        <Route path="recoverqr" element={<RecoverQR />}></Route>
+        <Route path="recoverqr" element={<RecoverQR />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="howitworks" element={<HowItWorks />} />
+        <Route path="locations" element={<StoreLocator />} />
+        <Route path="faq" element={<FAQ />} />
+        <Route
+          path="gameinfo/:game/:creditsPerGame/:running"
+          element={<GameInfo />}
+        />
 
         {/* Admin Routes */}
         <Route element={<PersistLogin />}>
@@ -53,6 +68,12 @@ function App() {
               <Route path="edit-machine/:machineId" element={<EditMachine />} />
               <Route path="usage/:machineId" element={<MachineUsage />} />
               <Route path="accounting" element={<Accounting />} />
+              <Route path="expense" element={<CreateExpense />} />
+              <Route path="transactions" element={<Transactions />} />
+              <Route
+                path="edit-transaction/:transactionId"
+                element={<EditTransaction />}
+              />
             </Route>
             {/* End Dash */}
           </Route>
@@ -70,6 +91,7 @@ function App() {
               <Route path="statistics" element={<ClientMachineStatistics />} />
               <Route path="qrcodes" element={<ClientQrCodes />} />
               <Route path="profile" element={<ClientProfile />} />
+              <Route path="support" element={<EmailContact />} />
             </Route>
           </Route>
         </Route>

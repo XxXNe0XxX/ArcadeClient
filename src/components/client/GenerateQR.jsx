@@ -47,7 +47,7 @@ const GenerateQR = () => {
     <section className="flex flex-col justify-between h-full">
       <form
         onSubmit={generate}
-        className="max-w-md mx-auto px-4  bg-color3 shadow-md rounded-md"
+        className="max-w-md mx-auto px-4  bg-color2 shadow-md rounded-md"
       >
         <h1 className="font-press-start text-center p-2 text-3xl">
           Generar QR
@@ -64,7 +64,7 @@ const GenerateQR = () => {
             value={amountCharged}
             onChange={(e) => setAmountCharged(e.target.value)}
             placeholder="$$$$$$$"
-            className="w-full text-color4 bg-color2 p-2 mx-2"
+            className="w-full text-color4  p-2 mx-2"
             required
           />
           <img
@@ -84,7 +84,7 @@ const GenerateQR = () => {
             value={creditAmount}
             onChange={(e) => setCreditAmount(e.target.value)}
             placeholder="Creditos"
-            className="w-full text-color4 bg-color2 p-2 mx-2"
+            className="w-full text-color4  p-2 mx-2"
             required
           />
           <img
