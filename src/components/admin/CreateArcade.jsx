@@ -11,9 +11,9 @@ const CreateArcade = () => {
   const createArcade = async (formData) => {
     try {
       const response = await axiosPrivate.post(
-        "/api/arcademachines/createArcadeMachine",
+        "/api/arcademachines/",
         JSON.stringify({
-          formData,
+          ...formData,
         })
       );
       response?.status === 201 &&
@@ -27,45 +27,35 @@ const CreateArcade = () => {
     }
   };
 
+  const fields = [
+    {
+      id: "Juego",
+      name: "game",
+      type: "input",
+      placeholder: "Ultra Street Fighter IV",
+    },
+    {
+      id: "Ubicacion",
+      name: "location",
+      type: "input",
+      placeholder: "Ubicacion",
+    },
+    {
+      id: "Creditos por partida",
+      name: "creditsPerGame",
+      type: "input",
+      placeholder: "1",
+    },
+    {
+      id: "Correo",
+      name: "email",
+      type: "input",
+      placeholder: "Correo del cliente",
+    },
+  ];
+
   return (
-    <>
-      <Form onSubmit={createArcade} title="Crear Arcade">
-        <Input
-          type="email"
-          id="Correo del cliente"
-          name="email"
-          value=""
-          placeholder="correo@mail.com"
-          required
-        ></Input>
-        <Input
-          type="text"
-          id="Nombre del juego"
-          name="game"
-          value=""
-          placeholder="Ultra Street Fighter IV"
-          required
-        ></Input>
-        <Input
-          min={1}
-          type="number"
-          id="Creditos por partida"
-          name="creditsPerGame"
-          value=""
-          placeholder="1"
-          required
-        ></Input>
-        <Input
-          type="text"
-          id="Ubicacion"
-          name="location"
-          value=""
-          placeholder="calle a entre b y c"
-          required
-        ></Input>
-        <Button type="submit">Crear</Button>
-      </Form>
-    </>
+    <Form onSubmit={createArcade} fields={fields} title="Crear Arcade"></Form>
   );
 };
 

@@ -11,20 +11,10 @@ const ClientTransactions = () => {
     const controller = new AbortController();
     const getTransactions = async () => {
       try {
-        console.log(
-          JSON.stringify({
-            clientEmail: localStorage.getItem("email"),
-          })
-        );
-        const response = await axiosPrivate.get(
-          `/api/transactions/getClientTransactions/${localStorage.getItem(
-            "email"
-          )}`,
-          {
-            withCredentials: true,
-            signal: controller.signal,
-          }
-        );
+        const response = await axiosPrivate.get(`/api/client/transactions`, {
+          withCredentials: true,
+          signal: controller.signal,
+        });
         setData(response?.data);
       } catch (error) {
         console.log(error);
@@ -38,9 +28,9 @@ const ClientTransactions = () => {
   }, []);
 
   return (
-    <div className="">
+    <>
       <Table data={data} title={"Transacciones"} />
-    </div>
+    </>
   );
 };
 

@@ -3,7 +3,7 @@ import DashHeader from "./DashHeader";
 import DashFooter from "./DashFooter";
 const DashLayout = () => {
   return (
-    <section className="h-screen flex flex-col justify-between">
+    <section className="min-h-screen flex flex-col justify-between">
       <DashHeader />
       <Outlet />
       <DashFooter />

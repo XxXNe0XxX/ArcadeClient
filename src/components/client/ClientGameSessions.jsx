@@ -13,22 +13,13 @@ const ClientGameSessions = () => {
     const controller = new AbortController();
     const getGameSessions = async () => {
       try {
-        console.log(
-          JSON.stringify({
-            clientEmail: localStorage.getItem("email"),
-          })
-        );
-        const response = await axiosPrivate.get(
-          `/api/clients/sessions/${localStorage.getItem("email")}`,
-          {
-            withCredentials: true,
-            signal: controller.signal,
-          }
-        );
-        console.log(response.data);
+        const response = await axiosPrivate.get(`/api/client/sessions/`, {
+          withCredentials: true,
+          signal: controller.signal,
+        });
         setSessions(response?.data);
       } catch (error) {
-        console.log(error);
+        setMsg(error.message);
       }
     };
 

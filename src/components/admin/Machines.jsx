@@ -43,7 +43,7 @@ const Machines = () => {
   const handleDelete = async (row) => {
     try {
       const response = await axiosPrivate.delete(
-        `/api/arcademachines/deleteArcadeMachine/${row.MachineID}`
+        `/api/arcademachines//${row.MachineID}`
       );
       response.status === 200 &&
         openModal({
@@ -62,7 +62,7 @@ const Machines = () => {
   const handleToggle = async (row) => {
     try {
       const response = await axiosPrivate.get(
-        `/api/arcademachines/toggleArcadeMachine/${row.MachineID}`
+        `/api/arcademachines/toggle/${row.MachineID}`
       );
       response.data.status === "activated"
         ? openModal({
@@ -73,6 +73,7 @@ const Machines = () => {
             message: `Arcade desactivado`,
           })
         : "";
+      setRefetch(!refetch);
     } catch (error) {
       openModal({
         message: `${error.message}`,

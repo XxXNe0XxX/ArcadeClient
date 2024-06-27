@@ -12,19 +12,10 @@ const ClientQrCodes = () => {
     const controller = new AbortController();
     const getQrCodes = async () => {
       try {
-        console.log(
-          JSON.stringify({
-            clientEmail: localStorage.getItem("email"),
-          })
-        );
-        const response = await axiosPrivate.get(
-          `/api/clients/qrcodes/${localStorage.getItem("email")}`,
-          {
-            withCredentials: true,
-            signal: controller.signal,
-          }
-        );
-        console.log(response.data);
+        const response = await axiosPrivate.get(`/api/client/qrcodes`, {
+          withCredentials: true,
+          signal: controller.signal,
+        });
         setQrCodes(response?.data);
       } catch (error) {
         console.log(error);

@@ -1,12 +1,8 @@
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { useState, useEffect } from "react";
-import Button from "../Button";
-import Input from "../Input";
 import Form from "../Form";
 import { useModal } from "../../context/ModalProvider";
-import Select from "../Select";
 
-const EditMachine = () => {
+const CreateExpense = () => {
   const axiosPrivate = useAxiosPrivate();
   const openModal = useModal();
 
@@ -14,8 +10,8 @@ const EditMachine = () => {
   const createExpense = async (formData) => {
     try {
       const response = await axiosPrivate.post(
-        `/api/transactions/createExpense/${localStorage.getItem("email")}`,
-        JSON.stringify({ formData })
+        `/api/transactions/createExpense/`,
+        JSON.stringify({ ...formData })
       );
       if (response?.status === 201) {
         openModal({ message: "Gasto creado" });
@@ -28,41 +24,37 @@ const EditMachine = () => {
       }
     }
   };
+
+  const fields = [
+    {
+      id: "Cantidad Cobrada",
+      name: "amountCharged",
+      type: "input",
+      placeholder: "$$$$$$$$",
+    },
+    {
+      id: "Moneda",
+      name: "currency",
+      type: "select",
+      placeholder: "Selecciona la moneda",
+      options: [
+        { value: "MLC", label: "MLC" },
+        { value: "USD", label: "USD" },
+        { value: "CUP", label: "CUP" },
+      ],
+    },
+    {
+      id: "Descripcion",
+      name: "description",
+      type: "textarea",
+      placeholder: "Descripcion",
+    },
+  ];
   return (
     <>
-      <Form onSubmit={createExpense} title="Crear Gasto">
-        <Input
-          id="Cantidad cobrada"
-          type="number"
-          placeholder="$$$$$$$$$"
-          value=""
-          name="Amount_charged"
-          required
-        />
-        <Select
-          value=""
-          id="Moneda"
-          name="Currency"
-          options={[
-            { value: "CUP", label: "CUP" },
-            { value: "MLC", label: "MLC" },
-            { value: "USD", label: "USD" },
-            { value: "", label: "Selecciona la moneda" },
-          ]}
-          required
-        />
-        <Input
-          id="Descripcion"
-          type="text"
-          placeholder="Breve descripcion del gasto"
-          value=""
-          name="Description"
-          required
-        />
-        <Button type="submit">Editar</Button>
-      </Form>
+      <Form onSubmit={createExpense} title="Crear Gasto" fields={fields} />
     </>
   );
 };
 
-export default EditMachine;
+export default CreateExpense;

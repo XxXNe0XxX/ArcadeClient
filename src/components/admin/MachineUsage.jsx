@@ -5,11 +5,11 @@ import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import Input from "../Input";
+import Select from "../Select";
 const MachineUsage = () => {
   const { machineId } = useParams();
   const axiosPrivate = useAxiosPrivate();
   const [usageData, setUsageData] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [date, setDate] = useState(
     // "2024-06-07"
     new Date().toISOString().split("T")[0]
@@ -17,6 +17,7 @@ const MachineUsage = () => {
   const [period, setPeriod] = useState("day"); // "day", "month", "year"
 
   useEffect(() => {
+    console.log(machineId);
     const fetchUsageData = async () => {
       try {
         if (machineId && date) {
@@ -48,13 +49,12 @@ const MachineUsage = () => {
           setUsageData(response.data);
         }
       } catch (error) {
-        setError(error);
+        console.log(error);
       } finally {
-        setLoading(false);
       }
     };
 
-    fetchUsageData();
+    date && period && fetchUsageData();
   }, [machineId, date, period]);
 
   const getChartData = () => {
@@ -106,9 +106,6 @@ const MachineUsage = () => {
     return usageData.reduce((acc, curr) => acc + curr.usage_count, 0);
   };
   const totalUses = getTotalUses();
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   const chartData = getChartData();
   const getTitle = () => {
@@ -124,28 +121,26 @@ const MachineUsage = () => {
     return "";
   };
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       <h1 className="p-2">Estadisticas de uso maquina: {machineId}</h1>
-      <div className="flex gap-2 p-2 items-center">
+      <div className=" grid gap-2 md:grid-cols-3 justify-center p-2">
         <Input
           id="Fecha"
           onChange={(e) => setDate(e.target.value)}
           type="date"
           value={date}
         />
-        <div className="flex flex-col justify-between">
-          <label htmlFor="period">Periodo</label>
-          <select
-            id="period"
-            onChange={(e) => setPeriod(e.target.value)}
-            className={`bg-color2 p-1 h-full text-color4`}
-          >
-            <option value="day">Dia</option>
-            <option value="month">Mes</option>
-            <option value="year">Año</option>
-          </select>
-        </div>
-        <h1 className="p-2">
+        <Select
+          id="Periodo"
+          onChange={(e) => setPeriod(e.target.value)}
+          options={[
+            { value: "day", label: "Dia" },
+            { value: "month", label: "Mes" },
+            { value: "year", label: "Año" },
+          ]}
+          placeholder={"Selecciona el periodo"}
+        ></Select>
+        <h1 className="p-3 flex items-end  justify-center">
           Total en el {period}: {totalUses}
         </h1>
       </div>

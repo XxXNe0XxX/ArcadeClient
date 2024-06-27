@@ -1,45 +1,34 @@
+// TextArea.jsx
 import React from "react";
 import PropTypes from "prop-types";
 
-const Textarea = ({
-  value = "",
-  onChange = () => {},
-  placeholder = "",
-  className = "",
-  disabled = false,
-  id = "",
-  defaultValue,
-  img = "",
-  ...props
-}) => {
+const TextArea = ({ id, value, onChange, placeholder, className, name }) => {
   return (
-    <div className={`flex ${img ? "justify-start" : "flex-col"} `}>
-      {img && (
-        <div className="w-10 flex items-center justify-center mr-2">
-          <img className=" " src={img}></img>
-        </div>
-      )}
+    <div className="flex flex-col">
       <label htmlFor={id}>{id}</label>
       <textarea
         id={id}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`bg-color2 p-1 text-color4 w-full ${className}`}
-        disabled={disabled}
-        {...props}
-      ></textarea>
+        className={`w-full flex border rounded-md p-2 ${className}`}
+        name={name}
+      />
     </div>
   );
 };
 
-Textarea.propTypes = {
-  type: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onChange: PropTypes.func,
+TextArea.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   className: PropTypes.string,
-  disabled: PropTypes.bool,
+  name: PropTypes.string.isRequired,
 };
 
-export default Textarea;
+TextArea.defaultProps = {
+  placeholder: "",
+  className: "",
+};
+
+export default TextArea;

@@ -13,9 +13,9 @@ const ConfirmationModal = ({
   if (!isOpen) return null;
 
   return (
-    <div className=" fixed top-0 left-0  max-w-[500px]  m-auto ">
-      <div className="p-2 rounded-md shadow-md text-center border bg-black border-color1 mt-12 flex gap-2 ">
-        <div className="flex *:px-2 gap-2 items-center justify-end w-full ">
+    <div className=" fixed top-0 flex md:justify-start justify-center w-full m-auto ">
+      <div className="p-2  rounded-md shadow-md text-center border bg-black border-color1 mt-12 flex gap-2 ">
+        <div className="flex  *:px-2 gap-2 items-center justify-end w-full ">
           <h1>{message}</h1>
           {type == "message" ? (
             <>

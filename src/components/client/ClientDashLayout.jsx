@@ -3,7 +3,7 @@ import ClientDashHeader from "./ClientDashHeader";
 import ClientDashFooter from "./ClientDashFooter";
 const ClientDashLayout = () => {
   return (
-    <section className="h-screen flex flex-col justify-between">
+    <section className=" min-h-screen flex flex-col justify-between">
       <ClientDashHeader />
 
       <Outlet />

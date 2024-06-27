@@ -1,51 +1,54 @@
-// Select.js
+// Select.jsx
 import React from "react";
 import PropTypes from "prop-types";
 
 const Select = ({
-  value,
-  onChange = () => {},
   options,
-  className = "",
-  disabled = false,
-  defaultValue = "",
+  value,
+  onChange,
+  placeholder,
+  className,
+  name,
+  disabled,
   id,
-  ...props
 }) => {
   return (
-    <>
-      <label>{id}</label>
+    <div className="flex flex-col items-start justify-center">
+      <label htmlFor={id}>{id}</label>
       <select
+        id={id}
         value={value}
         onChange={onChange}
-        className={`bg-color4 text-color2 p-1 ${className}`}
+        className={`bg-color2 p-2 w-full rounded-md ${className}`}
+        name={name}
         disabled={disabled}
-        {...props}
       >
-        {options.map((option, index) => (
+        <option value="">{placeholder}</option>
+        {options?.map((option, index) => (
           <option key={index} value={option.value}>
             {option.label}
           </option>
         ))}
       </select>
-    </>
+    </div>
   );
 };
 
 Select.propTypes = {
-  name: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  onChange: PropTypes.func,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
         .isRequired,
-      label: PropTypes.string.isRequired,
+      label: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        .isRequired,
     })
   ).isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
   className: PropTypes.string,
+  name: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
-  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default Select;

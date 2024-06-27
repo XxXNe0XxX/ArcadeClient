@@ -25,7 +25,6 @@ const GenerateQR = () => {
       const response = await axiosPrivate.post("/api/qr/generate", {
         amountCharged,
         creditAmount,
-        email: localStorage.getItem("email"),
         currency,
       });
 
@@ -95,7 +94,7 @@ const GenerateQR = () => {
         <div className="mb-4">
           <label
             htmlFor="currency"
-            className="block font-medium text-color2 py-1"
+            className="block font-medium text-color4 py-1"
           >
             Moneda
           </label>

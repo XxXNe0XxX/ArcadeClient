@@ -1,36 +1,61 @@
+// Input.jsx
 import React from "react";
 import PropTypes from "prop-types";
-
-const Input = ({
-  type = "text",
-  value = "",
-  onChange = () => {},
-  placeholder = "",
-  className = "",
-  disabled = false,
-  id = "",
-  defaultValue,
-  img = "",
-  ...props
-}) => {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+const Input = ({ id, type, value, onChange, placeholder, className, name }) => {
+  const [show, setShow] = useState(false);
   return (
-    <div className={`flex ${img ? "justify-start" : "flex-col"} `}>
-      {img && (
-        <div className="w-10 flex items-center justify-center mr-2">
-          <img className=" " src={img}></img>
-        </div>
-      )}
+    <div className="flex flex-col">
       <label htmlFor={id}>{id}</label>
-      <input
-        id={id}
-        type={type}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className={`bg-color2 p-1 text-color4 w-full ${className}`}
-        disabled={disabled}
-        {...props}
-      />
+      <div className="flex items-center justify-start">
+        <input
+          id={id}
+          type={
+            name === "password" ||
+            name === "currentPassword" ||
+            name === "newPassword" ||
+            name === "repeatPassword"
+              ? "password"
+              : name === "email"
+              ? "email"
+              : name === "contact" ||
+                name === "add" ||
+                name === "subtract" ||
+                name === "amount" ||
+                name === "creditAmount" ||
+                name === "creditsPerGame"
+              ? "number"
+              : type
+          }
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          className={`p-2 rounded-md border border-color2 w-full rounded-md${className}`}
+          name={name}
+          min={1}
+        />
+        {/* {name === "password" ||
+        name === "currentPassword" ||
+        name === "repeatPassword" ||
+        name === "newPassword" ? (
+          <FontAwesomeIcon
+            onClick={() => {
+              setShow(!show);
+              console.log(show);
+            }}
+            icon={faEye}
+            className=" w-8 h-8 scale-75 "
+          ></FontAwesomeIcon>
+        ) : (
+          <FontAwesomeIcon
+            onClick={() => setShow(!show)}
+            icon={faEyeSlash}
+            className=" w-8 h-8 scale-75 "
+          ></FontAwesomeIcon>
+        )} */}
+      </div>
     </div>
   );
 };
@@ -38,10 +63,10 @@ const Input = ({
 Input.propTypes = {
   type: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   className: PropTypes.string,
-  disabled: PropTypes.bool,
+  name: PropTypes.string.isRequired,
 };
 
 export default Input;

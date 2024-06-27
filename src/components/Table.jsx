@@ -6,6 +6,7 @@ import {
   faCheck,
   faTimes,
   faToggleOn,
+  faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
@@ -28,7 +29,20 @@ const Table = ({
   const [searchQuery, setSearchQuery] = useState("");
   const openModal = useModal();
 
-  if (!data || data.length === 0) return <p>No hay información disponible</p>;
+  if (!data || data.length === 0)
+    return (
+      <div className="flex flex-col items-center justify-center text-center h-64 border border-color4 p-2 max-w-[800px] w-full m-auto">
+        <FontAwesomeIcon
+          icon={faInfoCircle}
+          size="3x"
+          className="text-gray-400"
+        />
+        <p className="text-gray-600 mt-2">
+          No hay informacion disponible por el momento.
+        </p>
+        <p className="text-gray-500">Intente mas tarde.</p>
+      </div>
+    );
 
   const columns = Object.keys(data[0]);
 

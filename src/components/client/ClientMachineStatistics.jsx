@@ -9,7 +9,7 @@ const ClientMachineStatistics = () => {
     const fetchMachineStatistics = async () => {
       try {
         const response = await axiosPrivate.get(
-          `api/clients/machinestatistics/${localStorage.getItem("email")}`
+          `api/client/machinestatistics/`
         );
 
         console.log(response.data);

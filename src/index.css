@@ -31,3 +31,9 @@
     background-color: #f9f9f9;
   }
 }
+
+.colortext {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: rgb(0 0 0 / 20%);
+}

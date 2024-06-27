@@ -45,7 +45,7 @@ const RecoverQR = () => {
 
     if (cleanAndFormatString(identifier)) {
       try {
-        const response = await axios.post("/api/qr/get", {
+        const response = await axios.post("/api/qr/recover", {
           identifier: cleanAndFormatString(identifier),
         });
         if (response.status === 200) {

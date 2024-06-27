@@ -4,7 +4,7 @@ import Input from "./Input";
 import Form from "./Form";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useModal } from "../context/ModalProvider";
-import Textarea from "./Textarea";
+import Textarea from "../components/TextArea";
 const EmailContact = () => {
   const axiosPrivate = useAxiosPrivate();
   const openModal = useModal();
@@ -21,33 +21,17 @@ const EmailContact = () => {
       openModal({ message: error.message });
     }
   };
-
-  return (
-    <Form onSubmit={sendEmail} title="Comunicate">
-      <Input
-        type="text"
-        id="Nombre"
-        name="name"
-        value=""
-        placeholder="Nombre"
-      ></Input>
-      <Input
-        type="email"
-        id="Correo"
-        name="email"
-        value={""}
-        placeholder="correo@mail.com"
-        required
-      ></Input>
-      <Textarea
-        id="Mensaje"
-        value=""
-        name="message"
-        placeholder="Cuentanos que sucede..."
-      ></Textarea>
-      <Button type="submit">Enviar</Button>
-    </Form>
-  );
+  const fields = [
+    { id: "Nombre", name: "name", type: "input", placeholder: "Nombre" },
+    { id: "Correo", name: "email", type: "input", placeholder: "Correo" },
+    {
+      id: "Mensaje",
+      name: "message",
+      type: "textarea",
+      placeholder: "Cuentanos que sucede...",
+    },
+  ];
+  return <Form onSubmit={sendEmail} title="Comunicate" fields={fields}></Form>;
 };
 
 export default EmailContact;

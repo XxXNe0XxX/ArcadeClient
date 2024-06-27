@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "../../api/axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { redirect } from "react-router-dom";
 const LOGIN_URL = "/auth";
 
 const Login = () => {
@@ -19,7 +18,7 @@ const Login = () => {
     try {
       const response = await axios.post(
         LOGIN_URL,
-        JSON.stringify({ ClientEmail: email, ClientPassword: password }),
+        JSON.stringify({ email: email, password: password }),
         {
           headers: {
             "Content-Type": "application/json",
@@ -31,10 +30,12 @@ const Login = () => {
       const role = response?.data.role;
       setAuth({ accessToken, role });
       response?.status === 200 && localStorage.setItem("email", email);
-      if (role === "Admin") {
+      if (role === "ADMIN") {
         navigate("/dash");
-      } else if (role === "Client") {
+      } else if (role === "CLIENT") {
         navigate("/clientdash");
+      } else if (role === "TECHNICIAN") {
+        navigate("/techniciandash");
       } else {
         navigate(from, { replace: true });
       }

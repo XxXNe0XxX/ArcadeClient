@@ -8,7 +8,7 @@ import Select from "../Select";
 import { useParams } from "react-router-dom";
 
 const EditBalance = () => {
-  const { clientId } = useParams();
+  const { userId } = useParams();
   const [info, setInfo] = useState({});
   const axiosPrivate = useAxiosPrivate();
   const openModal = useModal();
@@ -19,9 +19,7 @@ const EditBalance = () => {
     // Get client
     const getClient = async () => {
       try {
-        const response = await axiosPrivate.get(
-          `/api/clients/getClientById/${clientId}`
-        );
+        const response = await axiosPrivate.get(`/api/users/info/${userId}`);
         if (response?.status === 200) {
           setInfo(response.data);
         }
@@ -39,9 +37,9 @@ const EditBalance = () => {
   const addCredits = async (formData) => {
     try {
       const response = await axiosPrivate.post(
-        `/api/credits/add-credits/${clientId}`,
+        `/api/credits/add/${userId}`,
         JSON.stringify({
-          formData,
+          ...formData,
         })
       );
       if (response.statusText === "OK") {
@@ -58,8 +56,8 @@ const EditBalance = () => {
   const removeCredits = async (formData) => {
     try {
       const response = await axiosPrivate.post(
-        `/api/credits/remove-credits/${clientId}`,
-        JSON.stringify({ formData })
+        `/api/credits/remove/${userId}`,
+        JSON.stringify({ ...formData })
       );
       if (response.statusText === "OK") {
         openModal({ message: "Creditos deducidos correctamente" });
@@ -70,64 +68,49 @@ const EditBalance = () => {
     }
   };
 
+  const addFields = [
+    { id: "Creditos", name: "add", type: "input", placeholder: "Creditos" },
+    {
+      id: "Cantidad a cobrar",
+      name: "amount",
+      type: "input",
+      placeholder: "$$$$$$$$",
+    },
+    {
+      id: "Moneda",
+      name: "currency",
+      type: "select",
+      placeholder: "Selecciona la moneda",
+      options: [
+        { value: "MLC", label: "MLC" },
+        { value: "USD", label: "USD" },
+        { value: "CUP", label: "CUP" },
+      ],
+    },
+  ];
+  const subtractFields = [
+    {
+      id: "Creditos",
+      name: "subtract",
+      type: "input",
+      placeholder: "Creditos",
+    },
+  ];
+
   return (
-    <>
-      <ul className="flex flex-col p-2 border gap-2 bg-color2">
-        <li>Cliente: {info.ClientName}</li>
-        <li>Correo: {info.ClientEmail}</li>
-        <li className="bg-color1 p-1 rounded-md w-fit">
-          Balance: {info.Credit_balance}
+    <div className="flex flex-col h-full">
+      <ul className="flex flex-col p-2  gap-2 bg-color2">
+        <li>Cliente: {info?.User?.Name}</li>
+        <li>Correo: {info?.User?.Email}</li>
+        <li className="bg-color1 p-2 rounded-md w-fit">
+          Balance: {info?.Credit_balance}
         </li>
       </ul>
-
-      <Form onSubmit={addCredits} title="Añadir" className="">
-        <Input
-          img="/src/assets/icons/cherries.png"
-          type="number"
-          name="add"
-          placeholder="Creditos"
-          value=""
-          min={1}
-          required
-          className=""
-        />
-
-        <Input
-          img="/src/assets/icons/coin.png"
-          name="amount"
-          type="number"
-          placeholder="$$$$$$$$"
-          value=""
-          min={1}
-          required
-          className=""
-        />
-        <Select
-          options={[
-            { value: "MLC", label: "MLC" },
-            { value: "USD", label: "USD" },
-            { value: "CUP", label: "CUP" },
-            { value: "", label: "Selecciona la Moneda" },
-          ]}
-          id="Moneda"
-          name="currency"
-          required
-          defaultValue={""}
-        ></Select>
-        <Button type="submit">+</Button>
-      </Form>
-
-      <Form onSubmit={removeCredits} title="Deducir">
-        <Input
-          img="/src/assets/icons/cherries.png"
-          type="number"
-          placeholder="Creditos"
-          value=""
-          name="subtract"
-        />
-        <Button type="submit">-</Button>
-      </Form>
-    </>
+      <div className="md:flex md:gap-2">
+        <Form onSubmit={addCredits} title="+" fields={addFields} />
+        <Form onSubmit={removeCredits} title="-" fields={subtractFields} />
+      </div>
+    </div>
   );
 };
 

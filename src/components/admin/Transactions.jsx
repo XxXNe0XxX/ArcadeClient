@@ -6,7 +6,6 @@ import { useModal } from "../../context/ModalProvider";
 
 const Transactions = () => {
   const navigate = useNavigate();
-
   const axiosPrivate = useAxiosPrivate();
   const [transactions, setTransactions] = useState();
   const [refetch, setRefetch] = useState(false);
@@ -44,7 +43,7 @@ const Transactions = () => {
   const handleDelete = async (row) => {
     try {
       const response = await axiosPrivate.delete(
-        `/api/transactions/deleteTransaction/${row.TransactionID}`
+        `/api/transactions/${row.TransactionID}`
       );
       response.status === 200 &&
         openModal({

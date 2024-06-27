@@ -4,28 +4,28 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/ModalProvider";
 
-const Clients = () => {
+const Users = () => {
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
-  const [clients, setClients] = useState();
+  const [users, setUsers] = useState();
   const [refetch, setRefetch] = useState(false);
   const openModal = useModal();
   useEffect(() => {
     let isMounted = true;
-    //Fetch clients
-    const getClients = async () => {
+    //Fetch users
+    const getUsers = async () => {
       try {
-        const response = await axiosPrivate.get("/api/clients", {
+        const response = await axiosPrivate.get("/api/users", {
           withCredentials: true,
         });
-        isMounted && setClients(response.data);
+        isMounted && setUsers(response.data);
       } catch (error) {
         openModal({
           message: `${error.message}`,
         });
       }
     };
-    getClients();
+    getUsers();
     return () => {
       isMounted = false;
     };
@@ -33,18 +33,15 @@ const Clients = () => {
 
   //Edit Client
   const handleEdit = (row) => {
-    navigate(`/dash/edit-client/${row.ClientID}`);
+    navigate(`/dash/edit-user/${row.UserID}`);
   };
 
   //Delete Client
   const handleDelete = async (row) => {
     try {
-      const response = await axiosPrivate.delete(
-        `/api/clients/deleteClient/${row.ClientID}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axiosPrivate.delete(`/api/users/${row.UserID}`, {
+        withCredentials: true,
+      });
       response.status === 200 &&
         openModal({
           message: `Cliente eliminado`,
@@ -56,19 +53,40 @@ const Clients = () => {
       });
     }
   };
-
+  const handleToggle = async (row) => {
+    try {
+      const response = await axiosPrivate.get(
+        `/api/users/toggle/${row.UserID}`
+      );
+      response.data.status === "activated"
+        ? openModal({
+            message: `Usuario activado`,
+          })
+        : response.data.status === "deactivated"
+        ? openModal({
+            message: `Usuario desactivado`,
+          })
+        : "";
+      setRefetch(!refetch);
+    } catch (error) {
+      openModal({
+        message: `${error.message}`,
+      });
+    }
+  };
   return (
     <>
-      {clients && (
+      {users && (
         <Table
-          data={clients}
-          title={"Clientes"}
+          data={users}
+          title={"Usuarios"}
           onEdit={handleEdit}
           onDelete={handleDelete}
+          onToggle={handleToggle}
         />
       )}
     </>
   );
 };
 
-export default Clients;
+export default Users;

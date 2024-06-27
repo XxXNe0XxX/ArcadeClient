@@ -12,7 +12,7 @@ const Button = ({
     <button
       type={type}
       onClick={onClick}
-      className={`border bg-color1 my-3 p-1 text-center hover:bg-color4 hover:text-color2 transition-colors ${className}`}
+      className={`border-b hover:shadow-none shadow-sm shadow-white  flex justify-center bg-color1 m-3 p-3 text-md text-center hover:bg-color4 hover:text-color2 rounded-md transition-all  ${className}`}
       disabled={disabled}
     >
       {children}

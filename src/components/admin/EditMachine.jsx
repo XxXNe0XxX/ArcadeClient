@@ -1,18 +1,17 @@
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Button from "../Button";
-import Input from "../Input";
 import Form from "../Form";
 import { useModal } from "../../context/ModalProvider";
-import Select from "../Select";
+import { getModifiedFields } from "../../utils/lowerCaseUpperCase";
 
 const EditMachine = () => {
   const { machineId } = useParams();
   const [clients, setClients] = useState([]);
-  const [info, setInfo] = useState("");
+  const [info, setInfo] = useState({});
   const axiosPrivate = useAxiosPrivate();
   const openModal = useModal();
+  const [refetch, setRefetch] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -20,10 +19,9 @@ const EditMachine = () => {
     //Get Clients
     const getClients = async () => {
       try {
-        const response = await axiosPrivate.get("/api/clients");
+        const response = await axiosPrivate.get("/api/client/info");
         if (response?.status === 200) {
           setClients(response.data);
-          // Find the current client by ClientID and set currentClient to the entire client object
         }
       } catch (error) {
         openModal({ message: error.message });
@@ -34,7 +32,7 @@ const EditMachine = () => {
     const getMachine = async () => {
       try {
         const response = await axiosPrivate.get(
-          `/api/arcademachines/getArcadeMachine/${machineId}`
+          `/api/arcademachines/${machineId}`
         );
         if (response?.status === 200) {
           setInfo(response.data);
@@ -43,74 +41,79 @@ const EditMachine = () => {
         openModal({ message: error.message });
       }
     };
+
     getClients();
     getMachine();
+
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [refetch]);
 
   //Edit Machine
   const editMachine = async (formData) => {
+    console.log(formData, info);
+    const modifiedFields = getModifiedFields(info, formData);
     try {
-      const response = await axiosPrivate.put(
-        `/api/arcademachines/updateArcadeMachine/${machineId}`,
-        JSON.stringify({ formData })
+      const response = await axiosPrivate.patch(
+        `/api/arcademachines/${machineId}`,
+        JSON.stringify({ ...modifiedFields })
       );
       if (response?.status === 204) {
         openModal({ message: "Arcade actualizado" });
+        setRefetch(!refetch);
       }
     } catch (error) {
-      if (error.response.status === 400) {
+      if (error.response?.status === 400) {
         openModal({ message: "Al menos un campo es requerido" });
       } else {
         openModal({ message: error.message });
       }
     }
   };
+
+  const fields = [
+    {
+      id: "Juego",
+      name: "game",
+      type: "input",
+      placeholder: "Ultra Street Fighter IV",
+    },
+    {
+      id: "Ubicacion",
+      name: "location",
+      type: "input",
+      placeholder: "Ubicacion",
+    },
+    {
+      id: "Creditos por partida",
+      name: "creditsPerGame",
+      type: "input",
+      placeholder: "1",
+    },
+    {
+      id: "Correo",
+      name: "clientID",
+      type: "select",
+      placeholder: `${
+        clients &&
+        info &&
+        clients.find((each) => each.clientId === info.ClientID)?.email
+      } actual`,
+      options: clients?.map((each) => {
+        return { value: each.clientId, label: each.email };
+      }),
+    },
+  ];
+
   return (
     <>
-      <Form onSubmit={editMachine} title="Editar Arcade">
-        <Input
-          type="text"
-          id="Nombre del juego"
-          name="game"
-          value=""
-          placeholder={`${info.Game}`}
-        ></Input>
-        <Input
-          min={1}
-          type="number"
-          id="Creditos por partida"
-          name="creditsPerGame"
-          value=""
-          placeholder={`${info.CreditsPerGame}`}
-        ></Input>
-        <Input
-          min={1}
-          type="text"
-          id="Ubicacion"
-          name="location"
-          value=""
-          placeholder={`${info.Location}`}
-        ></Input>
-        <Select
-          value=""
-          id="Cliente"
-          name="clientId"
-          options={clients?.map((each) => {
-            return { value: each.ClientID.toString(), label: each.ClientEmail };
-          })}
-          defaultValue={
-            clients &&
-            info &&
-            clients?.find((each) => each.ClientID === info.ClientID)?.ClientID
-          }
-        />
-        <Button type="submit">Editar</Button>
-      </Form>
-      {/* <DeleteClient email={currentEmail} setMsg={setMsg}></DeleteClient>
-        <EditBalance email={currentEmail} setMsg={setMsg}></EditBalance> */}
+      <Form
+        onSubmit={editMachine}
+        title="Editar Arcade"
+        fields={fields}
+        initialValues={info}
+      ></Form>
     </>
   );
 };
