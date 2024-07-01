@@ -23,7 +23,7 @@ const EditUser = () => {
         setInfo(response?.data);
       } catch (error) {
         openModal({
-          message: `${error.message}`,
+          message: `${error.response.data.message}`,
         });
       }
     };

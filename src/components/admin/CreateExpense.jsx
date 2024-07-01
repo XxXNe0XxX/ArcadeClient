@@ -20,7 +20,7 @@ const CreateExpense = () => {
       if (error.response.status === 400) {
         openModal({ message: "Al menos un campo es requerido" });
       } else {
-        openModal({ message: error.message });
+        openModal({ message: error.response.data.message });
       }
     }
   };

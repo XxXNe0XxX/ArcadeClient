@@ -94,13 +94,16 @@ const Navbar = () => {
                   <FontAwesomeIcon icon={faQuestionCircle} /> Preguntas
                 </li>
               </Link>
-              <Link to="locations">
+              {/* <Link to="locations">
                 <li
                   className="hover:border-color1 hover:text-color1 border p-1 transition-all"
                   onClick={() => setIsOpen(!open)}
                 >
                   <FontAwesomeIcon icon={faLocation} /> Ubicaciones
                 </li>
+              </Link> */}
+              <Link to="phrase">
+                <div className="border hover:h-20 hover:w-full bg-[url('./assets/images/bricks.jpg')] hover:blur-none w-1 blur-sm transition-all bg-cover bg-repeat-x bg-center"></div>
               </Link>
             </ul>
           </div>

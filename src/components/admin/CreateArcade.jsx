@@ -22,7 +22,7 @@ const CreateArcade = () => {
         });
     } catch (error) {
       openModal({
-        message: ` ${error.message}`,
+        message: ` ${error.response.data.message}`,
       });
     }
   };

@@ -7,13 +7,13 @@ const Unauthorized = () => {
 
   return (
     <div>
-      Unauthorized{" "}
+      No autorizado{" "}
       <button onClick={() => navigate(-1)}>
-        Go back
+        Regresar
         <FontAwesomeIcon icon={faBackward} />
       </button>
       <button onClick={() => navigate("/")}>
-        Go Home
+        Inicio
         <FontAwesomeIcon icon={faHouse} />
       </button>
     </div>

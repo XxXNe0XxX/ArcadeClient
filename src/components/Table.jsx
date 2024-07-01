@@ -7,6 +7,7 @@ import {
   faTimes,
   faToggleOn,
   faInfoCircle,
+  faToggleOff,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
@@ -126,7 +127,7 @@ const Table = ({
           />
         </div>
       </div>
-      <div className="overflow-scroll h-[70vh] w-screen">
+      <div className="overflow-scroll h-[70vh] w-full max-w-screen">
         <table className="bg-white border border-gray-200 w-full h-full p-1">
           <thead>
             <tr>
@@ -192,10 +193,17 @@ const Table = ({
                       className="text-color2 text-center w-full"
                       onClick={() => onToggle(row)}
                     >
-                      <FontAwesomeIcon
-                        className="text-color3 scale-125"
-                        icon={faToggleOn}
-                      />
+                      {row.Running || row.Active ? (
+                        <FontAwesomeIcon
+                          className="text-color1 scale-125"
+                          icon={faToggleOn}
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                          className="text-color1 scale-125"
+                          icon={faToggleOff}
+                        />
+                      )}
                     </button>
                   </td>
                 ) : (

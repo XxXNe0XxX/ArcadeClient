@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const ClientDashFooter = () => {
   return (
     <div className="sticky  self-end items-center max-h-10  w-full bg-color2 flex z-10 justify-between p-1">
-      <h1>ClientDashFooter</h1>
+      <h1>Panel de administracion</h1>
       <Link to={"/"}>
         <button>
           <FontAwesomeIcon icon={faHouseChimney}></FontAwesomeIcon>{" "}

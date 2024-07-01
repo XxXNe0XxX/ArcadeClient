@@ -24,7 +24,7 @@ const EditMachine = () => {
           setClients(response.data);
         }
       } catch (error) {
-        openModal({ message: error.message });
+        openModal({ message: error.response.data.message });
       }
     };
 

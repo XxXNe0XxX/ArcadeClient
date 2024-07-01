@@ -16,8 +16,7 @@ const ClientChangePassword = () => {
         setMsg("Contraseña cambiada con exito");
       }
     } catch (error) {
-      console.log(error);
-      setMsg(error.message);
+      setMsg(error.response.data.message);
     }
   };
 

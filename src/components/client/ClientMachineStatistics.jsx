@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 const ClientMachineStatistics = () => {
   const [data, setData] = useState();
+  const [msg, setMsg] = useState("");
   const axiosPrivate = useAxiosPrivate();
   useEffect(() => {
     let isMounted = true;
@@ -12,10 +13,9 @@ const ClientMachineStatistics = () => {
           `api/client/machinestatistics/`
         );
 
-        console.log(response.data);
         setData(response.data);
       } catch (error) {
-        console.log(error);
+        setMsg(error.response.data.message);
       }
     };
     fetchMachineStatistics();

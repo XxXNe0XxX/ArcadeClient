@@ -1,9 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import { useModal } from "../../../context/ModalProvider";
 const GrowthRate = () => {
   const axiosPrivate = useAxiosPrivate();
   const [data, setData] = useState();
+  const openModal = useModal();
   const [query, setQuery] = useState({
     date: new Date().toISOString().split("T")[0],
     period: "week",
@@ -19,7 +21,7 @@ const GrowthRate = () => {
         });
         setData(response.data);
       } catch (error) {
-        console.log(error);
+        openModal({ message: error.response.data.message });
       }
     };
     fetchGrowthRate();
@@ -30,7 +32,7 @@ const GrowthRate = () => {
   }, [query]);
 
   return (
-    <div className="w-fit flex flex-col gap-2 items bg-color2 rounded-md h-fit p-1">
+    <div className=" flex flex-col gap-2 items bg-color2 rounded-md h-fit p-1">
       <div className="flex text-sm items-center bg-color2  w-full justify-between rounded-md">
         Tasa de crecimiento
         <h1 className="bg-color1 p-1 rounded-md">{data?.salesGrowthRate} %</h1>

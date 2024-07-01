@@ -93,7 +93,7 @@ const Form = ({ fields, onSubmit, className, initialValues = {}, title }) => {
       <h1 className=" py-6 text-4xl text-center colortext bg-gradient-to-r from-orange-500 to-orange-100  ">
         {title}
       </h1>
-      <div className="grid md:gap-2  border border-color1 p-6 rounded-md  shadow-inner  shadow-white md:grid-cols-2 items-center px-6 ">
+      <div className="grid md:gap-2  border border-color1 p-6 rounded-md  shadow-inner  shadow-white md:grid-cols-2 items-center px-6 w-full ">
         {fields.map((field) => renderField(field))}
       </div>
       <Button type="submit" className=" ">

@@ -6,6 +6,8 @@ import Button from "../Button";
 const ClientProfile = () => {
   const axiosPrivate = useAxiosPrivate();
   const [info, setInfo] = useState();
+  const [msg, setMsg] = useState("");
+
   const [changepassword, setChangePassword] = useState(false);
   useEffect(() => {
     let isMounted = true;
@@ -14,7 +16,7 @@ const ClientProfile = () => {
         const response = await axiosPrivate.get(`/api/client/info`);
         setInfo(response.data);
       } catch (error) {
-        console.log(error.message);
+        setMsg(error.response.data.message);
       }
     };
     getInfo();
@@ -51,6 +53,9 @@ const ClientProfile = () => {
       ) : (
         ""
       )}
+      <h1 className="p-2 border border-color1 w-full m-auto text-center">
+        {msg}
+      </h1>
     </section>
   );
 };

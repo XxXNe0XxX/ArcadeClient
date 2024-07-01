@@ -22,7 +22,7 @@ const EditTransaction = () => {
         setInfo(response?.data);
       } catch (error) {
         openModal({
-          message: `${error.message}`,
+          message: `${error.reponse.data.message}`,
         });
       }
     };
@@ -89,6 +89,12 @@ const EditTransaction = () => {
       name: "description",
       type: "textarea",
       placeholder: "Descripcion",
+    },
+    {
+      id: "Tasa de cambio",
+      name: "exchangeRate",
+      type: "input",
+      placeholder: "",
     },
   ];
 

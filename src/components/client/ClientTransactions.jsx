@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 const ClientTransactions = () => {
   const [data, setData] = useState();
   const axiosPrivate = useAxiosPrivate();
+  const [msg, setMsg] = useState("");
 
   useEffect(() => {
     let isMounted = true;
@@ -17,7 +18,7 @@ const ClientTransactions = () => {
         });
         setData(response?.data);
       } catch (error) {
-        console.log(error);
+        setMsg(error.response.data.message);
       }
     };
 

@@ -6,8 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import Input from "../Input";
 import Select from "../Select";
+import { useModal } from "../../context/ModalProvider";
 const MachineUsage = () => {
   const { machineId } = useParams();
+  const openModal = useModal();
   const axiosPrivate = useAxiosPrivate();
   const [usageData, setUsageData] = useState([]);
   const [date, setDate] = useState(
@@ -17,7 +19,6 @@ const MachineUsage = () => {
   const [period, setPeriod] = useState("day"); // "day", "month", "year"
 
   useEffect(() => {
-    console.log(machineId);
     const fetchUsageData = async () => {
       try {
         if (machineId && date) {
@@ -49,7 +50,7 @@ const MachineUsage = () => {
           setUsageData(response.data);
         }
       } catch (error) {
-        console.log(error);
+        openModal({ message: error.response.data.message });
       } finally {
       }
     };
@@ -121,17 +122,19 @@ const MachineUsage = () => {
     return "";
   };
   return (
-    <div className="flex flex-col ">
-      <h1 className="p-2">Estadisticas de uso maquina: {machineId}</h1>
-      <div className=" grid gap-2 md:grid-cols-3 justify-center p-2">
+    <div className=" max-w-[1200px]  w-full m-auto ">
+      <h1 className="p-2">Estadisticas de uso maquina: ID: {machineId}</h1>
+      <div className=" grid gap-2 md:grid-cols-3 sm:grid-cols-2  p-2">
         <Input
           id="Fecha"
           onChange={(e) => setDate(e.target.value)}
           type="date"
+          name="date"
           value={date}
         />
         <Select
           id="Periodo"
+          name="period"
           onChange={(e) => setPeriod(e.target.value)}
           options={[
             { value: "day", label: "Dia" },
@@ -140,7 +143,7 @@ const MachineUsage = () => {
           ]}
           placeholder={"Selecciona el periodo"}
         ></Select>
-        <h1 className="p-3 flex items-end  justify-center">
+        <h1 className="p-3 flex items-end w-full justify-center">
           Total en el {period}: {totalUses}
         </h1>
       </div>

@@ -11,6 +11,7 @@ import {
   faHouseChimney,
   faMoneyBill,
   faMoneyBillTransfer,
+  faMoneyBillTrendUp,
   faPeopleArrows,
   faPerson,
   faPersonCirclePlus,
@@ -27,7 +28,7 @@ const DashHeader = () => {
   }, [location]);
 
   return (
-    <nav className="text-color4 z-20 sticky w-screen p-1 flex items-center justify-between bg-color4 font-pixel-emulator tracking-tighter ">
+    <nav className="text-color4 z-20 sticky w-full p-1 flex items-center justify-between bg-color4 font-pixel-emulator tracking-tighter ">
       <div
         className={` ${
           open ? "w-[250px]" : "w-0"
@@ -96,6 +97,11 @@ const DashHeader = () => {
           <Link to="expense">
             <li className="hover:border-color1 hover:rounded-none rounded-lg  hover:text-color1 border p-1 transition-all w-full">
               <FontAwesomeIcon icon={faMoneyBillTransfer} /> Generar Gasto
+            </li>
+          </Link>
+          <Link to="rates">
+            <li className="hover:border-color1 hover:rounded-none rounded-lg  hover:text-color1 border p-1 transition-all w-full">
+              <FontAwesomeIcon icon={faMoneyBillTrendUp} /> Tasa de cambio
             </li>
           </Link>
         </ul>

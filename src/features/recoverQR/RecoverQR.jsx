@@ -1,14 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../../api/axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-
+import { useParams } from "react-router-dom";
 const RecoverQR = () => {
-  const [identifier, setIdentifier] = useState("");
+  const { id } = useParams();
+  const [identifier, setIdentifier] = useState(id || "");
   const [qr, setQr] = useState("");
   const [balance, setBalance] = useState("");
   const [msg, setMsg] = useState("");
   const [showIdentifier, setShowIdentifier] = useState(false);
+
   const generateQR = async (e) => {
     e.preventDefault();
 

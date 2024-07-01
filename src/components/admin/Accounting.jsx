@@ -1,43 +1,42 @@
 import React, { useEffect, useState } from "react";
+import { Bar, Line } from "react-chartjs-2";
+import "chart.js/auto"; // Ensure you have this import
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import Table from "../Table";
+
 const Accounting = () => {
-  const axiosPrivate = useAxiosPrivate();
-  const [statistics, setStatistics] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [statistics, setStatistics] = useState(null);
   const [error, setError] = useState(null);
+  const axiosPrivate = useAxiosPrivate();
+  const [currency, setCurrency] = useState("USD");
 
   useEffect(() => {
-    const fetchStatistics = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axiosPrivate.get("/api/accounting");
-        if (response.statusText !== "OK") {
-          throw new Error("Network response was not ok");
-        }
+        const response = await axiosPrivate.get(
+          `/api/accounting?currency=${currency}`
+        );
         setStatistics(response.data);
       } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
+        setError("Error al obtener los datos");
       }
     };
 
-    fetchStatistics();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+    fetchData();
+  }, [axiosPrivate, currency]);
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div>{error}</div>;
+  }
+
+  if (!statistics) {
+    return <div>Cargando...</div>;
   }
 
   const {
     totalRevenue,
-    revenueByClient,
-    monthlyRevenue,
     totalExpenses,
-    expensesByClient,
+    monthlyRevenue,
     monthlyExpenses,
     netProfit,
     netProfitMargin,
@@ -45,97 +44,131 @@ const Accounting = () => {
     averageRevenuePerUser,
     revenueGrowthRate,
     expenseGrowthRate,
+    averageTransactionValue,
+    topClients,
+    monthlyNetProfit,
   } = statistics;
 
+  const monthlyLabels = monthlyRevenue && Object.keys(monthlyRevenue).sort();
+
+  const generateChartData = (data, label) => ({
+    labels: monthlyLabels,
+    datasets: [
+      {
+        label: `${label} (${currency})`,
+        data: monthlyLabels?.map((month) =>
+          data[month]?.[currency]?.toFixed(2)
+        ),
+        borderColor: "rgba(54,162,235,1)",
+        backgroundColor: "rgba(54,162,235,0.2)",
+      },
+    ],
+  });
+
+  const netProfitData = generateChartData(
+    monthlyNetProfit,
+    "Ganancia Neta Mensual"
+  );
+
+  const topClientsData = {
+    labels: topClients?.map((client) => client.clientID),
+    datasets: [
+      {
+        label: `Ingresos (${currency})`,
+        data: topClients?.map((client) => client.revenue[currency]?.toFixed(2)),
+        backgroundColor: "rgba(54,162,235,0.6)",
+      },
+    ],
+  };
+
+  const summaryData = [
+    {
+      label: `Ingresos Totales (${currency})`,
+      value: totalRevenue?.[currency]?.toFixed(2),
+    },
+    {
+      label: `Gastos Totales (${currency})`,
+      value: totalExpenses?.[currency]?.toFixed(2),
+    },
+    {
+      label: `Ganancia Neta (${currency})`,
+      value: netProfit?.[currency]?.toFixed(2),
+    },
+    {
+      label: `Margen de Ganancia Neta (${currency})`,
+      value: `${netProfitMargin?.[currency]?.toFixed(2)}%`,
+    },
+    {
+      label: "Total de Clientes",
+      value: totalClients,
+    },
+    {
+      label: `Ingreso Promedio por Usuario (${currency})`,
+      value: averageRevenuePerUser?.[currency]?.toFixed(2),
+    },
+    {
+      label: `Tasa de Crecimiento de Ingresos (${currency})`,
+      value: `${revenueGrowthRate?.[currency]?.toFixed(2)}%`,
+    },
+    {
+      label: `Tasa de Crecimiento de Gastos (${currency})`,
+      value: `${expenseGrowthRate?.[currency]?.toFixed(2)}%`,
+    },
+    {
+      label: `Valor Promedio de Transacción (ADD) (${currency})`,
+      value: averageTransactionValue.ADD[currency]?.toFixed(2),
+    },
+    {
+      label: `Valor Promedio de Transacción (SUBTRACT) (${currency})`,
+      value: averageTransactionValue.SUBTRACT[currency]?.toFixed(2),
+    },
+    {
+      label: `Valor Promedio de Transacción (EXPENSE) (${currency})`,
+      value: averageTransactionValue.EXPENSE[currency]?.toFixed(2),
+    },
+  ];
+
   return (
-    <>
-      <h1>Estadisticas de contabilidad</h1>
-      <div className="flex flex-wrap m-auto gap-2 ">
-        <div className="border p-1">
-          <h2>Ingresos</h2>
-          <p>Ingreso total:</p>
-          <ul>
-            <li>CUP: ${totalRevenue.CUP}</li>
-            <li>MLC: ${totalRevenue.MLC}</li>
-            <li>USD: ${totalRevenue.USD}</li>
-          </ul>
-          <h3>Ingreso por cliente</h3>
-          <ul>
-            {Object.entries(revenueByClient).map(([clientId, revenue]) => (
-              <li key={clientId}>
-                Cliente {clientId}: CUP ${revenue.CUP}, MLC ${revenue.MLC}, USD
-                ${revenue.USD}
-              </li>
-            ))}
-          </ul>
-          <h3>Ingreso mensual</h3>
-          <ul>
-            {Object.entries(monthlyRevenue).map(([month, revenue]) => (
-              <li key={month}>
-                {month}: CUP ${revenue.CUP}, MLC ${revenue.MLC}, USD $
-                {revenue.USD}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="border p-1">
-          <h2>Gastos</h2>
-          <p>Gastos totales</p>
-          <ul>
-            <li>CUP: ${totalExpenses.CUP}</li>
-            <li>MLC: ${totalExpenses.MLC}</li>
-            <li>USD: ${totalExpenses.USD}</li>
-          </ul>
-          <ul>
-            {Object.entries(expensesByClient).map(([clientId, expenses]) => (
-              <li key={clientId}>
-                Cliente {clientId}: CUP ${expenses.CUP}, MLC ${expenses.MLC},
-                USD ${expenses.USD}
-              </li>
-            ))}
-          </ul>
-          <h3>Gastos mensuales</h3>
-          <ul>
-            {Object.entries(monthlyExpenses).map(([month, expenses]) => (
-              <li key={month}>
-                {month}: CUP ${expenses.CUP}, MLC ${expenses.MLC}, USD $
-                {expenses.USD}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="border p-1">
-          <h2>Ganancias</h2>
-          <p>Ganancia neta:</p>
-          <ul>
-            <li>CUP: ${netProfit.CUP}</li>
-            <li>MLC: ${netProfit.MLC}</li>
-            <li>USD: ${netProfit.USD}</li>
-          </ul>
-          <p>Margen de ganancia neta:</p>
-          <ul>
-            <li>CUP: {netProfitMargin.CUP}%</li>
-            <li>MLC: {netProfitMargin.MLC}%</li>
-            <li>USD: {netProfitMargin.USD}%</li>
-          </ul>
-        </div>
-        <div className="border p-1">
-          <h2>Metricas de clientes</h2>
-          <p>Total de clientes: {totalClients}</p>
-          <p>Ingreso promedio por cliente</p>
-          <ul>
-            <li>CUP: ${averageRevenuePerUser.CUP}</li>
-            <li>MLC: ${averageRevenuePerUser.MLC}</li>
-            <li>USD: ${averageRevenuePerUser.USD}</li>
-          </ul>
-        </div>
-        <div className="border p-1">
-          <h2>Metricas de rendimiento</h2>
-          <p>Tasa de crecimiento de ingresos: {revenueGrowthRate}%</p>
-          <p>Tasa de crecimiento de gastos: {expenseGrowthRate}%</p>
+    <div className="flex-col items-center ">
+      <div className="w-full flex flex-wrap sm:justify-between justify-center items-center p-1 gap-2">
+        <h1 className="text-xl">Contabilidad y finanzas</h1>
+        <div className="flex items-center gap-2">
+          <h1>Selecciona la moneda: </h1>
+          <select
+            onChange={(e) => setCurrency(e.target.value)}
+            className="p-1 border rounded-md"
+          >
+            <option value="USD">USD</option>
+            <option value="MLC">MLC</option>
+            <option value="CUP">CUP</option>
+          </select>
         </div>
       </div>
-    </>
+      <div className="flex flex-wrap justify-center gap-2 p-2">
+        <div className="max-w-[800px] w-full bg-color4 text-color1 border border-color1 p-2 rounded-md">
+          <h2>Ingresos Mensuales</h2>
+          <Line
+            data={generateChartData(monthlyRevenue, "Ingresos Mensuales")}
+          />
+        </div>
+        <div className="max-w-[800px] w-full bg-color4 text-color1 border border-color1 p-2 rounded-md">
+          <h2>Gastos Mensuales</h2>
+          <Line data={generateChartData(monthlyExpenses, "Gastos Mensuales")} />
+        </div>
+        <div className="max-w-[800px] w-full bg-color4 text-color1 border border-color1 p-2 rounded-md">
+          <h2>Ganancia Neta Mensual</h2>
+          <Line data={netProfitData} />
+        </div>
+        <div className="max-w-[800px] w-full bg-color4 text-color1 border border-color1 p-2 rounded-md">
+          <h2>Principales Clientes por Ingresos</h2>
+          <Bar data={topClientsData} />
+        </div>
+      </div>
+      <div className=" max-w-[800px] m-auto">
+        <h2 className="text-color1 text-xl p-2 bg-color2">Resumen</h2>
+        <Table data={summaryData} title="Resumen de Estadísticas" />
+      </div>
+    </div>
   );
 };
 

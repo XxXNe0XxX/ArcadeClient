@@ -43,7 +43,7 @@ const GenerateQR = () => {
   };
 
   return (
-    <section className="flex flex-col justify-between h-full">
+    <section className="flex h-[90vh] flex-col  justify-between ">
       <form
         onSubmit={generate}
         className="max-w-md mx-auto px-4  bg-color2 shadow-md rounded-md"

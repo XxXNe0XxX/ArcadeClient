@@ -1,8 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import { useModal } from "../../../context/ModalProvider";
 const ProfitMargin = () => {
   const axiosPrivate = useAxiosPrivate();
+  const openModal = useModal();
+
   const [data, setData] = useState();
   const [query, setQuery] = useState({
     date: new Date().toISOString().split("T")[0],
@@ -19,7 +22,7 @@ const ProfitMargin = () => {
         });
         setData(response.data);
       } catch (error) {
-        console.log(error);
+        openModal({ message: error.response.data.message });
       }
     };
     fetchProfitMargin();
@@ -30,7 +33,7 @@ const ProfitMargin = () => {
   }, [query]);
 
   return (
-    <div className="w-fit flex flex-col gap-2 bg-color2 rounded-md p-1">
+    <div className="flex flex-col gap-2 bg-color2 rounded-md p-1">
       <div className="flex flex-col  items-start bg-color2 p-1 w-full justify-center  rounded-md">
         <div className="flex text-sm gap-2 w-full *:flex-grow ">
           <div className="flex flex-col ">
@@ -39,7 +42,7 @@ const ProfitMargin = () => {
               {data?.map((each, i) => {
                 return (
                   <li key={i}>
-                    {each.currency} {each.profitMargin}
+                    {each.currency} {each.profit}
                   </li>
                 );
               })}{" "}

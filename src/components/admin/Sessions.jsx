@@ -22,7 +22,7 @@ const Sessions = () => {
         isMounted && setSessions(response.data);
       } catch (error) {
         openModal({
-          message: `${error.message}`,
+          message: `${error.response.data.message}`,
         });
       }
     };

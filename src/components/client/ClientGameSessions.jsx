@@ -19,7 +19,7 @@ const ClientGameSessions = () => {
         });
         setSessions(response?.data);
       } catch (error) {
-        setMsg(error.message);
+        setMsg(error.response.data.message);
       }
     };
 

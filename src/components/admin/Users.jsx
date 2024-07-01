@@ -21,7 +21,7 @@ const Users = () => {
         isMounted && setUsers(response.data);
       } catch (error) {
         openModal({
-          message: `${error.message}`,
+          message: `${error.message.message}`,
         });
       }
     };
@@ -49,7 +49,7 @@ const Users = () => {
       setRefetch(!refetch);
     } catch (error) {
       openModal({
-        message: `${error.message}`,
+        message: `${error.response.data}`,
       });
     }
   };

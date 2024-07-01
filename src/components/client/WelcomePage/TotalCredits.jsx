@@ -1,8 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import { useModal } from "../../../context/ModalProvider";
+
 const TotalCredits = () => {
   const axiosPrivate = useAxiosPrivate();
+  const openModal = useModal();
   const [creditsSold, setCreditsSold] = useState();
   const [averageCreditsSold, setAverageCreditsSold] = useState();
   const [query, setQuery] = useState({
@@ -20,7 +23,7 @@ const TotalCredits = () => {
         });
         setCreditsSold(response.data);
       } catch (error) {
-        console.log(error);
+        openModal({ message: error.response.data.message });
       }
     };
     fetchTotalCreditsSold();
@@ -43,7 +46,7 @@ const TotalCredits = () => {
   }, [query]);
 
   return (
-    <div className="w-fit flex flex-col gap-2 items bg-color2 rounded-md h-fit p-1">
+    <div className="flex flex-col gap-2 items bg-color2 rounded-md h-fit p-1">
       <div className="flex text-sm items-center bg-color2  w-full justify-between rounded-md">
         Creditos vendidos
         <h1 className="bg-color1 p-1 rounded-md">

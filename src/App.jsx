@@ -37,6 +37,8 @@ import Users from "./components/admin/Users";
 import EditUser from "./components/admin/EditUser";
 import Sessions from "./components/admin/Sessions";
 import QrCodes from "./components/admin/QrCodes";
+import ExchangeRates from "./components/admin/ExchangeRates";
+import Phrase from "./components/Phrase";
 function App() {
   return (
     <Routes>
@@ -55,6 +57,7 @@ function App() {
           path="gameinfo/:game/:creditsPerGame/:running"
           element={<GameInfo />}
         />
+        <Route path="phrase" element={<Phrase></Phrase>}></Route>
 
         {/* Admin Routes */}
         <Route element={<PersistLogin />}>
@@ -76,6 +79,7 @@ function App() {
               <Route path="sessions" element={<Sessions />} />
               <Route path="expense" element={<CreateExpense />} />
               <Route path="qrcodes" element={<QrCodes />} />
+              <Route path="rates" element={<ExchangeRates />} />
 
               <Route path="usage/:machineId" element={<MachineUsage />} />
               <Route path="accounting" element={<Accounting />} />
@@ -91,7 +95,7 @@ function App() {
               <Route index element={<WelcomeClient />} />
               <Route path="transactions" element={<ClientTransactions />} />
               <Route path="generate" element={<GenerateQR />} />
-              <Route path="recoverqr" element={<RecoverQR />}></Route>
+              <Route path="recoverqr/:id" element={<RecoverQR />}></Route>
               <Route path="sessions" element={<ClientGameSessions />}></Route>
               <Route path="statistics" element={<ClientMachineStatistics />} />
               <Route path="qrcodes" element={<ClientQrCodes />} />
