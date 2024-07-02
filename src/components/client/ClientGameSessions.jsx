@@ -1,4 +1,3 @@
-import { axiosPrivate } from "../../api/axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useState, useEffect } from "react";
 import Table from "../Table";

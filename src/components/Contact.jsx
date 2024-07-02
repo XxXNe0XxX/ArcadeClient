@@ -1,4 +1,3 @@
-import Button from "./Button";
 import EmailContact from "./EmailContact";
 
 const Contact = () => {

@@ -1,9 +1,6 @@
 import React from "react";
-import useAuth from "../../hooks/useAuth";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import TotalCredits from "./WelcomePage/TotalCredits";
 import ProfitMargin from "./WelcomePage/ProfitMargin";
 import GrowthRate from "./WelcomePage/GrowthRate";
@@ -11,13 +8,9 @@ import ClientExchangeRates from "./WelcomePage/ClientExchangeRates";
 const WelcomeClient = () => {
   const [info, setInfo] = useState({});
   const [machines, setMachines] = useState([]);
-  const [balance, setBalance] = useState("");
-  const [expenses, setExpenses] = useState("");
-  const [profits, setProfits] = useState("");
-  const [earnings, setEarnings] = useState("");
+
   const [msg, setMsg] = useState("");
   const axiosPrivate = useAxiosPrivate();
-  const email = localStorage.getItem("email");
   useEffect(() => {
     let isMounted = true;
     const fetchInfo = async () => {

@@ -1,5 +1,3 @@
-import React from "react";
-
 const Phrase = () => {
   return (
     <div className="max-w-[800px] w-full m-auto">

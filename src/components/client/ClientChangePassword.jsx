@@ -1,7 +1,5 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useState } from "react";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Form from "../Form";
 const ClientChangePassword = () => {
   const axiosPrivate = useAxiosPrivate();

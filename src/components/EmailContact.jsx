@@ -1,10 +1,8 @@
 import React from "react";
-import Button from "./Button";
-import Input from "./Input";
 import Form from "./Form";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useModal } from "../context/ModalProvider";
-import Textarea from "../components/TextArea";
+
 const EmailContact = () => {
   const axiosPrivate = useAxiosPrivate();
   const openModal = useModal();

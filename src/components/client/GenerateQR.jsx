@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import "./generate.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import PipeQR from "../PipeQR";
 
 const GenerateQR = () => {

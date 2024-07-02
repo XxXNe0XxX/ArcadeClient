@@ -1,5 +1,4 @@
 // TextArea.jsx
-import React from "react";
 import PropTypes from "prop-types";
 
 const TextArea = ({ id, value, onChange, placeholder, className, name }) => {

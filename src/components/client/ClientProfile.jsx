@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { Link } from "react-router-dom";
 import ClientChangePassword from "./ClientChangePassword";
 import Button from "../Button";
 const ClientProfile = () => {
