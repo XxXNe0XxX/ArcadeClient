@@ -66,7 +66,7 @@ const GenerateQR = () => {
           />
           <img
             className="h-14 w-20 scale-75 object-cover"
-            src="/src/assets/icons/coin.png"
+            src="/assets/icons/coin.png"
           />
         </div>
         <div className="mb-4 flex items-center">
@@ -84,10 +84,7 @@ const GenerateQR = () => {
             className="w-full text-color4  p-2 mx-2"
             required
           />
-          <img
-            className="h-12 object-cover"
-            src="/src/assets/icons/cherries.png"
-          />
+          <img className="h-12 object-cover" src="/assets/icons/cherries.png" />
         </div>
         <div className="mb-4">
           <label

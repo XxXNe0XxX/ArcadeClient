@@ -53,7 +53,7 @@ const WelcomeClient = () => {
         <div className="flex flex-col w-fit items-center justify-evenly p-2  m-auto">
           <h1>Balance</h1>
           <div className="flex m-auto flex-col h-[100px] w-[100px] justify-center items-center bg-color4 rounded-full border-color1 border-4">
-            <img className="w-8 h-8" src="/src/assets/icons/cherries.png"></img>
+            <img className="w-8 h-8" src="/assets/icons/cherries.png"></img>
             <h1 className="text-xl text-color2">x{info?.Credit_balance}</h1>
           </div>
         </div>
@@ -77,11 +77,11 @@ const WelcomeClient = () => {
                     </h1>
                     <img
                       className="object-cover w-[85%] h-40 p-1 rounded-xl  "
-                      src={`/src/assets/gamesArt/${each.Game}.jpg`}
+                      src={`/assets/gamesArt/${each.Game}.jpg`}
                     ></img>{" "}
                     <img
                       className="w-[15%] object-cover h-full bg-color4 absolute left-0"
-                      src="/src/assets/icons/arcade-cabinet.png"
+                      src="/assets/icons/arcade-cabinet.png"
                     />
                   </li>
                 );

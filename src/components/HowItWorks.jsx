@@ -5,17 +5,17 @@ const steps = [
   {
     title: "Ir a una tienda",
     description: "Dirigete a un local que tenga una maquina arcade.",
-    image: "src/assets/images/howto1.webp",
+    image: "/assets/images/howto1.webp",
   },
   {
     title: "Comprar QR",
     description: "Adquiere un QR con la persona a cargo de el local",
-    image: "src/assets/images/howto2.jpg",
+    image: "/assets/images/howto2.jpg",
   },
   {
     title: "Escanear QR",
     description: "Usa tu codigo QR en la maquina para comenzar una partida",
-    image: "src/assets/images/howto3.webp",
+    image: "/assets/images/howto3.webp",
   },
 ];
 

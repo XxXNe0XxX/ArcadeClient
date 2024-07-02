@@ -110,7 +110,7 @@ const DashHeader = () => {
         className="text-color2 flex gap-2"
         onClick={() => setIsOpen(true)}
       >
-        <img className="h-6 w-6" src="/src/assets/icons/joystick.png"></img>Menu
+        <img className="h-6 w-6" src="/assets/icons/joystick.png"></img>Menu
       </button>
       <h1 className="text-color1">
         <Logout />

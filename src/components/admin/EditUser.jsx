@@ -119,7 +119,7 @@ const EditUser = () => {
         <Link to={`/dash/edit-balance/${userId}`}>
           <Button className=" flex gap-2 mx-auto mb-10 px-5 items-center justify-center rounded-full">
             <h1> {"->"} Balance </h1>
-            <img className="w-8" src="/src/assets/icons/coin.png" alt="" />{" "}
+            <img className="w-8" src="/assets/icons/coin.png" alt="" />{" "}
           </Button>
         </Link>
       )}

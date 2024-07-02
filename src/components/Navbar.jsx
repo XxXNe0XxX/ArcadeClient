@@ -15,8 +15,8 @@ import {
   faQuestionCircle,
   faLocation,
 } from "@fortawesome/free-solid-svg-icons";
-import Pacmanopen from "../assets/icons/Pacmanopen";
-import Pacmanclosed from "../assets/icons/Pacmanclosed";
+import Pacmanopen from "/public/assets/icons/Pacmanclosed";
+import Pacmanclosed from "/public/assets/icons/Pacmanclosed";
 const Navbar = () => {
   const [open, setIsOpen] = useState(false);
   const location = useLocation();

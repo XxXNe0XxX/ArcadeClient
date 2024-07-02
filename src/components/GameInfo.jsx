@@ -10,17 +10,17 @@ const GameInfo = () => {
     "Guitar Hero Arcade": {
       description:
         "Guitar Hero Arcade es un juego de ritmo musical donde los jugadores usan un controlador en forma de guitarra para simular tocar música rock.",
-      image: "/src/assets/images/Guitar Hero Arcade.jpg",
+      image: "/assets/images/Guitar Hero Arcade.jpg",
     },
     "Mario Kart DX": {
       description:
         "Mario Kart DX es un juego de carreras de arcade donde los jugadores compiten usando karts y potenciadores.",
-      image: "/src/assets/images/Mario Kart DX.jpg",
+      image: "/assets/images/Mario Kart DX.jpg",
     },
     "Ultra Street Fighter IV": {
       description:
         "Ultra Street Fighter IV es un juego de lucha que presenta una gran lista de personajes con habilidades y estilos de lucha únicos.",
-      image: "/src/assets/images/Ultra Street Fighter IV.jpg",
+      image: "/assets/images/Ultra Street Fighter IV.jpg",
     },
   };
   const currentGame = gameInfo[game];

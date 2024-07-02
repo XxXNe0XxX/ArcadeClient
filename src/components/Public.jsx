@@ -43,7 +43,7 @@ const Public = () => {
           Arcade!
         </h1>
         <img
-          src="/src/assets/images/hero1.jpg"
+          src="/assets/images/hero1.jpg"
           className="h-[95vh] md:h-[600px] w-full object-cover "
         ></img>
       </div>
@@ -144,7 +144,7 @@ const Public = () => {
                   <li className="relative group">
                     <img
                       className="w-full h-32 object-cover "
-                      src={`/src/assets/gamesArt/${each.Game}.jpg`}
+                      src={`/assets/gamesArt/${each.Game}.jpg`}
                     ></img>
                     <h1 className="absolute -bottom-8 text-color4 backdrop-blur-lg right-0 p-2  opacity-0 transition-all w-full group-hover:opacity-100">
                       {each.Game}

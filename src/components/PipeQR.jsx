@@ -18,7 +18,7 @@ const PipeQR = ({ qr }) => {
   return (
     <div className=" w-full h-full flex flex-col justify-end">
       <img
-        src={showQr ? qr : "/src/assets/icons/box.png"}
+        src={showQr ? qr : "/assets/icons/box.png"}
         id="box"
         className={`${
           animationStarted ? "sendBox" : ""
@@ -27,12 +27,12 @@ const PipeQR = ({ qr }) => {
       />
       <img
         id="coin"
-        src="/src/assets/icons/coin.png"
+        src="/assets/icons/coin.png"
         className={`${animationStarted ? "insertCoin" : ""} h-20 w-20 mx-auto`}
       />
       <img
         id="pipe"
-        src="/src/assets/icons/pipe.png"
+        src="/assets/icons/pipe.png"
         className="h-40 w-40 mx-auto"
       />
     </div>
