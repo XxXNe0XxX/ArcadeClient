@@ -43,10 +43,7 @@ const GameInfo = () => {
               Partida
               <span className="flex items-center gap-1">
                 X {creditsPerGame}
-                <img
-                  className="h-8 w-8"
-                  src="/src/assets/icons/cherries.png"
-                ></img>
+                <img className="h-8 w-8" src="/assets/icons/cherries.png"></img>
               </span>{" "}
             </h1>
           </div>

@@ -103,7 +103,7 @@ const Navbar = () => {
                 </li>
               </Link> */}
               <Link to="phrase">
-                <div className="border hover:h-20 hover:w-full bg-[url('./assets/images/bricks.jpg')] hover:blur-none w-1 blur-sm transition-all bg-cover bg-repeat-x bg-center"></div>
+                <div className="border hover:h-20 hover:w-full bg-[url('/assets/images/bricks.jpg')] hover:blur-none w-1 blur-sm transition-all bg-cover bg-repeat-x bg-center"></div>
               </Link>
             </ul>
           </div>
