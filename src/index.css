@@ -14,8 +14,8 @@
 }
 
 @font-face {
-  font-family: 'PixelEmulator';
-  src: url('/src/assets/fonts/Pixel\ Emulator.otf') format('truetype');
+  font-family: 'Pixel Emulator';
+  src: url('/assets/fonts/Pixel Emulator.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
