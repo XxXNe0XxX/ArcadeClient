@@ -1,7 +1,6 @@
-// TextArea.jsx
 import PropTypes from "prop-types";
 
-const TextArea = ({ id, value, onChange, placeholder, className, name }) => {
+const Textarea = ({ id, value, onChange, placeholder, className, name }) => {
   return (
     <div className="flex flex-col">
       <label htmlFor={id}>{id}</label>
@@ -17,7 +16,7 @@ const TextArea = ({ id, value, onChange, placeholder, className, name }) => {
   );
 };
 
-TextArea.propTypes = {
+Textarea.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
@@ -25,9 +24,9 @@ TextArea.propTypes = {
   name: PropTypes.string.isRequired,
 };
 
-TextArea.defaultProps = {
+Textarea.defaultProps = {
   placeholder: "",
   className: "",
 };
 
-export default TextArea;
+export default Textarea;

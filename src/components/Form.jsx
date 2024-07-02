@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Input from "./Input";
 import Select from "./Select";
-import TextArea from "./TextArea";
+import Textarea from "./Textarea";
 import Button from "./Button";
 import { regions } from "../data/regions"; // Import the regions data
 import {
@@ -13,7 +13,7 @@ import {
 const fieldComponents = {
   input: Input,
   select: Select,
-  textarea: TextArea,
+  textarea: Textarea,
 };
 
 const Form = ({ fields, onSubmit, className, initialValues = {}, title }) => {
