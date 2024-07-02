@@ -104,7 +104,7 @@ const RecoverQR = () => {
         <h1 className="">Balance disponible -{"  "}</h1>
         <div className="flex items-center gap-2">
           <span>-</span>
-          <img className="h-8 w-8" src="/src/assets/icons/cherries.png"></img>
+          <img className="h-8 w-8" src="/assets/icons/cherries.png"></img>
           <span className="text-2xl">x{balance}</span>
         </div>
       </div>

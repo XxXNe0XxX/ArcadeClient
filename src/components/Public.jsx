@@ -159,7 +159,7 @@ const Public = () => {
           <div className="relative rounded-full bg-color4 translate-x-[50px] translate-y-16">
             <img
               className="h-40 w-40"
-              src="/src/assets/icons/arcade-cabinet.png"
+              src="/assets/icons/arcade-cabinet.png"
             ></img>
           </div>
         </div>
