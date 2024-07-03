@@ -25,15 +25,15 @@ export default defineConfig({
   plugins: [react(), svgrPlugin()],
   build: {
     outDir: "dist",
+    rollupOptions: {
+      output: {
+        entryFileNames: "assets/[name].[hash].js",
+        chunkFileNames: "assets/[name].[hash].js",
+        assetFileNames: "assets/[name].[hash].[ext]",
+      },
+    },
   },
-  // server: {
-  //   host: "0.0.0.0",
-  //   proxy: {
-  //     "/api": {
-  //       target: "http://192.168.1.27:3000", // Backend server address
-  //       changeOrigin: true,
-  //       rewrite: (path) => path.replace(/^\/api/, ""),
-  //     },
-  //   },
-  // },
+  server: {
+    historyApiFallback: true,
+  },
 });
