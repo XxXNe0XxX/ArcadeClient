@@ -5,8 +5,8 @@ const Phrase = () => {
         “La felicidad sólo es real cuando es compartida.”
       </p>
       <div className="px-2">
-        <p className="text-color3 text-right">Alex Supertramp</p>
-        <p className="text-color4  text-right">
+        <p className="text-color4 text-right">Alex Supertramp</p>
+        <p className="text-color3  text-right">
           Into the Wild <span className="text-color2 text-right"> 2007</span>
         </p>
       </div>

@@ -63,7 +63,11 @@ const EditBalance = () => {
       }
       setRefetch(!refetch);
     } catch (error) {
-      openModal({ message: error.message });
+      if (error.response && error.response.data.errors) {
+        openModal({ message: error.response.data.errors[0].msg });
+      } else {
+        openModal({ message: error.response.data.message });
+      }
     }
   };
 

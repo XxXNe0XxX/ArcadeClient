@@ -1,0 +1,43 @@
+@keyframes lightBeam {
+    0% {
+      background-position: -200% -200%;
+    }
+    50% {
+      background-position: 200% 200%;
+    }
+    100% {
+      background-position: -200% -200%;
+    }
+  }
+  
+
+.text-shine{
+      display: inline-block;
+      position: relative;
+      color: white;
+      
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: lightBeam 3s linear infinite;
+   padding: 20px;
+   margin: 40px;
+   border-radius: 10px;
+   outline-width: 2px;
+   outline-color: aqua;
+   outline-style: solid;
+   border:1px solid white;
+    margin-top:35px;
+    background-color:rgb(66, 244, 220);
+    box-shadow: -10px 0px 35px 5px rgba(66, 244, 220, .5);
+    animation: flash infinite .9s;
+  }
+  
+  @keyframes flash{
+    0%{box-shadow: -10px 0px 35px 5px rgba(66, 244, 220, 0);}
+    50%{box-shadow: -10px 0px 35px 5px rgba(66, 244, 220, .5);}
+    70%{box-shadow: -10px 0px 35px 5px rgba(66, 244, 220, .2);}
+    100%{
+      box-shadow: -10px 0px 35px 5px rgba(66, 244, 220, .3);
+    }
+  }

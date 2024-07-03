@@ -35,8 +35,8 @@ const Input = ({ id, type, value, onChange, placeholder, className, name }) => {
           placeholder={placeholder}
           className={`p-2 rounded-md border border-color2 w-full rounded-md${className}`}
           name={name}
-          step="0.00001"
-          min={name === "exchangeRate" ? 0.0001 : 1}
+          step="0.00000001"
+          min={name === "exchangeRate" ? 0.00000001 : 1}
         />
         {/* {name === "password" ||
         name === "currentPassword" ||

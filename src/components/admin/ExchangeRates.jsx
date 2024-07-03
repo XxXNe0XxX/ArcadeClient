@@ -14,7 +14,11 @@ const ExchangeRates = () => {
         const response = await axiosPrivate.get("/api/exchange");
         setRates(response.data);
       } catch (error) {
-        openModal({ message: error.message });
+        if (error.response && error.response.data.errors) {
+          openModal({ message: error.response.data.errors[0].msg });
+        } else {
+          openModal({ message: error.response.data.message });
+        }
       }
     };
 

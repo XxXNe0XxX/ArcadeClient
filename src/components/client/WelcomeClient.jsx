@@ -50,16 +50,18 @@ const WelcomeClient = () => {
         </span>
       </div>
       <section className=" md:grid md:grid-cols-2 md:grid-rows-3  gap-5 ">
-        <div className="flex flex-col w-fit items-center justify-evenly p-2  m-auto">
-          <h1>Balance</h1>
-          <div className="flex m-auto flex-col h-[100px] w-[100px] justify-center items-center bg-color4 rounded-full border-color1 border-4">
-            <img className="w-8 h-8" src="/assets/icons/cherries.png"></img>
-            <h1 className="text-xl text-color2">x{info?.Credit_balance}</h1>
+        <div className="flex justify-between col-span-2 ">
+          <div className="flex flex-col sm:w-full w-fit items-center justify-evenly p-2  m-auto">
+            <h1>Balance</h1>
+            <div className="flex m-auto flex-col h-[100px] w-[100px] justify-center items-center bg-color4 rounded-full border-color1 border-4">
+              <img className="w-8 h-8" src="/assets/icons/cherries.png"></img>
+              <h1 className="text-xl text-color2">x{info?.Credit_balance}</h1>
+            </div>
           </div>
-        </div>
-        <div className=" p-1 h-full w-full flex flex-col justify-center">
-          <h1>Tasas de cambio hoy</h1>
-          <ClientExchangeRates />
+          <div className=" text-center p-1  w-full flex flex-col justify-center">
+            <h1>Tasas de cambio hoy</h1>
+            <ClientExchangeRates />
+          </div>
         </div>
 
         <div className="max-w-[800px] h-full  md:col-span-1 md:row-span-3 col-span-1 row-span-1 w-full min-h-fit  text-color4  p-2  rounded-md  ">

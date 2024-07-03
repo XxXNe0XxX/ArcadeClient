@@ -9,7 +9,8 @@ import {
   mapKeysToFirstCharLowerCase,
   mapKeysToFirstCharUpperCase,
 } from "../utils/lowerCaseUpperCase";
-
+import { useModal } from "../context/ModalProvider";
+import "./formTitleShine.css";
 const fieldComponents = {
   input: Input,
   select: Select,
@@ -19,7 +20,7 @@ const fieldComponents = {
 const Form = ({ fields, onSubmit, className, initialValues = {}, title }) => {
   const [formData, setFormData] = useState({});
   const [municipalityOptions, setMunicipalityOptions] = useState([]);
-
+  const openModal = useModal();
   useEffect(() => {
     // Initialize formData with initialValues or empty strings
     const initialFormData = {};
@@ -58,9 +59,19 @@ const Form = ({ fields, onSubmit, className, initialValues = {}, title }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    // Check if all form fields are empty
+    const allFieldsEmpty = fields.every((field) => !formData[field.name]);
+
+    if (allFieldsEmpty) {
+      openModal({
+        message: "All fields are empty. Please fill out at least one field.",
+      });
+      return;
+    }
+
     onSubmit(formData);
   };
-
   const renderField = (field) => {
     const FieldComponent = fieldComponents[field.type];
     const options =
@@ -90,10 +101,10 @@ const Form = ({ fields, onSubmit, className, initialValues = {}, title }) => {
       onSubmit={handleSubmit}
       className={`max-w-[1200px] mt-3 w-full m-auto gap-2 flex flex-col items-center  rounded-md   ${className}`}
     >
-      <h1 className=" py-6 text-4xl text-center colortext bg-gradient-to-r from-orange-500 to-orange-100  ">
+      <h1 className="text-shine py-6 text-4xl text-center bg-gradient-to-r text-color4 from-orange-500 to-orange-100  ">
         {title}
       </h1>
-      <div className="grid md:gap-2  border border-color1 p-6 rounded-md  shadow-inner  shadow-white md:grid-cols-2 items-center px-6 w-full ">
+      <div className="grid md:gap-2  border-color1 p-6 rounded-md  shadow-inner  shadow-white md:grid-cols-2 items-center px-6 outline-1 border outline outline-orange-500  ">
         {fields.map((field) => renderField(field))}
       </div>
       <Button type="submit" className=" ">

@@ -24,6 +24,5 @@ export const getModifiedFields = (initialValues, currentValues) => {
       modifiedFields[key] = currentValues[key];
     }
   });
-  console.log(modifiedFields);
   return modifiedFields;
 };

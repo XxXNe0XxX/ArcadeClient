@@ -25,7 +25,7 @@ const ClientProfile = () => {
   }, []);
 
   return (
-    <section className="bg-color5  flex flex-col items-start justify-start h-full gap-2 w-full p-4 ">
+    <section className=" max-w-[800px] m-auto flex flex-col items-start justify-start h-full gap-2 w-full p-4 ">
       <ul className="flex flex-col gap-2 bg-color2 p-2 rounded-md w-full">
         <li>Nombre: {info?.User?.Name}</li>
         <li>Apellido: {info?.User?.Name}</li>
@@ -52,9 +52,6 @@ const ClientProfile = () => {
       ) : (
         ""
       )}
-      <h1 className="p-2 border border-color1 w-full m-auto text-center">
-        {msg}
-      </h1>
     </section>
   );
 };

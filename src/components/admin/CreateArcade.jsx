@@ -21,9 +21,11 @@ const CreateArcade = () => {
           message: `Arcade creado`,
         });
     } catch (error) {
-      openModal({
-        message: ` ${error.response.data.message}`,
-      });
+      if (error.response && error.response.data.errors) {
+        openModal({ message: error.response.data.errors[0].msg });
+      } else {
+        openModal({ message: error.response.data.message });
+      }
     }
   };
 

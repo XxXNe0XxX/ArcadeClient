@@ -17,8 +17,8 @@ const CreateExpense = () => {
         openModal({ message: "Gasto creado" });
       }
     } catch (error) {
-      if (error.response.status === 400) {
-        openModal({ message: "Al menos un campo es requerido" });
+      if (error.response && error.response.data.errors) {
+        openModal({ message: error.response.data.errors[0].msg });
       } else {
         openModal({ message: error.response.data.message });
       }

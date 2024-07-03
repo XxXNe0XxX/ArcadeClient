@@ -37,7 +37,9 @@ const EditUser = () => {
   //Edit Client
   const handleSubmit = async (formData) => {
     const modifiedFields = getModifiedFields(info, formData);
-
+    if (Object.keys(modifiedFields).length < 1) {
+      return openModal({ message: "Al menos un campo debe ser modificado" });
+    }
     try {
       const response = await axiosPrivate.patch(
         `/api/users/${userId}`,
@@ -47,12 +49,10 @@ const EditUser = () => {
         openModal({ message: "Cliente actualizado" });
       }
     } catch (error) {
-      if (error.response.status === 409) {
-        openModal({ message: "Ya existe un cliente con ese correo" });
-      } else if (error.response.status === 400) {
-        openModal({ message: `${error.response.data.message}` });
+      if (error.response && error.response.data.errors) {
+        openModal({ message: error.response.data.errors[0].msg });
       } else {
-        openModal({ message: error.response.data.error });
+        openModal({ message: error.response.data.message });
       }
     }
     setRefetch(!refetch);
