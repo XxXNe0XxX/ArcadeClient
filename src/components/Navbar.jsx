@@ -21,6 +21,7 @@ const Navbar = () => {
   const [open, setIsOpen] = useState(false);
   const location = useLocation();
   const navRef = useRef(null);
+  const [count, setCount] = useState(10);
 
   const handleClickOutside = (event) => {
     if (navRef.current && !navRef.current.contains(event.target)) {
@@ -38,7 +39,23 @@ const Navbar = () => {
   return (
     <>
       {!location.pathname.includes("/dash" || "/clientdash") && (
-        <nav className="text-color4 z-20 sticky p-1 flex items-center justify-between bg-color4 font-pixel-emulator w-full tracking-tighter overflow-hidden">
+        <nav className="text-color4 z-20  flex items-center justify-between bg-repeat bg-bottom bg-contain relative font-pixel-emulator w-full tracking-tighter overflow-hidden bg-[url('/assets/images/bricks.png')] ">
+          <div className="flex absolute justify-center *:flex-grow h-full -z-10">
+            <div className=" bg-black opacity-35 h-14 w-[22vw]"></div>
+            <div
+              className=" w-[2.6vw]  bg-black opacity-35 hover:bg-transparent hover:opacity-100 transition-all  h-14"
+              onClick={() => {
+                setCount((prev) => prev - 1);
+              }}
+            >
+              {count === 0 && (
+                <Link to="/phrase">
+                  <button onClick={() => setCount(0)}>Found</button>
+                </Link>
+              )}
+            </div>
+            <div className="   bg-black opacity-35 w-[76vw] h-14"></div>
+          </div>
           <div
             ref={navRef}
             className={` ${
@@ -103,7 +120,7 @@ const Navbar = () => {
                 </li>
               </Link> */}
               <Link to="phrase">
-                <div className="border hover:h-20 hover:w-full bg-[url('/assets/images/bricks.jpg')] hover:blur-none w-1 blur-sm transition-all bg-cover bg-repeat-x bg-center"></div>
+                <div className="border hover:h-20 hover:w-full bg-[url('/assets/images/bricks.png')] hover:blur-none w-1 blur-sm transition-all bg-cover bg-repeat-x bg-center"></div>
               </Link>
             </ul>
           </div>
@@ -111,28 +128,40 @@ const Navbar = () => {
             onClick={() => setIsOpen(!open)}
             className={`${open ? "ml-[250px]" : ""} transition-all`}
           >
-            {open ? <Pacmanopen /> : <Pacmanclosed />}
+            <div className="  h-full p-1 ">
+              {open ? (
+                <img
+                  className="h-12  w-12"
+                  src="/assets/icons/pacmanopen.png"
+                />
+              ) : (
+                <img
+                  className="h-12  w-12"
+                  src="/assets/icons/pacmanclosed.png"
+                />
+              )}
+            </div>
           </button>
           {location.pathname === "/login" ? (
-            <button className="text-color1 px-2">
-              <Link to="/">
+            <Link to="/">
+              <button className="text-color1 p-1 px-2 flex items-center  bg-color5 rounded-md ">
                 Inicio
                 <FontAwesomeIcon
                   className="px-1"
                   icon={faHouseChimney}
                 ></FontAwesomeIcon>
-              </Link>
-            </button>
+              </button>
+            </Link>
           ) : (
-            <button className="p-1 flex text-color1">
-              <Link to="login">
+            <Link to="login">
+              <button className="p-1 px-2 flex items-center text-color1  bg-color5  rounded-md ">
                 Login
                 <FontAwesomeIcon
                   className="px-1 animate-bounce"
                   icon={faArrowRight}
                 ></FontAwesomeIcon>
-              </Link>
-            </button>
+              </button>
+            </Link>
           )}
         </nav>
       )}

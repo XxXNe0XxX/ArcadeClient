@@ -43,8 +43,8 @@ const Public = () => {
           Arcade!
         </h1>
         <img
-          src="/assets/images/hero1.jpg"
-          className="h-[95vh] md:h-[600px] w-full object-cover "
+          src="/assets/images/heroHD.png"
+          className="h-[95vh] md:h-[700px] w-full object-cover "
         ></img>
       </div>
 

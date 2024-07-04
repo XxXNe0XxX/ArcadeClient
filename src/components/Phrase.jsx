@@ -1,7 +1,7 @@
 const Phrase = () => {
   return (
     <div className="max-w-[800px] w-full m-auto">
-      <p className="text-color1 bg-color4 p-2 m-1 rounded-md text-center ">
+      <p className="text-color1  p-2 m-1 rounded-md text-center ">
         “La felicidad sólo es real cuando es compartida.”
       </p>
       <div className="px-2">
