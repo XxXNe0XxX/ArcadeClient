@@ -10,7 +10,7 @@
     50% {transform:translateY(5.5rem)}
     90%{scale:1}
     95%{opacity: 1;height:7rem}
-    100% { opacity: 1;height:7rem;z-index: 3;}
+    100% { opacity: 1;height:7rem;z-index: 3; transform: translateY(3rem);}
 }
 
 #coin{

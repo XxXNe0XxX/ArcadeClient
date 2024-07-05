@@ -8,6 +8,7 @@ const GenerateQR = () => {
   const [amountCharged, setAmountCharged] = useState("");
   const [creditAmount, setCreditAmount] = useState("");
   const [currency, setCurrency] = useState("");
+  const [exchangeRate, setExchangeRate] = useState("");
   const [msg, setMsg] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const [qr, setQr] = useState("");
@@ -24,6 +25,7 @@ const GenerateQR = () => {
         amountCharged,
         creditAmount,
         currency,
+        exchangeRate: exchangeRate || undefined,
       });
 
       response?.data && setMsg("Creditos añadidos con exito");
@@ -32,6 +34,7 @@ const GenerateQR = () => {
       setAmountCharged("");
       setCreditAmount("");
       setCurrency("");
+      setExchangeRate("");
       setTimeout(() => {
         setIsDisabled(false);
       }, 6000);
@@ -106,6 +109,19 @@ const GenerateQR = () => {
             <option value="USD">USD</option>
             <option value="CUP">CUP</option>
           </select>
+        </div>
+        <div className="mb-4">
+          <input
+            type="number"
+            min="0"
+            id="exchangeRate"
+            name="exchangeRate"
+            value={exchangeRate}
+            onChange={(e) => setExchangeRate(e.target.value)}
+            className="w-full text-color4  p-2"
+            placeholder="Tasa de cambio { opcional }"
+            step={0.000001}
+          ></input>
         </div>
         <div className="text-center">
           <button

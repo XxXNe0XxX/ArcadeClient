@@ -35,11 +35,14 @@ const EditBalance = () => {
 
   // Add credits
   const addCredits = async (formData) => {
+    const filteredData = Object.fromEntries(
+      Object.entries(formData).filter(([_, v]) => v !== "")
+    );
     try {
       const response = await axiosPrivate.post(
         `/api/credits/add/${userId}`,
         JSON.stringify({
-          ...formData,
+          ...filteredData,
         })
       );
       if (response.statusText === "OK") {
@@ -89,6 +92,12 @@ const EditBalance = () => {
         { value: "USD", label: "USD" },
         { value: "CUP", label: "CUP" },
       ],
+    },
+    {
+      id: "Tasa de cambio",
+      name: "exchangeRate",
+      type: "input",
+      placeholder: "Opcional",
     },
   ];
   const subtractFields = [
