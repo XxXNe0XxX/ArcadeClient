@@ -95,7 +95,7 @@ function App() {
               <Route index element={<WelcomeClient />} />
               <Route path="transactions" element={<ClientTransactions />} />
               <Route path="generate" element={<GenerateQR />} />
-              <Route path="recoverqr/:id" element={<RecoverQR />}></Route>
+              <Route path="recoverqr/:id?" element={<RecoverQR />}></Route>
               <Route path="sessions" element={<ClientGameSessions />}></Route>
               <Route path="statistics" element={<ClientMachineStatistics />} />
               <Route path="qrcodes" element={<ClientQrCodes />} />

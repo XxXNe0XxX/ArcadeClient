@@ -96,7 +96,9 @@ const RecoverQR = () => {
       </button>
       <h1 className=" text-center border-color1 border my-4  w-full">{msg}</h1>
       <img
-        className="my-10 w-full max-h-[500px] object-contain"
+        className={`${
+          qr ? "h-full" : "h-1"
+        }  my-10 w-full max-h-[500px] object-contain transition-all`}
         src={qr}
         alt=""
       />
