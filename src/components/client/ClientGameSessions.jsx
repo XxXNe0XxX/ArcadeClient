@@ -1,6 +1,7 @@
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useState, useEffect } from "react";
 import Table from "../Table";
+import { flattenObject } from "../../utils/flattenObject";
 
 const ClientGameSessions = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -16,7 +17,11 @@ const ClientGameSessions = () => {
           withCredentials: true,
           signal: controller.signal,
         });
-        setSessions(response?.data);
+        const flattenedData = response.data.map((machine) =>
+          flattenObject(machine)
+        );
+        console.log(flattenedData);
+        isMounted && setSessions(flattenedData);
       } catch (error) {
         setMsg(error.response.data.message);
       }

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/ModalProvider";
+import { flattenObject } from "../../utils/flattenObject";
 const Machines = () => {
   const navigate = useNavigate();
 
@@ -17,11 +18,14 @@ const Machines = () => {
     // Fetch machines
     const getMachines = async () => {
       try {
-        const response = await axiosPrivate.get("/api/arcademachines", {
+        const response = await axiosPrivate.get("/api/arcademachines/manage", {
           withCredentials: true,
         });
 
-        isMounted && setMachines(response.data);
+        const flattenedData = response.data.map((machine) =>
+          flattenObject(machine)
+        );
+        isMounted && setMachines(flattenedData);
       } catch (error) {
         openModal({
           message: `${error.response.data.message}`,

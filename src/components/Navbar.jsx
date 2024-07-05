@@ -40,10 +40,10 @@ const Navbar = () => {
     <>
       {!location.pathname.includes("/dash" || "/clientdash") && (
         <nav className="text-color4 z-20  flex items-center justify-between bg-repeat bg-bottom bg-contain relative font-pixel-emulator w-full tracking-tighter overflow-hidden bg-[url('/assets/images/bricks.png')] ">
-          <div className="flex absolute justify-center *:flex-grow h-full -z-10">
-            <div className=" bg-black opacity-35 h-14 w-[22vw]"></div>
+          <div className="flex absolute justify-center w-full h-full -z-10 shadow-lg shadow-white">
+            <div className=" bg-black opacity-20 flex-grow h-14 "></div>
             <div
-              className=" w-[2.6vw]  bg-black opacity-35 hover:bg-transparent hover:opacity-100 transition-all  h-14"
+              className="   bg-black opacity-20 w-[60px]  hover:bg-transparent hover:opacity-100 transition-all  h-14"
               onClick={() => {
                 setCount((prev) => prev - 1);
               }}
@@ -54,7 +54,7 @@ const Navbar = () => {
                 </Link>
               )}
             </div>
-            <div className="   bg-black opacity-35 w-[76vw] h-14"></div>
+            <div className="   bg-black opacity-20 flex-grow h-14"></div>
           </div>
           <div
             ref={navRef}
@@ -154,7 +154,7 @@ const Navbar = () => {
             </Link>
           ) : (
             <Link to="login">
-              <button className="p-1 px-2 flex items-center text-color1  bg-color5  rounded-md ">
+              <button className="p-1 px-2 mr-1 flex items-center text-color1  bg-color5  rounded-md ">
                 Login
                 <FontAwesomeIcon
                   className="px-1 animate-bounce"

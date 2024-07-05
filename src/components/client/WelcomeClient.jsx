@@ -22,7 +22,7 @@ const WelcomeClient = () => {
     const getMachines = async () => {
       try {
         const response = await axiosPrivate.get(`/api/client/machines`);
-        setMachines(response.data.machines);
+        setMachines(response.data);
       } catch (error) {
         setMsg(error.response.message);
       }

@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import axios from "../../api/axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Button from "../../components/Button";
+
 const LOGIN_URL = "/auth";
 
 const Login = () => {
@@ -47,6 +48,13 @@ const Login = () => {
       const role = response?.data.role;
       setAuth({ accessToken, role });
       localStorage.setItem("email", email);
+
+      // Reset attempts and timeout on successful login
+      localStorage.removeItem("attempts");
+      localStorage.removeItem("timeout");
+      setAttempts(3);
+      setIsTimeout(false);
+
       if (role === "ADMIN") {
         navigate("/dash");
       } else if (role === "CLIENT") {

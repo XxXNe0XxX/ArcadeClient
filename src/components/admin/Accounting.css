@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Pixel Emulator';
+    src: url('/assets/fonts/Pixel Emulator.otf') format('opentype');
+  }
+  
+  body {
+    font-family: 'Pixel Emulator', Arial, sans-serif;
+  }
+  

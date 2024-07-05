@@ -2,6 +2,7 @@ import Table from "../Table";
 import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useModal } from "../../context/ModalProvider";
+import { flattenObject } from "../../utils/flattenObject";
 
 const QrCodes = () => {
   const [qrCodes, setQrCodes] = useState();
@@ -16,7 +17,8 @@ const QrCodes = () => {
         const response = await axiosPrivate.get("/api/qr", {
           withCredentials: true,
         });
-        isMounted && setQrCodes(response.data);
+        const flattenedData = response.data.map((qr) => flattenObject(qr));
+        isMounted && setQrCodes(flattenedData);
       } catch (error) {
         openModal({
           message: `${error.response.data.message}`,

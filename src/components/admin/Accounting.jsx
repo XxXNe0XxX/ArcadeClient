@@ -3,6 +3,7 @@ import { Bar, Line } from "react-chartjs-2";
 import "chart.js/auto"; // Ensure you have this import
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import Table from "../Table";
+import "./Accounting.css"; // Import the CSS for the font
 
 const Accounting = () => {
   const [statistics, setStatistics] = useState(null);
@@ -59,11 +60,51 @@ const Accounting = () => {
         data: monthlyLabels?.map((month) =>
           data[month]?.[currency]?.toFixed(2)
         ),
-        borderColor: "rgba(54,162,235,1)",
-        backgroundColor: "rgba(54,162,235,0.2)",
+        borderColor: "#DC5F00", // Line color
+        backgroundColor: "#373A40", // Background color
       },
     ],
   });
+
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    aspectRatio: 2, // Adjust the aspect ratio as needed
+    scales: {
+      x: {
+        grid: {
+          color: "#686D76", // Grid line color
+        },
+        ticks: {
+          color: "#EEEEEE", // Tick color
+          font: {
+            family: "Pixel Emulator", // Custom font family
+          },
+        },
+      },
+      y: {
+        grid: {
+          color: "#686D76", // Grid line color
+        },
+        ticks: {
+          color: "#EEEEEE", // Tick color
+          font: {
+            family: "Pixel Emulator", // Custom font family
+          },
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        labels: {
+          color: "#EEEEEE", // Legend label color
+          font: {
+            family: "Pixel Emulator", // Custom font family
+          },
+        },
+      },
+    },
+  };
 
   const netProfitData = generateChartData(
     monthlyNetProfit,
@@ -76,7 +117,7 @@ const Accounting = () => {
       {
         label: `Ingresos (${currency})`,
         data: topClients?.map((client) => client.revenue[currency]?.toFixed(2)),
-        backgroundColor: "rgba(54,162,235,0.6)",
+        backgroundColor: "#DC5F00", // Bar color
       },
     ],
   };
@@ -144,28 +185,31 @@ const Accounting = () => {
           </select>
         </div>
       </div>
-      <div className="flex flex-wrap justify-center gap-2 p-2">
-        <div className="max-w-[800px] w-full bg-color4 text-color1 border border-color1 p-2 rounded-md">
+      <div className="flex flex-wrap justify-center gap-6">
+        <div className="max-w-[800px] w-full h-96  text-color4 border border-color1 p-2 rounded-md">
           <h2>Ingresos Mensuales</h2>
           <Line
             data={generateChartData(monthlyRevenue, "Ingresos Mensuales")}
+            options={chartOptions}
           />
         </div>
-        <div className="max-w-[800px] w-full bg-color4 text-color1 border border-color1 p-2 rounded-md">
+        <div className="max-w-[800px] w-full h-96  text-color4 border border-color1 p-2 rounded-md">
           <h2>Gastos Mensuales</h2>
-          <Line data={generateChartData(monthlyExpenses, "Gastos Mensuales")} />
+          <Line
+            data={generateChartData(monthlyExpenses, "Gastos Mensuales")}
+            options={chartOptions}
+          />
         </div>
-        <div className="max-w-[800px] w-full bg-color4 text-color1 border border-color1 p-2 rounded-md">
+        <div className="max-w-[800px] w-full h-96  text-color4 border border-color1 p-2 rounded-md">
           <h2>Ganancia Neta Mensual</h2>
-          <Line data={netProfitData} />
+          <Line data={netProfitData} options={chartOptions} />
         </div>
-        <div className="max-w-[800px] w-full bg-color4 text-color1 border border-color1 p-2 rounded-md">
-          <h2>Principales Clientes por Ingresos</h2>
-          <Bar data={topClientsData} />
+        <div className="max-w-[800px] w-full h-96  text-color4 border border-color1 p-2 rounded-md">
+          <h2>Principales Clientes por ingreso</h2>
+          <Bar data={topClientsData} options={chartOptions} />
         </div>
       </div>
-      <div className=" max-w-[800px] m-auto">
-        <h2 className="text-color1 text-xl p-2 bg-color2">Resumen</h2>
+      <div className=" max-w-[800px] m-auto my-10">
         <Table data={summaryData} title="Resumen de Estadísticas" />
       </div>
     </div>
