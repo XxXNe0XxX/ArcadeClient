@@ -10,8 +10,9 @@ import {
   faToggleOff,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useModal } from "../context/ModalProvider";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Table = ({
   data,
@@ -28,7 +29,11 @@ const Table = ({
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedRow, setSelectedRow] = useState(null);
+  const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
   const openModal = useModal();
+  const popoverRef = useRef();
+  const tableContainerRef = useRef();
 
   if (!data || data.length === 0)
     return (
@@ -94,6 +99,15 @@ const Table = ({
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
+  const handleRowClick = (row, event) => {
+    if (!row) return; // Avoid selecting empty rows
+    const rowElement = event.currentTarget;
+    const rect = rowElement.getBoundingClientRect();
+    const containerRect = tableContainerRef.current.getBoundingClientRect();
+    setSelectedRow(row);
+    setClickPosition({ x: event.clientX, y: rect.top - containerRect.top });
+  };
+
   const handleDeleteClick = (item) => {
     openModal({
       type: "confirmation",
@@ -127,38 +141,14 @@ const Table = ({
           />
         </div>
       </div>
-      <div className="overflow-scroll h-[70vh] w-full max-w-screen">
+      <div
+        ref={tableContainerRef}
+        className="overflow-scroll h-[70vh] w-full max-w-screen"
+        onScroll={() => setSelectedRow(null)}
+      >
         <table className="bg-white border border-gray-200 w-full h-full p-1">
           <thead>
             <tr>
-              {onToggle ? (
-                <th className="px-4 py-2 border-b border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer">
-                  <h1>{"Activar\nDesactivar"}</h1>
-                </th>
-              ) : (
-                <th></th>
-              )}
-              {onEdit ? (
-                <th className="px-4 py-2 border-b border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer">
-                  <h1>Editar</h1>
-                </th>
-              ) : (
-                <th></th>
-              )}
-              {onDelete ? (
-                <th className="px-4 py-2 border-b border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer">
-                  <h1>Eliminar</h1>
-                </th>
-              ) : (
-                <th></th>
-              )}
-              {onStatistics ? (
-                <th className="px-4 py-2 border-b border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer">
-                  <h1>Estadisticas</h1>
-                </th>
-              ) : (
-                <th></th>
-              )}
               {columns.map((column) => (
                 <th
                   key={column}
@@ -185,73 +175,16 @@ const Table = ({
             {rowsToDisplay.map((row, rowIndex) => (
               <tr
                 key={rowIndex}
-                className={`${rowIndex % 2 === 0 ? "bg-color4" : ""}`}
+                data-key={row?.id} // Add data-key attribute to identify the row
+                className={`cursor-pointer ${
+                  row === selectedRow &&
+                  row !== null &&
+                  "bg-color1 outline-1 outline-double outline-black transition-all" // Ensure row is not null or empty
+                } ${
+                  row !== selectedRow && rowIndex % 2 === 0 ? "bg-color4" : ""
+                }`}
+                onClick={(event) => handleRowClick(row, event)}
               >
-                {onToggle && row ? (
-                  <td>
-                    <button
-                      className="text-color2 text-center w-full"
-                      onClick={() => onToggle(row)}
-                    >
-                      {row.Running || row.Active ? (
-                        <FontAwesomeIcon
-                          className="text-color1 scale-125"
-                          icon={faToggleOn}
-                        />
-                      ) : (
-                        <FontAwesomeIcon
-                          className="text-color1 scale-125"
-                          icon={faToggleOff}
-                        />
-                      )}
-                    </button>
-                  </td>
-                ) : (
-                  <td></td>
-                )}
-                {onEdit && row ? (
-                  <td>
-                    <button
-                      className="text-color2 text-center w-full"
-                      onClick={() => onEdit(row)}
-                    >
-                      <FontAwesomeIcon className="scale-125" icon={faEdit} />
-                    </button>
-                  </td>
-                ) : (
-                  <td></td>
-                )}
-                {onDelete && row ? (
-                  <td>
-                    <button
-                      className="text-color2 text-center w-full"
-                      onClick={() => handleDeleteClick(row)}
-                    >
-                      <FontAwesomeIcon
-                        className="text-color1 scale-125"
-                        icon={faTrash}
-                      />
-                    </button>
-                  </td>
-                ) : (
-                  <td></td>
-                )}
-                {onStatistics && row ? (
-                  <td>
-                    <button
-                      className="text-color2 text-center w-full"
-                      onClick={() => onStatistics(row)}
-                    >
-                      <FontAwesomeIcon
-                        className="text-color3 scale-125"
-                        icon={faChartBar}
-                      />
-                    </button>
-                  </td>
-                ) : (
-                  <td></td>
-                )}
-
                 {columns.map((column) => (
                   <td
                     key={column}
@@ -302,6 +235,71 @@ const Table = ({
           {">"}
         </button>
       </div>
+      <AnimatePresence>
+        {(selectedRow && onEdit) || onDelete || onStatistics || onToggle ? (
+          <motion.div
+            ref={popoverRef}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{
+              top: clickPosition.y,
+              translateY: "80px",
+            }}
+            className="absolute rounded-bl-none rounded-2xl border-black bg-white border  shadow-lg p-2 flex items-center gap-2 *:border *:p-1 *:rounded-md"
+          >
+            {onEdit && (
+              <button
+                className="text-color2 flex flex-col items-center gap-2"
+                onClick={() => onEdit(selectedRow)}
+              >
+                <span className="text-xs">Editar</span>
+                <FontAwesomeIcon className="text-color3" icon={faEdit} />
+              </button>
+            )}
+            {onDelete && (
+              <button
+                className="text-color2 flex flex-col items-center gap-2"
+                onClick={() => handleDeleteClick(selectedRow)}
+              >
+                <span className="text-xs">Eliminar</span>
+                <FontAwesomeIcon className="text-red-600" icon={faTrash} />
+              </button>
+            )}
+            {onStatistics && (
+              <button
+                className="text-color2 flex flex-col items-center gap-2"
+                onClick={() => onStatistics(selectedRow)}
+              >
+                <span className="text-xs">Estadisticas</span>
+                <FontAwesomeIcon className="text-color2" icon={faChartBar} />
+              </button>
+            )}
+            {onToggle && (
+              <button
+                className="text-color2 flex flex-col items-center gap-2"
+                onClick={() => onToggle(selectedRow)}
+              >
+                <span className="text-xs">
+                  {selectedRow.Running || selectedRow.Active
+                    ? "Activar"
+                    : "Desactivar"}
+                </span>
+                <FontAwesomeIcon
+                  className="text-color1"
+                  icon={
+                    selectedRow.Running || selectedRow.Active
+                      ? faToggleOn
+                      : faToggleOff
+                  }
+                />
+              </button>
+            )}
+          </motion.div>
+        ) : (
+          "Not editable"
+        )}
+      </AnimatePresence>
     </div>
   );
 };
