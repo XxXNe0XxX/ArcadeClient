@@ -282,12 +282,15 @@ const Table = ({
             {onToggle && (
               <button
                 className="text-color2 flex flex-col items-center gap-2"
-                onClick={() => onToggle(selectedRow)}
+                onClick={() => {
+                  onToggle(selectedRow);
+                  setSelectedRow(null);
+                }}
               >
                 <span className="text-xs">
                   {selectedRow.Running || selectedRow.Active
-                    ? "Activar"
-                    : "Desactivar"}
+                    ? "Activado"
+                    : "Desactivado"}
                 </span>
                 <FontAwesomeIcon
                   className="text-color1"

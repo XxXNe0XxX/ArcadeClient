@@ -33,6 +33,13 @@ const ConfirmationModal = ({ type, isOpen, message, onConfirm, onCancel }) => {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    // Reset the countdown when the modal opens or the message changes
+    if (isOpen || message !== "") {
+      setCountdown(5);
+    }
+  }, [isOpen, message]); // Include message in the dependency array
+
   const handleCancel = () => {
     onCancel();
   };
