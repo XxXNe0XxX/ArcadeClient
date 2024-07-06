@@ -297,7 +297,7 @@ const Table = ({
             )}
           </motion.div>
         ) : (
-          "Not editable"
+          ""
         )}
       </AnimatePresence>
     </div>
