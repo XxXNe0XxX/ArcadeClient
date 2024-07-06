@@ -183,7 +183,11 @@ const Table = ({
                 } ${
                   row !== selectedRow && rowIndex % 2 === 0 ? "bg-color4" : ""
                 }`}
-                onClick={(event) => handleRowClick(row, event)}
+                onClick={(event) => {
+                  onToggle || onEdit || onDelete || onStatistics
+                    ? handleRowClick(row, event)
+                    : "";
+                }}
               >
                 {columns.map((column) => (
                   <td
@@ -236,7 +240,7 @@ const Table = ({
         </button>
       </div>
       <AnimatePresence>
-        {(selectedRow && onEdit) || onDelete || onStatistics || onToggle ? (
+        {selectedRow && (
           <motion.div
             ref={popoverRef}
             initial={{ opacity: 0 }}
@@ -296,8 +300,6 @@ const Table = ({
               </button>
             )}
           </motion.div>
-        ) : (
-          ""
         )}
       </AnimatePresence>
     </div>
