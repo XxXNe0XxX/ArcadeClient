@@ -101,9 +101,7 @@ const Form = ({ fields, onSubmit, className, initialValues = {}, title }) => {
       onSubmit={handleSubmit}
       className={`max-w-[1200px] mt-3 w-full m-auto gap-2 flex flex-col items-center  rounded-md   ${className}`}
     >
-      <h1 className="text-shine py-6 text-4xl text-center bg-gradient-to-r text-color4 from-orange-500 to-orange-100  ">
-        {title}
-      </h1>
+      <h1 className="text-shine py-3 text-3xl text-center w-fit ">{title}</h1>
       <div className="grid md:gap-2  border-color1 p-6 rounded-md  shadow-inner  shadow-white md:grid-cols-2 items-center px-6 outline-1 border outline outline-orange-500  ">
         {fields.map((field) => renderField(field))}
       </div>

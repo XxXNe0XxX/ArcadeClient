@@ -1,62 +1,59 @@
-// Input.jsx
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+
 const Input = ({ id, type, value, onChange, placeholder, className, name }) => {
   const [show, setShow] = useState(false);
+
+  const inputTypeMapping = {
+    password: show ? "text" : "password",
+    currentPassword: show ? "text" : "password",
+    newPassword: show ? "text" : "password",
+    repeatPassword: show ? "text" : "password",
+    email: "email",
+    contact: "number",
+    add: "number",
+    subtract: "number",
+    amount: "number",
+    creditAmount: "number",
+    creditsPerGame: "number",
+    exchangeRate: "number",
+  };
+
+  const inputType = inputTypeMapping[name] || type;
+
+  const isPasswordInput = [
+    "password",
+    "currentPassword",
+    "newPassword",
+    "repeatPassword",
+  ].includes(name);
+
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col">
       <label htmlFor={id}>{id}</label>
-      <div className="flex items-center justify-start">
+      <div className="flex items-center justify-center">
         <input
           id={id}
-          type={
-            name === "password" ||
-            name === "currentPassword" ||
-            name === "newPassword" ||
-            name === "repeatPassword"
-              ? "password"
-              : name === "email"
-              ? "email"
-              : name === "contact" ||
-                name === "add" ||
-                name === "subtract" ||
-                name === "amount" ||
-                name === "creditAmount" ||
-                name === "creditsPerGame" ||
-                name === "exchangeRate"
-              ? "number"
-              : type
-          }
+          type={inputType}
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className={`p-2 rounded-md border border-color2 w-full rounded-md${className}`}
+          className={`p-2 border border-color2 w-full rounded-md ${className}`}
           name={name}
           step="0.00000001"
           min={name === "exchangeRate" ? 0.00000001 : 1}
         />
-        {/* {name === "password" ||
-        name === "currentPassword" ||
-        name === "repeatPassword" ||
-        name === "newPassword" ? (
-          <FontAwesomeIcon
-            onClick={() => {
-              setShow(!show);
-              console.log(show);
-            }}
-            icon={faEye}
-            className=" w-8 h-8 scale-75 "
-          ></FontAwesomeIcon>
-        ) : (
-          <FontAwesomeIcon
-            onClick={() => setShow(!show)}
-            icon={faEyeSlash}
-            className=" w-8 h-8 scale-75 "
-          ></FontAwesomeIcon>
-        )} */}
+        {isPasswordInput && (
+          <button type="button" onClick={() => setShow(!show)} className="mx-2">
+            {show ? (
+              <FontAwesomeIcon icon={faEye} className="w-6" />
+            ) : (
+              <FontAwesomeIcon icon={faEyeSlash} className="w-6" />
+            )}
+          </button>
+        )}
       </div>
     </div>
   );
