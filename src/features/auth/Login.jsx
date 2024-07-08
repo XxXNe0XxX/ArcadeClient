@@ -139,7 +139,7 @@ const Login = () => {
       />
       <Button
         type="submit"
-        className="flex justify-center items-center gap-2 bg-color1 p-2 my-2 disabled:bg-color3 "
+        className="flex justify-center items-center gap-2 bg-color1 p-2 my-2 disabled:text-color4 disabled:bg-color3 disabled:border-color4"
         disabled={isTimeout} // Disable button during timeout
       >
         Continuar

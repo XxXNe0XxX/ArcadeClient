@@ -39,8 +39,8 @@ const Navbar = () => {
   return (
     <>
       {!location.pathname.includes("/dash" || "/clientdash") && (
-        <nav className="text-color4 z-20  flex items-center justify-between bg-repeat bg-bottom bg-contain relative font-pixel-emulator w-full tracking-tighter overflow-hidden bg-[url('/assets/images/bricks.png')] ">
-          <div className="flex absolute justify-center w-full h-full -z-10 shadow-lg shadow-white">
+        <nav className="text-color4 z-20  flex items-center justify-between bg-repeat bg-bottom bg-contain relative font-pixel-emulator w-full tracking-tighter  bg-[url('/assets/images/bricks.png')] ">
+          <div className="flex absolute justify-center w-full h-full -z-10 shadow-lg shadow-yellow-800">
             <div className=" bg-black opacity-20 flex-grow h-14 "></div>
             <div
               className="   bg-black opacity-20 w-[60px]  hover:bg-transparent hover:opacity-100 transition-all  h-14"
