@@ -44,15 +44,15 @@ const GenerateQR = () => {
   };
 
   return (
-    <section className="flex h-[90vh] flex-col  justify-between ">
+    <section className="h-[92vh] overflow-hidden flex  flex-col ">
       <form
         onSubmit={generate}
-        className="max-w-md mx-auto px-4  bg-color2 shadow-md rounded-md"
+        className="max-w-[800px] md:text-base text-sm flex flex-col flex-wrap mx-auto px-2 py-1 space-y-2 bg-color2 shadow-md rounded-md"
       >
-        <h1 className="font-press-start text-center p-2 text-3xl">
+        <h1 className="font-press-start text-center p-1 text-2xl">
           Generar QR
         </h1>
-        <div className="mb-4 flex items-center">
+        <div className=" flex items-center">
           <label htmlFor="amountCharged" className="flex text-sm">
             Cantidad a cobrar
           </label>
@@ -68,11 +68,11 @@ const GenerateQR = () => {
             required
           />
           <img
-            className="h-14 w-20 scale-75 object-cover"
+            className="md:h-14 md:w-20 h-12 scale-75 object-cover"
             src="/assets/icons/coin.png"
           />
         </div>
-        <div className="mb-4 flex items-center">
+        <div className=" flex items-center">
           <label htmlFor="creditAmount" className="flex text-sm">
             Cantidad a añadir
           </label>
@@ -87,56 +87,62 @@ const GenerateQR = () => {
             className="w-full text-color4  p-2 mx-2"
             required
           />
-          <img className="h-12 object-cover" src="/assets/icons/cherries.png" />
+          <img
+            className="md:h-12 h-10 object-cover"
+            src="/assets/icons/cherries.png"
+          />
         </div>
-        <div className="mb-4">
-          <label
-            htmlFor="currency"
-            className="block font-medium text-color4 py-1"
-          >
-            Moneda
-          </label>
-          <select
-            id="currency"
-            name="currency"
-            value={currency}
-            onChange={(e) => setCurrency(e.target.value)}
-            className="text-color3 w-full py-2 border bg-color4"
-            required
-          >
-            <option value="">Selecciona la moneda</option>
-            <option value="MLC">MLC</option>
-            <option value="USD">USD</option>
-            <option value="CUP">CUP</option>
-          </select>
-        </div>
-        <div className="mb-4">
-          <input
-            type="number"
-            min="0"
-            id="exchangeRate"
-            name="exchangeRate"
-            value={exchangeRate}
-            onChange={(e) => setExchangeRate(e.target.value)}
-            className="w-full text-color4  p-2"
-            placeholder="Tasa de cambio { opcional }"
-            step={0.000001}
-          ></input>
+        <div className=" flex gap-2 items-center justify-between ">
+          <div className="w-full flex flex-col">
+            <label
+              htmlFor="currency"
+              className="block font-medium text-color4 "
+            >
+              Moneda
+            </label>
+            <select
+              id="currency"
+              name="currency"
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
+              className=" p-2 w-full"
+              required
+            >
+              <option className value="">
+                Selecciona
+              </option>
+              <option value="MLC">MLC</option>
+              <option value="USD">USD</option>
+              <option value="CUP">CUP</option>
+            </select>
+          </div>
+          <div className="flex flex-col w-full">
+            <label htmlFor="exchangeRate">Tasa de cambio</label>
+            <input
+              type="number"
+              min="0"
+              id="exchangeRate"
+              name="exchangeRate"
+              value={exchangeRate}
+              onChange={(e) => setExchangeRate(e.target.value)}
+              className=" text-color4  bg-color4 w-full p-1.5"
+              placeholder="Opcional"
+              step={0.000001}
+            ></input>
+          </div>
         </div>
         <div className="text-center">
           <button
             type="submit"
             className={`${
               isDisabled ? "bg-color2" : ""
-            } transition-all border mb-3 text-color4 bg-color1 w-full p-2`}
+            } transition-all border my-1 rounded-md active:bg-color4 active:border-color1 active:text-color1 text-color4 bg-color1 w-full p-2`}
             disabled={isDisabled}
           >
             Generar
           </button>
         </div>
-        {msg && (
-          <h1 className="border text-center p-1 my-2 border-color1">{msg}</h1>
-        )}
+        {msg && <h1 className="border text-center p-1 border-color1">{msg}</h1>}
       </form>
       <PipeQR qr={qr} />
     </section>

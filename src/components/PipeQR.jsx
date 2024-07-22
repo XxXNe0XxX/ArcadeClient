@@ -33,7 +33,7 @@ const PipeQR = ({ qr }) => {
       <img
         id="pipe"
         src="/assets/icons/pipe.png"
-        className="h-40 w-40 mx-auto"
+        className="h-40 w-40 mx-auto translate-y-10"
       />
     </div>
   );

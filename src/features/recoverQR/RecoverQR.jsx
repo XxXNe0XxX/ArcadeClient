@@ -63,7 +63,7 @@ const RecoverQR = () => {
   return (
     <form
       onSubmit={generateQR}
-      className="bg-color2 max-w-[600px] mx-auto flex flex-col p-6"
+      className="bg-color2  h-full max-w-[600px] mx-auto flex flex-col p-6"
     >
       <h1 className="font-press-start text-center p-2 text-3xl">
         Recupera tu QR

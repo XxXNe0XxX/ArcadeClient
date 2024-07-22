@@ -17,6 +17,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Pacmanopen from "/public/assets/icons/Pacmanopen";
 import Pacmanclosed from "/public/assets/icons/Pacmanclosed";
+import Logo from "../../public/assets/icons/Logo";
 const Navbar = () => {
   const [open, setIsOpen] = useState(false);
   const location = useLocation();
