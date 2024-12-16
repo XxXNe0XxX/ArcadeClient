@@ -6,7 +6,12 @@ const Layout = () => {
   const location = useLocation();
   return (
     <>
-      {!location.pathname.includes("/clientdash" || "/dash") && <Navbar />}
+      <Navbar />
+      {!location.pathname.includes("/dash") &&
+        !location.pathname.includes("/clientdash") && (
+          <div className="pb-16"></div>
+        )}
+
       <Outlet />
     </>
   );

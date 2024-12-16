@@ -2,7 +2,7 @@ import EmailContact from "./EmailContact";
 
 const Contact = () => {
   return (
-    <div className=" max-w-[1200px] m-auto p-6">
+    <div className=" max-w-[1200px] m-auto ">
       <div className="text-center py-4">
         <h1 className="text-3xl text-color1 font-press-start">Contactanos</h1>
         <p className="text-lg text-color4 mt-4">

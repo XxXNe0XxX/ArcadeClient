@@ -28,6 +28,15 @@ export default {
         "press-start": ['"Press Start 2P"', "cursive"],
         "pixel-emulator": ["PixelEmulator", "cursive"],
       },
+      keyframes: {
+        shine: {
+          "0%": { left: "-100%" },
+          "100%": { left: "100%" },
+        },
+      },
+      animation: {
+        shine: "shine 2s linear  forwards",
+      },
     },
   },
 

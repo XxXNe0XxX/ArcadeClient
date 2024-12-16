@@ -10,7 +10,7 @@ import {
   mapKeysToFirstCharUpperCase,
 } from "../utils/lowerCaseUpperCase";
 import { useModal } from "../context/ModalProvider";
-import "./formTitleShine.css";
+import "./formStyles.css";
 const fieldComponents = {
   input: Input,
   select: Select,
@@ -99,10 +99,12 @@ const Form = ({ fields, onSubmit, className, initialValues = {}, title }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className={`max-w-[1200px] mt-3 w-full m-auto gap-2 flex flex-col items-center  rounded-md   ${className}`}
+      className={`max-w-[1200px] mt-3 w-full m-auto gap-2 flex flex-col items-center  rounded-md form-container  ${className}`}
     >
-      <h1 className="text-shine py-3 text-3xl text-center w-fit ">{title}</h1>
-      <div className="grid md:gap-2  border-color1 p-6 rounded-md  shadow-inner  shadow-white md:grid-cols-2 items-center px-6 outline-1 border outline outline-orange-500  ">
+      <h1 className="text-shine p-3 rounded-md text-2xl text-center w-fit form-title border-2 border-color1 ">
+        {title}
+      </h1>
+      <div className="grid md:gap-2 p-6 rounded-md   md:grid-cols-2 items-center px-6 form-grid  ">
         {fields.map((field) => renderField(field))}
       </div>
       <Button type="submit" className=" ">
