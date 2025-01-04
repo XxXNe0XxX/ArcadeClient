@@ -2,19 +2,18 @@ import useAuth from "../../hooks/useAuth";
 import ASCIIVideo from "../ASCIIVideo";
 const Welcome = () => {
   const { auth } = useAuth();
-
+  console.log(auth);
   const date = new Date();
   const today = new Intl.DateTimeFormat("es-ES", {
     dateStyle: "full",
-    timeStyle: "long",
+    timeStyle: "short",
   }).format(date);
 
   return (
-    <section className="h-full">
+    <section className="h-full p-4">
       <p>{today}</p>
-      <h1>Bievenid@ {auth?.email}</h1>
+      <h1>Bievenid@ {auth.role}</h1>
       <ASCIIVideo></ASCIIVideo>
-      <div className="flex gap-2"></div>
     </section>
   );
 };

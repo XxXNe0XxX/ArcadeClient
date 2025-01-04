@@ -5,53 +5,54 @@ import { useModal } from "../../context/ModalProvider";
 import { flattenObject } from "../../utils/flattenObject";
 
 const QrCodes = () => {
-  const [qrCodes, setQrCodes] = useState();
+  const [qrCodes, setQrCodes] = useState([]);
   const axiosPrivate = useAxiosPrivate();
   const openModal = useModal();
-  const [refetch, setRefetch] = useState();
+  const [refetch, setRefetch] = useState(false);
+
   useEffect(() => {
-    let isMounted = true;
-    //Fetch Qr codes
+    const controller = new AbortController();
+
     const getQrCodes = async () => {
       try {
         const response = await axiosPrivate.get("/api/qr", {
           withCredentials: true,
+          signal: controller.signal,
         });
         const flattenedData = response.data.map((qr) => flattenObject(qr));
-        isMounted && setQrCodes(flattenedData);
+        setQrCodes(flattenedData);
       } catch (error) {
-        openModal({
-          message: `${error.response.data.message}`,
-        });
+        if (!controller.signal.aborted) {
+          openModal({
+            message: `${error.response?.data?.message || error.message}`,
+          });
+        }
       }
     };
     getQrCodes();
-    return () => {
-      isMounted = false;
-    };
-  }, [refetch]);
 
-  //Delete Qr
+    return () => controller.abort();
+  }, [refetch, axiosPrivate, openModal]);
+
   const handleDelete = async (row) => {
     try {
       const response = await axiosPrivate.delete(`/api/qr/${row.QRCodeID}`, {
         withCredentials: true,
       });
-      response.status === 200 &&
-        openModal({
-          message: `Codigo QR eliminado`,
-        });
-      setRefetch(!refetch);
+      if (response.status === 200) {
+        openModal({ message: response.data?.message || `Codigo QR eliminado` });
+        setRefetch((prev) => !prev);
+      }
     } catch (error) {
       openModal({
-        message: `${error.message}`,
+        message: `${error.response?.data?.message || error.message}`,
       });
     }
   };
 
   return (
     <>
-      {qrCodes && (
+      {qrCodes.length > 0 && (
         <Table data={qrCodes} title={"Codigos QR"} onDelete={handleDelete} />
       )}
     </>
