@@ -125,3 +125,5 @@ If you have any questions, feel free to contact the repository owner or open an 
 
 IF the server is online you can visit at:
 https://arcadeclient.onrender.com/
+ALSO you can check the backend at:
+https://github.com/XxXNe0XxX/ArcadeServer
