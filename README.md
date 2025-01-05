@@ -1,5 +1,8 @@
 # Arcade Business Frontend
 
+IF the server is online you can visit at:
+https://arcadeclient.onrender.com/
+
 A React-based frontend for an arcade credit system. This project enables arcade owners to sell credits to business clients, who can then generate and manage QR codes for end users to redeem on arcade machines.
 
 ## Table of Contents
@@ -117,3 +120,6 @@ This project is available under the MIT License. Feel free to modify and distrib
 
 Thank you for checking out the Arcade Business Frontend!
 If you have any questions, feel free to contact the repository owner or open an issue.
+
+IF the server is online you can visit at:
+https://arcadeclient.onrender.com/
