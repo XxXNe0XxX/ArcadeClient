@@ -2,6 +2,8 @@
 
 IF the server is online you can visit at:
 https://arcadeclient.onrender.com/
+ALSO you can check the backend at:
+https://github.com/XxXNe0XxX/ArcadeServer
 
 A React-based frontend for an arcade credit system. This project enables arcade owners to sell credits to business clients, who can then generate and manage QR codes for end users to redeem on arcade machines.
 
