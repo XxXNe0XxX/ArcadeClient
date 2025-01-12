@@ -28,6 +28,7 @@ import Contact from "./components/Contact";
 import EditTransaction from "./components/admin/EditTransaction";
 import Transactions from "./components/admin/Transactions";
 import CreateExpense from "./components/admin/CreateExpense";
+import EditQR from "./components/admin/EditQR";
 import HowItWorks from "./components/HowItWorks";
 import FAQ from "./components/FAQ";
 import StoreLocator from "./components/StoreLocator";
@@ -79,6 +80,7 @@ function App() {
               <Route path="sessions" element={<Sessions />} />
               <Route path="expense" element={<CreateExpense />} />
               <Route path="qrcodes" element={<QrCodes />} />
+              <Route path="edit-qr/:qrId" element={<EditQR />} />
               <Route path="rates" element={<ExchangeRates />} />
 
               <Route path="usage/:machineId" element={<MachineUsage />} />

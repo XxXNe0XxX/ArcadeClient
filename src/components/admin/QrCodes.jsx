@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useModal } from "../../context/ModalProvider";
 import { flattenObject } from "../../utils/flattenObject";
-
+import { useNavigate } from "react-router-dom";
 const QrCodes = () => {
   const [qrCodes, setQrCodes] = useState([]);
   const axiosPrivate = useAxiosPrivate();
   const openModal = useModal();
   const [refetch, setRefetch] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const controller = new AbortController();
 
@@ -49,11 +49,19 @@ const QrCodes = () => {
       });
     }
   };
+  const handleEdit = (row) => {
+    navigate(`/dash/edit-qr/${row.QRCodeID}`);
+  };
 
   return (
     <>
       {qrCodes.length > 0 && (
-        <Table data={qrCodes} title={"Codigos QR"} onDelete={handleDelete} />
+        <Table
+          data={qrCodes}
+          title={"Codigos QR"}
+          onDelete={handleDelete}
+          onEdit={handleEdit}
+        />
       )}
     </>
   );
