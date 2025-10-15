@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons/faArrowRight";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Navbar from "./Navbar";
+// import { faArrowRight } from "@fortawesome/free-solid-svg-icons/faArrowRight";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import Navbar from "./Navbar";
 import axios from "../api/axios";
 import { useEffect, useState, useRef } from "react";
 import { motion, useAnimation } from "framer-motion"; // Import useAnimation
@@ -11,7 +11,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./machinehero.css";
-import ASCIIVideo from "./ASCIIVideo";
+// import ASCIIVideo from "./ASCIIVideo";
 
 const Public = () => {
   const [games, setGames] = useState([]);
@@ -131,7 +131,7 @@ const Public = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 50 }}
         >
-          Welcome to the Arcade!
+          Bienvenidos a la experiencia Arcade!
         </motion.h1>
         {/* Subheading */}
         <motion.p
@@ -140,10 +140,10 @@ const Public = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3, type: "spring", stiffness: 50 }}
         >
-          Relive the classic games of the golden era.
+          Juega a juegos arcade modernos
         </motion.p>
         {/* Call to Action Button */}
-        <motion.button
+        {/* <motion.button
           className="relative mt-8 px-8 py-4 bg-color1 text-white font-bold rounded-full hover:bg-color2 transition-colors"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -151,7 +151,7 @@ const Public = () => {
           whileHover={{ scale: 1.1 }}
         >
           Get Started
-        </motion.button>
+        </motion.button> */}
       </div>
 
       {/* Rest of your component... */}
@@ -292,10 +292,10 @@ const Public = () => {
 
               <div className="relative z-10">
                 <h2 className="md:text-4xl text-2xl font-bold text-white">
-                  Experience the Nostalgia!
+                  Experimenta la nostalgia!
                 </h2>
                 <p className="mt-2 text-white">
-                  Relive classic arcade games with a modern twist.
+                  Revive juegos arcade clásicos con un giro moderno.
                 </p>
               </div>
             </motion.div>
@@ -306,7 +306,7 @@ const Public = () => {
       {/* Testimonials Section */}
       <div className="testimonials-section my-12">
         <h2 className="text-2xl text-center font-bold mb-6">
-          What Players Say
+          Lo que dicen los jugadores
         </h2>
         <div className="flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-6 p-6">
           <motion.div
@@ -314,7 +314,10 @@ const Public = () => {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <p>"This arcade is amazing! I love the retro feel."</p>
+            <p>
+              &quot;¡Esta sala de juegos es increíble! Me encanta el aire
+              retro&quot;
+            </p>
             <h3 className="mt-4 font-bold">- Player One</h3>
           </motion.div>
           <motion.div
@@ -322,7 +325,9 @@ const Public = () => {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <p>"A great place to unwind and play classic games."</p>
+            <p>
+              &quot;Un gran lugar para relajarse y jugar juegos clásicos.&quot;
+            </p>
             <h3 className="mt-4 font-bold">- Player Two</h3>
           </motion.div>
           <motion.div
@@ -330,7 +335,7 @@ const Public = () => {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <p>"Highly recommend for all arcade enthusiasts."</p>
+            <p>&quot;Muy recomendable para todos los entusiastas&quot;</p>
             <h3 className="mt-4 font-bold">- Player Three</h3>
           </motion.div>
         </div>
@@ -338,15 +343,7 @@ const Public = () => {
 
       {/* Call to Action Section */}
       <div className="cta-section bg-color1 text-center py-12">
-        <h2 className="text-3xl font-bold text-white">
-          Join the Arcade Community!
-        </h2>
-        <p className="text-white mt-4">
-          Sign up now and get exclusive access to new games and events.
-        </p>
-        <button className="mt-6 px-6 py-3 bg-white text-color1 font-bold rounded-full">
-          Sign Up
-        </button>
+        <h2 className="text-3xl font-bold text-white">Unete a la comunidad!</h2>
       </div>
     </div>
   );

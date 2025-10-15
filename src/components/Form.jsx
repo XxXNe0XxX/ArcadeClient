@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Input from "./Input";
 import Select from "./Select";
@@ -7,7 +7,7 @@ import Button from "./Button";
 import { regions } from "../data/regions"; // Import the regions data
 import {
   mapKeysToFirstCharLowerCase,
-  mapKeysToFirstCharUpperCase,
+  // mapKeysToFirstCharUpperCase,
 } from "../utils/lowerCaseUpperCase";
 import { useModal } from "../context/ModalProvider";
 import "./formStyles.css";
