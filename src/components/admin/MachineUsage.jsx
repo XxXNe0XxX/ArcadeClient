@@ -14,7 +14,7 @@ const MachineUsage = () => {
   const [usageData, setUsageData] = useState([]);
   const [date, setDate] = useState(
     // "2024-06-07"
-    new Date().toISOString().split("T")[0]
+    new Date().toISOString().split("T")[0],
   );
   const [period, setPeriod] = useState("day"); // "day", "month", "year"
 
@@ -30,13 +30,13 @@ const MachineUsage = () => {
             case "month":
               endpoint = `/api/arcademachines/getUsageByMonth/${machineId}/${date.slice(
                 0,
-                7
+                7,
               )}`;
               break;
             case "year":
               endpoint = `/api/arcademachines/getUsageByYear/${machineId}/${date.slice(
                 0,
-                4
+                4,
               )}`;
               break;
             default:
@@ -86,7 +86,7 @@ const MachineUsage = () => {
       const daysInMonth = new Date(
         date.slice(0, 4),
         date.slice(5, 7),
-        0
+        0,
       ).getDate();
       for (let i = 1; i <= daysInMonth; i++) {
         labels.push(`${i}`);
@@ -114,10 +114,10 @@ const MachineUsage = () => {
       return `Uso de la maquina: ${machineId} - Dia: ${date}`;
     } else if (period === "month") {
       return `Uso de la maquina: ${machineId} - Mes: ${new Date(
-        date
+        date,
       ).toLocaleString("default", { month: "long" })} ${date.slice(0, 4)}`;
     } else if (period === "year") {
-      return `Uso de la maquina: ${machineId} - Año: ${date.slice(0, 4)}`;
+      return `Machine Usage: ${machineId} - Year: ${date.slice(0, 4)}`;
     }
     return "";
   };
@@ -139,7 +139,7 @@ const MachineUsage = () => {
           options={[
             { value: "day", label: "Dia" },
             { value: "month", label: "Mes" },
-            { value: "year", label: "Año" },
+            { value: "year", label: "Year" },
           ]}
           placeholder={"Selecciona el periodo"}
         ></Select>

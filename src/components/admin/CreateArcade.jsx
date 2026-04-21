@@ -14,11 +14,11 @@ const CreateArcade = () => {
         "/api/arcademachines/",
         JSON.stringify({
           ...formData,
-        })
+        }),
       );
       response?.status === 201 &&
         openModal({
-          message: `Arcade creado`,
+          message: `Arcade created`,
         });
     } catch (error) {
       if (error.response && error.response.data.errors) {
@@ -31,33 +31,33 @@ const CreateArcade = () => {
 
   const fields = [
     {
-      id: "Juego",
+      id: "Game",
       name: "game",
       type: "input",
       placeholder: "Ultra Street Fighter IV",
     },
     {
-      id: "Ubicacion",
+      id: "Location",
       name: "location",
       type: "input",
-      placeholder: "Ubicacion",
+      placeholder: "Location",
     },
     {
-      id: "Creditos por partida",
+      id: "Credits per Game",
       name: "creditsPerGame",
       type: "input",
       placeholder: "1",
     },
     {
-      id: "Correo",
+      id: "Email",
       name: "email",
       type: "input",
-      placeholder: "Correo del cliente",
+      placeholder: "Client email",
     },
   ];
 
   return (
-    <Form onSubmit={createArcade} fields={fields} title="Crear Arcade"></Form>
+    <Form onSubmit={createArcade} fields={fields} title="Create Arcade"></Form>
   );
 };
 

@@ -22,7 +22,7 @@ const Transactions = () => {
           withCredentials: true,
         });
         const flattenedData = response.data.map((transaction) =>
-          flattenObject(transaction)
+          flattenObject(transaction),
         );
         isMounted && setTransactions(flattenedData);
       } catch (error) {
@@ -46,11 +46,11 @@ const Transactions = () => {
   const handleDelete = async (row) => {
     try {
       const response = await axiosPrivate.delete(
-        `/api/transactions/${row.TransactionID}`
+        `/api/transactions/${row.TransactionID}`,
       );
       response.status === 200 &&
         openModal({
-          message: `Transaccion eliminada`,
+          message: `Transaction deleted`,
         });
       setRefetch(!refetch);
     } catch (error) {
@@ -65,7 +65,7 @@ const Transactions = () => {
       {transactions && (
         <Table
           data={transactions}
-          title={"Transacciones"}
+          title={"Transactions"}
           onEdit={handleEdit}
           onDelete={handleDelete}
         />

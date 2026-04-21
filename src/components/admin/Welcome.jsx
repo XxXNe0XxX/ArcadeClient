@@ -4,7 +4,7 @@ const Welcome = () => {
   const { auth } = useAuth();
   console.log(auth);
   const date = new Date();
-  const today = new Intl.DateTimeFormat("es-ES", {
+  const today = new Intl.DateTimeFormat("en-EN", {
     dateStyle: "full",
     timeStyle: "short",
   }).format(date);
@@ -12,7 +12,7 @@ const Welcome = () => {
   return (
     <section className="h-full p-4">
       <p>{today}</p>
-      <h1>Bievenid@ {auth.role}</h1>
+      <h1>Welcome {auth.role}</h1>
       <ASCIIVideo></ASCIIVideo>
     </section>
   );

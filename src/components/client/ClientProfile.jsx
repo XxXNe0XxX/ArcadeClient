@@ -44,7 +44,7 @@ const ClientProfile = () => {
           onClick={() => setChangePassword(!changepassword)}
           className="rounded-md"
         >
-          Cambiar contraseña
+          Change Password
         </Button>
       )}
       {changepassword ? (

@@ -56,17 +56,17 @@ const Users = () => {
   const handleToggle = async (row) => {
     try {
       const response = await axiosPrivate.get(
-        `/api/users/toggle/${row.UserID}`
+        `/api/users/toggle/${row.UserID}`,
       );
       response.data.status === "activated"
         ? openModal({
             message: `Usuario activado`,
           })
         : response.data.status === "deactivated"
-        ? openModal({
-            message: `Usuario desactivado`,
-          })
-        : "";
+          ? openModal({
+              message: `Usuario desactivado`,
+            })
+          : "";
       setRefetch(!refetch);
     } catch (error) {
       openModal({
@@ -79,7 +79,7 @@ const Users = () => {
       {users && (
         <Table
           data={users}
-          title={"Usuarios"}
+          title={"Users"}
           onEdit={handleEdit}
           onDelete={handleDelete}
           onToggle={handleToggle}

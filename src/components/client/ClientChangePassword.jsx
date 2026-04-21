@@ -8,7 +8,7 @@ const ClientChangePassword = () => {
     try {
       const response = await axiosPrivate.post(
         `/api/client/changePassword/`,
-        JSON.stringify({ ...formData })
+        JSON.stringify({ ...formData }),
       );
       if (response.statusText === "OK") {
         setMsg("Contraseña cambiada con exito");
@@ -20,19 +20,19 @@ const ClientChangePassword = () => {
 
   const fields = [
     {
-      id: "Contraseña actual",
+      id: "Current Password",
       name: "currentPassword",
       type: "input",
       placeholder: "********",
     },
     {
-      id: "Nueva contraseña",
+      id: "New Password",
       name: "newPassword",
       type: "input",
       placeholder: "********",
     },
     {
-      id: "Repetir contraseña",
+      id: "Repeat Password",
       name: "repeatPassword",
       type: "input",
       placeholder: "********",
@@ -44,7 +44,7 @@ const ClientChangePassword = () => {
       <Form
         onSubmit={changePassword}
         fields={fields}
-        title={"Cambiar contraseña"}
+        title={"Change Password"}
       ></Form>
       {msg}
     </>

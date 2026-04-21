@@ -17,7 +17,7 @@ const GenerateQR = () => {
     setQr("");
     e.preventDefault();
     if (amountCharged <= 0 || creditAmount <= 0) {
-      setMsg("Cantidad incorrecta");
+      setMsg("Incorrect amount");
       return;
     }
     try {
@@ -28,7 +28,7 @@ const GenerateQR = () => {
         exchangeRate: exchangeRate || undefined,
       });
 
-      response?.data && setMsg("Creditos añadidos con exito");
+      response?.data && setMsg("Credits added successfully");
       setQr(response.data.qrCode);
       setIsDisabled(true);
       setAmountCharged("");
@@ -39,7 +39,7 @@ const GenerateQR = () => {
         setIsDisabled(false);
       }, 6000);
     } catch (error) {
-      error.response.status === 404 && setMsg("Creditos insuficientes");
+      error.response.status === 404 && setMsg("Insufficient credits");
     }
   };
 
@@ -50,11 +50,11 @@ const GenerateQR = () => {
         className="max-w-[800px] md:text-base text-sm flex flex-col flex-wrap mx-auto px-2 py-1 space-y-2 bg-color2 shadow-md rounded-md"
       >
         <h1 className="font-press-start text-center p-1 text-2xl">
-          Generar QR
+          Generate QR
         </h1>
         <div className=" flex items-center">
           <label htmlFor="amountCharged" className="flex text-sm">
-            Cantidad a cobrar
+            Amount to Charge
           </label>
           <input
             type="number"
@@ -74,7 +74,7 @@ const GenerateQR = () => {
         </div>
         <div className=" flex items-center">
           <label htmlFor="creditAmount" className="flex text-sm">
-            Cantidad a añadir
+            Amount to Add
           </label>
           <input
             type="number"
@@ -98,7 +98,7 @@ const GenerateQR = () => {
               htmlFor="currency"
               className="block font-medium text-color4 "
             >
-              Moneda
+              Currency
             </label>
             <select
               id="currency"
@@ -109,7 +109,7 @@ const GenerateQR = () => {
               required
             >
               <option className value="">
-                Selecciona
+                Select
               </option>
               <option value="MLC">MLC</option>
               <option value="USD">USD</option>
@@ -117,7 +117,7 @@ const GenerateQR = () => {
             </select>
           </div>
           <div className="flex flex-col w-full">
-            <label htmlFor="exchangeRate">Tasa de cambio</label>
+            <label htmlFor="exchangeRate">Exchange Rate</label>
             <input
               type="number"
               min="0"
@@ -126,7 +126,7 @@ const GenerateQR = () => {
               value={exchangeRate}
               onChange={(e) => setExchangeRate(e.target.value)}
               className=" text-color4  bg-color4 w-full p-1.5"
-              placeholder="Opcional"
+              placeholder="Optional"
               step={0.000001}
             ></input>
           </div>
@@ -139,7 +139,7 @@ const GenerateQR = () => {
             } transition-all border my-1 rounded-md active:bg-color4 active:border-color1 active:text-color1 text-color4 bg-color1 w-full p-2`}
             disabled={isDisabled}
           >
-            Generar
+            Generate
           </button>
         </div>
         {msg && <h1 className="border text-center p-1 border-color1">{msg}</h1>}

@@ -39,7 +39,7 @@ const EditQR = () => {
     try {
       const response = await axiosPrivate.patch(
         `/api/qr/${qrId}`,
-        JSON.stringify({ ...formData })
+        JSON.stringify({ ...formData }),
       );
       if (response.status === 204) {
         openModal({ message: "QR actualizado" });
@@ -65,7 +65,7 @@ const EditQR = () => {
   return (
     <Form
       onSubmit={handleSubmit}
-      title="Editar QR"
+      title="Edit QR"
       fields={fields}
       initialValues={info}
     ></Form>

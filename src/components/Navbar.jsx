@@ -84,35 +84,35 @@ const Navbar = () => {
                       to="/"
                       className="flex items-center gap-2 hover:text-color1 hover:border-color1 transition-colors "
                     >
-                      <FontAwesomeIcon icon={faHouseChimney} /> Inicio
+                      <FontAwesomeIcon icon={faHouseChimney} /> Home
                     </Link>
                     <Link
                       onClick={() => setIsOpen(false)}
                       to="recoverqr"
                       className="flex items-center gap-2 hover:text-color1 hover:border-color1 transition-colors"
                     >
-                      <FontAwesomeIcon icon={faQrcode} /> Recuperar QR
+                      <FontAwesomeIcon icon={faQrcode} /> Recover QR
                     </Link>
                     <Link
                       onClick={() => setIsOpen(false)}
                       to="contact"
                       className="flex items-center gap-2 hover:text-color1 hover:border-color1 transition-colors"
                     >
-                      <FontAwesomeIcon icon={faWrench} /> Soporte
+                      <FontAwesomeIcon icon={faWrench} /> Support
                     </Link>
                     <Link
                       onClick={() => setIsOpen(false)}
                       to="howitworks"
                       className="flex items-center gap-2 hover:text-color1 hover:border-color1 transition-colors"
                     >
-                      <FontAwesomeIcon icon={faQuestion} /> Cómo funciona
+                      <FontAwesomeIcon icon={faQuestion} /> How It Works
                     </Link>
                     <Link
                       onClick={() => setIsOpen(false)}
                       to="faq"
                       className="flex items-center gap-2 hover:text-color1 hover:border-color1 transition-colors"
                     >
-                      <FontAwesomeIcon icon={faQuestionCircle} /> Preguntas
+                      <FontAwesomeIcon icon={faQuestionCircle} /> Questions
                     </Link>
                   </ul>
                 </motion.div>
@@ -148,7 +148,7 @@ const Navbar = () => {
             {/* Login or Home Button */}
             <Link to={location.pathname === "/login" ? "/" : "login"}>
               <button className="p-2 mr-4 flex items-center text-color1 bg-color5 rounded-md hover:bg-color1 hover:text-white  hover:translate-y-[2px] hover:border-color2 border-b-[3px] border-color3 transition-all">
-                {location.pathname === "/login" ? "Inicio" : "Login"}
+                {location.pathname === "/login" ? "Home" : "Login"}
                 <FontAwesomeIcon
                   className="px-1 animate-bounce"
                   icon={

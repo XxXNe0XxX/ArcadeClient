@@ -23,7 +23,7 @@ const Machines = () => {
         });
 
         const flattenedData = response.data.map((machine) =>
-          flattenObject(machine)
+          flattenObject(machine),
         );
         isMounted && setMachines(flattenedData);
       } catch (error) {
@@ -47,11 +47,11 @@ const Machines = () => {
   const handleDelete = async (row) => {
     try {
       const response = await axiosPrivate.delete(
-        `/api/arcademachines//${row.MachineID}`
+        `/api/arcademachines//${row.MachineID}`,
       );
       response.status === 200 &&
         openModal({
-          message: `Arcade eliminado`,
+          message: `Arcade deleted`,
         });
       setRefetch(!refetch);
     } catch (error) {
@@ -66,17 +66,17 @@ const Machines = () => {
   const handleToggle = async (row) => {
     try {
       const response = await axiosPrivate.get(
-        `/api/arcademachines/toggle/${row.MachineID}`
+        `/api/arcademachines/toggle/${row.MachineID}`,
       );
       response.data.status === "activated"
         ? openModal({
-            message: `Arcade activado`,
+            message: `Arcade activated`,
           })
         : response.data.status === "deactivated"
-        ? openModal({
-            message: `Arcade desactivado`,
-          })
-        : "";
+          ? openModal({
+              message: `Arcade deactivated`,
+            })
+          : "";
       setRefetch(!refetch);
     } catch (error) {
       openModal({
@@ -90,7 +90,7 @@ const Machines = () => {
       {machines && (
         <Table
           data={machines}
-          title={"Maquinas"}
+          title={"Machines"}
           onEdit={handleEdit}
           onDelete={handleDelete}
           onStatistics={handleStatistics}

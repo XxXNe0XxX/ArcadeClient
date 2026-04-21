@@ -36,17 +36,17 @@ const ExchangeRates = () => {
     try {
       const response = await axiosPrivate.patch(
         "/api/exchange/update",
-        updatedRates
+        updatedRates,
       );
       setRates((prevRates) =>
         prevRates.map((rate) =>
           updatedRates[rate.Currency] !== undefined
             ? { ...rate, Rate: updatedRates[rate.Currency] }
-            : rate
-        )
+            : rate,
+        ),
       );
       response.status === 200 &&
-        openModal({ message: "Tasas de cambio actualizadas" });
+        openModal({ message: "Exchange rates updated" });
       setUpdatedRates({});
     } catch (error) {
       openModal({ message: error.response.data.message });
@@ -55,7 +55,7 @@ const ExchangeRates = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
-      <h2 className="text-2xl font-semibold mb-4">Tasas de cambio</h2>
+      <h2 className="text-2xl font-semibold mb-4">Exchange Rates</h2>
       {rates.length > 0 ? (
         <div className="flex border p-8 rounded-md border-color1 bg-color2 flex-col justify-center items-center gap-2 ">
           {rates.map((each) => (
@@ -76,10 +76,10 @@ const ExchangeRates = () => {
           ))}
         </div>
       ) : (
-        <div>No hay tasas de cambio disponibles</div>
+        <div>No exchange rates available</div>
       )}
 
-      <Button onClick={handleUpdateRates}>Actualizar</Button>
+      <Button onClick={handleUpdateRates}>Update</Button>
     </div>
   );
 };

@@ -11,10 +11,10 @@ const CreateExpense = () => {
     try {
       const response = await axiosPrivate.post(
         `/api/transactions/createExpense/`,
-        JSON.stringify({ ...formData })
+        JSON.stringify({ ...formData }),
       );
       if (response?.status === 201) {
-        openModal({ message: "Gasto creado" });
+        openModal({ message: "Expense created" });
       }
     } catch (error) {
       if (error.response && error.response.data.errors) {
@@ -27,16 +27,16 @@ const CreateExpense = () => {
 
   const fields = [
     {
-      id: "Cantidad Cobrada",
+      id: "Amount Charged",
       name: "amountCharged",
       type: "input",
       placeholder: "$$$$$$$$",
     },
     {
-      id: "Moneda",
+      id: "Currency",
       name: "currency",
       type: "select",
-      placeholder: "Selecciona la moneda",
+      placeholder: "Select currency",
       options: [
         { value: "MLC", label: "MLC" },
         { value: "USD", label: "USD" },
@@ -44,15 +44,15 @@ const CreateExpense = () => {
       ],
     },
     {
-      id: "Descripcion",
+      id: "Description",
       name: "description",
       type: "textarea",
-      placeholder: "Descripcion",
+      placeholder: "Description",
     },
   ];
   return (
     <>
-      <Form onSubmit={createExpense} title="Crear Gasto" fields={fields} />
+      <Form onSubmit={createExpense} title="Create Expense" fields={fields} />
     </>
   );
 };

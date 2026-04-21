@@ -16,7 +16,7 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 const Chart = ({ data, labels, title }) => {
@@ -24,7 +24,7 @@ const Chart = ({ data, labels, title }) => {
     labels: labels,
     datasets: [
       {
-        label: "Uso de la maquina",
+        label: "Machine Usage",
         data: data,
         backgroundColor: "rgba(75, 192, 192, 0.2)",
         borderColor: "rgba(75, 192, 192, 1)",

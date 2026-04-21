@@ -40,7 +40,7 @@ const WelcomeClient = () => {
     <div className="  max-w-[1200px] m-auto min-h-screen w-full">
       <div className="bg-color1 w-full text-center p-1">
         <h1 className="p-3 text-xl gap-2 inline items-center justify-center ">
-          Bienvenid@
+          Welcome!
         </h1>
         <span className="text-color1  bg-color2 rounded-md p-1 px-2 m-1">
           {localStorage.getItem("email").charAt(0)}
@@ -59,13 +59,13 @@ const WelcomeClient = () => {
             </div>
           </div>
           <div className=" text-center p-1  w-full flex flex-col justify-center">
-            <h1>Tasas de cambio hoy</h1>
+            <h1>Exchange Rates Today</h1>
             <ClientExchangeRates />
           </div>
         </div>
 
         <div className="max-w-[800px] h-full  md:col-span-1 md:row-span-3 col-span-1 row-span-1 w-full min-h-fit  text-color4  p-2  rounded-md  ">
-          <h1>Maquinas activas</h1>
+          <h1>Active Machines</h1>
           <ul className="flex flex-col gap-2 overflow-hidden">
             {machines.length > 0 ? (
               machines?.map((each) => {
@@ -89,7 +89,7 @@ const WelcomeClient = () => {
                 );
               })
             ) : (
-              <li className="text-color3">No hay informacion disponible</li>
+              <li className="text-color3">No information available</li>
             )}
           </ul>
         </div>
@@ -103,9 +103,9 @@ const WelcomeClient = () => {
           <GrowthRate></GrowthRate>
         </div>
         <div className=" col-span-2 p-2 flex flex-col justify-center items-center ">
-          <h1>tienes alguna duda ?</h1>
-          <p>Telefono : +22112211</p>
-          <p>Correo : admin@gmail.com</p>
+          <h1>Have any questions?</h1>
+          <p>Phone: +22112211</p>
+          <p>Email: admin@gmail.com</p>
         </div>
       </section>
     </div>

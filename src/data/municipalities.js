@@ -164,5 +164,5 @@ export const municipalities = [
   { value: "Yaguajay", label: "Yaguajay" },
   { value: "Yara", label: "Yara" },
   { value: "Yateras", label: "Yateras" },
-  { value: "", label: "Selecciona una Ciudad" },
+  { value: "", label: "Select a City" },
 ];

@@ -5,20 +5,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRightArrowLeft,
   faCashRegister,
-  faChartBar,
   faCoins,
   faGamepad,
   faHouseChimney,
-  faMoneyBill,
   faMoneyBillTransfer,
   faMoneyBillTrendUp,
   faPeopleArrows,
-  faPerson,
   faPersonCirclePlus,
   faPlayCircle,
   faQrcode,
 } from "@fortawesome/free-solid-svg-icons";
-import { faMoneyCheckDollar } from "@fortawesome/free-solid-svg-icons/faMoneyCheckDollar";
 const DashHeader = () => {
   const [open, setIsOpen] = useState(false);
   const location = useLocation();
@@ -50,17 +46,17 @@ const DashHeader = () => {
         <ul className="p-3  *:h-8 flex flex-col justify-center gap-6 overflow-hidden">
           <Link to="/dash">
             <li className="hover:border-color1 hover:rounded-none rounded-lg hover:text-color1 border p-1 transition-all w-full">
-              <FontAwesomeIcon icon={faHouseChimney} /> Inicio
+              <FontAwesomeIcon icon={faHouseChimney} /> Home
             </li>
           </Link>
           <Link to="users">
             <li className="hover:border-color1 hover:rounded-none rounded-lg  hover:text-color1 border p-1 transition-all w-full">
-              <FontAwesomeIcon icon={faPeopleArrows} /> Usuarios
+              <FontAwesomeIcon icon={faPeopleArrows} /> Users
             </li>
           </Link>
           <Link to="createuser">
             <li className="hover:border-color1 hover:rounded-none rounded-lg  hover:text-color1 border p-1 transition-all w-full">
-              <FontAwesomeIcon icon={faPersonCirclePlus} /> Nuevo Usuario
+              <FontAwesomeIcon icon={faPersonCirclePlus} /> New User
             </li>
           </Link>
 
@@ -71,37 +67,37 @@ const DashHeader = () => {
           </Link>
           <Link to="createarcade">
             <li className="hover:border-color1 hover:rounded-none rounded-lg  hover:text-color1 border p-1 transition-all w-full">
-              <FontAwesomeIcon icon={faCoins} /> Crear Arcade
+              <FontAwesomeIcon icon={faCoins} /> Create Arcade
             </li>
           </Link>
           <Link to="accounting">
             <li className="hover:border-color1 hover:rounded-none rounded-lg  hover:text-color1 border p-1 transition-all w-full">
-              <FontAwesomeIcon icon={faCashRegister} /> Contabilidad
+              <FontAwesomeIcon icon={faCashRegister} /> Accounting
             </li>
           </Link>
           <Link to="transactions">
             <li className="hover:border-color1 hover:rounded-none rounded-lg  hover:text-color1 border p-1 transition-all w-full">
-              <FontAwesomeIcon icon={faArrowRightArrowLeft} /> Transacciones
+              <FontAwesomeIcon icon={faArrowRightArrowLeft} /> Transactions
             </li>
           </Link>
           <Link to="sessions">
             <li className="hover:border-color1 hover:rounded-none rounded-lg  hover:text-color1 border p-1 transition-all w-full">
-              <FontAwesomeIcon icon={faPlayCircle} /> Sesiones
+              <FontAwesomeIcon icon={faPlayCircle} /> Sessions
             </li>
           </Link>
           <Link to="qrcodes">
             <li className="hover:border-color1 hover:rounded-none rounded-lg  hover:text-color1 border p-1 transition-all w-full">
-              <FontAwesomeIcon icon={faQrcode} /> Codigos QR
+              <FontAwesomeIcon icon={faQrcode} /> QR Codes
             </li>
           </Link>
           <Link to="expense">
             <li className="hover:border-color1 hover:rounded-none rounded-lg  hover:text-color1 border p-1 transition-all w-full">
-              <FontAwesomeIcon icon={faMoneyBillTransfer} /> Generar Gasto
+              <FontAwesomeIcon icon={faMoneyBillTransfer} /> Create Expense
             </li>
           </Link>
           <Link to="rates">
             <li className="hover:border-color1 hover:rounded-none rounded-lg  hover:text-color1 border p-1 transition-all w-full">
-              <FontAwesomeIcon icon={faMoneyBillTrendUp} /> Tasa de cambio
+              <FontAwesomeIcon icon={faMoneyBillTrendUp} /> Exchange Rates
             </li>
           </Link>
         </ul>

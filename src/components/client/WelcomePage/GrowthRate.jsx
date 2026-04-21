@@ -50,10 +50,10 @@ const GrowthRate = () => {
           className="border rounded-md p-1 w-full"
           defaultValue={"week"}
         >
-          <option value={"day"}>Dia</option>
-          <option value={"week"}>Semana</option>
-          <option value={"month"}>Mes</option>
-          <option value={"year"}>Año</option>
+          <option value={"day"}>Day</option>
+          <option value={"week"}>Week</option>
+          <option value={"month"}>Month</option>
+          <option value={"year"}>Year</option>
         </select>
       </div>
     </div>

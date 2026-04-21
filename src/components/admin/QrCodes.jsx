@@ -58,7 +58,7 @@ const QrCodes = () => {
       {qrCodes.length > 0 && (
         <Table
           data={qrCodes}
-          title={"Codigos QR"}
+          title={"QR codes"}
           onDelete={handleDelete}
           onEdit={handleEdit}
         />

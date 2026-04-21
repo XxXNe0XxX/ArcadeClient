@@ -20,7 +20,7 @@ const RecoverQR = () => {
 
       // Check the length of the string
       if (cleanedString.length !== 32 && cleanedString.length !== 36) {
-        return setMsg("Identificador invalido");
+        return setMsg("Invalid identifier");
       }
 
       // Remove hyphens if the string already has them
@@ -30,16 +30,16 @@ const RecoverQR = () => {
 
       // Ensure the string is now 32 characters long
       if (cleanedString.length !== 32) {
-        return setMsg("Identificador invalido");
+        return setMsg("Invalid identifier");
       }
 
       // Add hyphens in the corresponding positions
       const formattedString = `${cleanedString.slice(
         0,
-        8
+        8,
       )}-${cleanedString.slice(8, 12)}-${cleanedString.slice(
         12,
-        16
+        16,
       )}-${cleanedString.slice(16, 20)}-${cleanedString.slice(20)}`;
 
       return formattedString;
@@ -66,7 +66,7 @@ const RecoverQR = () => {
       className="bg-color2  h-full max-w-[600px] m-auto flex flex-col p-6"
     >
       <h1 className="font-press-start text-center p-2 text-3xl">
-        Recupera tu QR
+        Recover Your QR
       </h1>
       <div className="w-full flex items-center justify-end ">
         <input
@@ -92,7 +92,7 @@ const RecoverQR = () => {
         )}
       </div>
       <button type="submit" className=" bg-color1 p-2 border">
-        Generar
+        Generate
       </button>
       <h1 className=" text-center border-color1 border my-4  w-full">{msg}</h1>
       <img
@@ -103,7 +103,7 @@ const RecoverQR = () => {
         alt=""
       />
       <div className="flex items-center justify-between">
-        <h1 className="">Balance disponible -{"  "}</h1>
+        <h1 className="">Available Balance - {"  "}</h1>
         <div className="flex items-center gap-2">
           <span>-</span>
           <img className="h-8 w-8" src="/assets/icons/cherries.png"></img>

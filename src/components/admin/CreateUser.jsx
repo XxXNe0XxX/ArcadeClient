@@ -10,9 +10,9 @@ const CreateUser = () => {
     try {
       const response = await axiosPrivate.post(
         "/api/users",
-        JSON.stringify({ ...formData })
+        JSON.stringify({ ...formData }),
       );
-      response?.status === 201 && openModal({ message: "Usuario creado" });
+      response?.status === 201 && openModal({ message: "User created" });
     } catch (error) {
       if (error.response && error.response.data.errors) {
         openModal({ message: error.response.data.errors[0].msg });
@@ -23,63 +23,63 @@ const CreateUser = () => {
   };
 
   const fields = [
-    { id: "Nombre", name: "name", type: "input", placeholder: "Nombre" },
+    { id: "Name", name: "name", type: "input", placeholder: "Name" },
     {
-      id: "Apellido",
+      id: "Last Name",
       name: "lastName",
       type: "input",
-      placeholder: "Apellido",
+      placeholder: "Last Name",
     },
 
-    { id: "Contacto", name: "contact", type: "input", placeholder: "12345678" },
+    { id: "Contact", name: "contact", type: "input", placeholder: "12345678" },
     {
-      id: "Correo",
+      id: "Email",
       name: "email",
       type: "input",
-      placeholder: "correo@mail.com",
+      placeholder: "email@mail.com",
     },
     {
-      id: "Contraseña",
+      id: "Password",
       name: "password",
       type: "input",
       placeholder: "********",
     },
     {
-      id: "Provincia",
+      id: "Province",
       name: "province",
       type: "select",
-      placeholder: "Selecciona la provincia",
+      placeholder: "Select the province",
       options: Object.keys(regions).map((each) => {
         return { value: each, label: each };
       }),
     },
     {
-      id: "Municipio",
+      id: "Municipality",
       name: "municipality",
       type: "select",
-      placeholder: "Selecciona el municipio",
+      placeholder: "Select the municipality",
       dependentField: "province",
     },
     {
-      id: "Direccion",
+      id: "Address",
       name: "address",
       type: "input",
-      placeholder: "Calle a entre b y c",
+      placeholder: "Street between and",
     },
     {
-      id: "Tipo de usuario",
+      id: "User Type",
       name: "role",
       type: "select",
-      placeholder: "Selecciona el tipo",
+      placeholder: "Select type",
       options: [
-        { value: "CLIENT", label: "Cliente" },
-        { value: "TECHNICIAN", label: "Tecnico" },
+        { value: "CLIENT", label: "Client" },
+        { value: "TECHNICIAN", label: "Technician" },
       ],
     },
   ];
 
   return (
-    <Form onSubmit={createUser} fields={fields} title="Crear Usuario"></Form>
+    <Form onSubmit={createUser} fields={fields} title="Create User"></Form>
   );
 };
 

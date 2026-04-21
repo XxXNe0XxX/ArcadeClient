@@ -36,17 +36,17 @@ const EditBalance = () => {
   // Add credits
   const addCredits = async (formData) => {
     const filteredData = Object.fromEntries(
-      Object.entries(formData).filter(([_, v]) => v !== "")
+      Object.entries(formData).filter(([_, v]) => v !== ""),
     );
     try {
       const response = await axiosPrivate.post(
         `/api/credits/add/${userId}`,
         JSON.stringify({
           ...filteredData,
-        })
+        }),
       );
       if (response.statusText === "OK") {
-        openModal({ message: "Creditos añadidos correctamente" });
+        openModal({ message: "Credits added correctly" });
       }
       setRefetch(!refetch);
     } catch (error) {
@@ -59,10 +59,10 @@ const EditBalance = () => {
     try {
       const response = await axiosPrivate.post(
         `/api/credits/remove/${userId}`,
-        JSON.stringify({ ...formData })
+        JSON.stringify({ ...formData }),
       );
       if (response.statusText === "OK") {
-        openModal({ message: "Creditos deducidos correctamente" });
+        openModal({ message: "Credits deducted correctly" });
       }
       setRefetch(!refetch);
     } catch (error) {
@@ -75,18 +75,18 @@ const EditBalance = () => {
   };
 
   const addFields = [
-    { id: "Creditos", name: "add", type: "input", placeholder: "Creditos" },
+    { id: "Credits", name: "add", type: "input", placeholder: "Credits" },
     {
-      id: "Cantidad a cobrar",
+      id: "Amount to Charge",
       name: "amount",
       type: "input",
       placeholder: "$$$$$$$$",
     },
     {
-      id: "Moneda",
+      id: "Currency",
       name: "currency",
       type: "select",
-      placeholder: "Selecciona la moneda",
+      placeholder: "Select currency",
       options: [
         { value: "MLC", label: "MLC" },
         { value: "USD", label: "USD" },
@@ -94,18 +94,18 @@ const EditBalance = () => {
       ],
     },
     {
-      id: "Tasa de cambio",
+      id: "Exchange Rate",
       name: "exchangeRate",
       type: "input",
-      placeholder: "Opcional",
+      placeholder: "Optional",
     },
   ];
   const subtractFields = [
     {
-      id: "Creditos",
+      id: "Credits",
       name: "subtract",
       type: "input",
-      placeholder: "Creditos",
+      placeholder: "Credits",
     },
   ];
 

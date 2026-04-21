@@ -17,8 +17,8 @@ const DashFooter = () => {
     );
   }
   return (
-    <div className="flex justify-between p-1 bg-color2">
-      <h1>Administracion</h1>
+    <div className="flex justify-between p-2 bg-color2">
+      <h1>Management</h1>
       {goHomeButton}
     </div>
   );

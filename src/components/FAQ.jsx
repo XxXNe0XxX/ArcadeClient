@@ -1,28 +1,27 @@
 // FAQ.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const faqData = [
   {
-    question: "¿Cómo puedo comprar créditos?",
-    answer:
-      "Puedes comprar créditos en nuestras máquinas o a través de nuestra aplicación.",
+    question: "How can I buy credits?",
+    answer: "You can buy credits at our machines or through our application.",
   },
   {
-    question: "¿Dónde puedo usar mi código QR?",
+    question: "Where can I use my QR code?",
     answer:
-      "Puedes usar tu código QR en cualquier máquina de nuestra red para empezar a jugar.",
+      "You can use your QR code at any machine in our network to start playing.",
   },
   {
-    question: "¿Qué hago si tengo un problema con una máquina?",
+    question: "What should I do if I have a problem with a machine?",
     answer:
-      "Si tienes algún problema con una máquina, por favor contacta a nuestro soporte técnico a través del chat en la aplicación.",
+      "If you experience any problems with a machine, please contact our technical support through the chat in the application.",
   },
   {
-    question: "¿Cómo puedo enviar comentarios?",
+    question: "How can I send feedback?",
     answer:
-      "Puedes enviar tus comentarios a través del formulario de comentarios en nuestra aplicación.",
+      "You can send your feedback through the feedback form in our application.",
   },
 ];
 
@@ -80,7 +79,7 @@ const FAQ = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        Preguntas Frecuentes
+        Frequently Asked Questions
       </motion.h1>
       <motion.div
         initial="hidden"

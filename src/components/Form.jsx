@@ -107,9 +107,9 @@ const Form = ({ fields, onSubmit, className, initialValues = {}, title }) => {
       <div className="grid md:gap-2 p-6 rounded-md   md:grid-cols-2 items-center px-6 form-grid  ">
         {fields.map((field) => renderField(field))}
       </div>
-      <Button type="submit" className=" ">
-        Continuar
-        <span className="font-press-start  tracking-tighter">...</span>?
+      <Button type="submit" className="px-7 ">
+        Continue
+        <span className="font-press-start  tracking-tighter"></span>
       </Button>
     </form>
   );
@@ -124,7 +124,7 @@ Form.propTypes = {
       options: PropTypes.array,
       dependentField: PropTypes.string,
       props: PropTypes.object,
-    })
+    }),
   ).isRequired,
   onSubmit: PropTypes.func.isRequired,
   className: PropTypes.string,

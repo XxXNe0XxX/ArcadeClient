@@ -10,17 +10,17 @@ const GameInfo = () => {
   const gameInfo = {
     "Guitar Hero Arcade": {
       description:
-        "Guitar Hero Arcade es un juego de ritmo musical donde los jugadores usan un controlador en forma de guitarra para simular tocar música rock.",
+        "Guitar Hero Arcade is a rhythm music game where players use a guitar-shaped controller to simulate playing rock music.",
       image: "/assets/images/Guitar Hero Arcade.jpg",
     },
     "Mario Kart DX": {
       description:
-        "Mario Kart DX es un juego de carreras de arcade donde los jugadores compiten usando karts y potenciadores.",
+        "Mario Kart DX is an arcade racing game where players compete using karts and power-ups.",
       image: "/assets/images/Mario Kart DX.jpg",
     },
     "Ultra Street Fighter IV": {
       description:
-        "Ultra Street Fighter IV es un juego de lucha que presenta una gran lista de personajes con habilidades y estilos de lucha únicos.",
+        "Ultra Street Fighter IV is a fighting game that features a large roster of characters with unique fighting abilities and styles.",
       image: "/assets/images/Ultra Street Fighter IV.jpg",
     },
   };
@@ -77,7 +77,7 @@ const GameInfo = () => {
           >
             <div className="border p-2 rounded-md px-4 bg-white shadow">
               <h2 className="text-xl font-semibold text-gray-800 flex items-center">
-                Partida X {creditsPerGame}
+                Game X {creditsPerGame}
                 <img
                   className="h-8 w-8 ml-2"
                   src="/assets/icons/cherries.png"
@@ -95,7 +95,7 @@ const GameInfo = () => {
             animate={{ scale: 1 }}
             transition={{ delay: 0.8 }}
           >
-            {running === "true" ? "Activa" : "Inactiva"}
+            {running === "true" ? "Active" : "Inactive"}
           </motion.div>
         </div>
       </motion.div>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "../../api/axios";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Button from "../../components/Button";
 
 const LOGIN_URL = "/auth";
@@ -42,7 +42,7 @@ const Login = () => {
             "Content-Type": "application/json",
             withCredentials: true,
           },
-        }
+        },
       );
       const accessToken = response?.data?.accessToken;
       const role = response?.data.role;
@@ -113,7 +113,7 @@ const Login = () => {
               : "assets/icons/heart.png"
           }
           alt={i < 3 - attempts ? "Empty Heart" : "Full Heart"}
-        />
+        />,
       );
     }
     return hearts;
@@ -124,10 +124,16 @@ const Login = () => {
       onSubmit={handleSubmit}
       className="mt-[25vh] justify-center h-full rounded-md flex max-w-[600px] p-2 min-w-[350px] m-auto flex-col bg-color2"
     >
-      <h1 className="text-3xl font-press-start py-2 text-center">Login</h1>
+      <h1 className="text-3xl font-press-start py-2 text-center">LOGIN</h1>
+      <div className="p-4 m-4 border-color1 border-2 animate-pulse">
+        <p className="text-5xl text-color1 text-center pb-2">DEMO ONLY</p>
+        <p className="text-center text-xl">Use credentials below to login</p>
+        <p className="pl-7 pt-3">Email: admin@gmail.com</p>
+        <p className="pl-7 pt-1">Password: admin</p>
+      </div>
       <input
         className="border-color3 border-2 mx-4 my-1 p-2"
-        placeholder="correo"
+        placeholder="email"
         type="text"
         onChange={(e) => setEmail(e.target.value)}
       />
@@ -142,7 +148,7 @@ const Login = () => {
         className="flex justify-center items-center gap-2 bg-color1 p-2 my-2 disabled:text-color4 disabled:bg-color3 disabled:border-color4"
         disabled={isTimeout} // Disable button during timeout
       >
-        Continuar
+        Continue
         <span className="text-sm font-press-start block">...</span>?
       </Button>
       <div className="flex items-center justify-end gap-2 p-2">
@@ -152,7 +158,7 @@ const Login = () => {
           } transition-colors`}
           htmlFor="persist"
         >
-          Confio en el dispositivo
+          Trust the device
         </label>
         <input
           type="checkbox"
@@ -168,7 +174,7 @@ const Login = () => {
           <>
             {isTimeout && (
               <div className="text-center text-red-600">
-                Espera {timeout} segundos antes de intentar nuevamente.
+                Wait {timeout} seconds before trying again.
               </div>
             )}
             <img

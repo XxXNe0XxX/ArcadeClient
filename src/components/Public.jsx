@@ -35,7 +35,7 @@ const Public = () => {
         }
       } catch (error) {
         if (isMounted) {
-          setMsg("Error solicitando los juegos disponibles");
+          setMsg("Error requesting available games");
         }
       }
     };
@@ -105,7 +105,7 @@ const Public = () => {
       <div className="relative flex flex-col items-center justify-center h-screen overflow-hidden  ">
         {/* Background Video with CRT TV animation */}
         <motion.div
-          className="absolute md:h-[80%] h-full md:top-10 top-0 md:w-[95%] w-full"
+          className="absolute md:h-[80%] h-full md:top-10 top-0 md:w-[95%] w-screen"
           initial={{ scaleY: 0, opacity: 0, filter: "brightness(0)" }}
           animate={controls}
         >
@@ -126,21 +126,21 @@ const Public = () => {
         {/* Animated Headline */}
         <div className="relative -mb-40"></div>
         <motion.h1
-          className="relative text-white text-4xl md:text-6xl font-bold font-press-start text-center px-4"
+          className="relative text-white text-5xl md:text-6xl font-bold font-press-start text-center px-4"
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 50 }}
         >
-          Bienvenidos a la experiencia Arcade!
+          Welcome to the Arcade Experience!
         </motion.h1>
         {/* Subheading */}
         <motion.p
-          className="relative text-white text-lg md:text-2xl text-center mt-4 px-4"
+          className="relative text-color1 animate-bounce text-2xl md:text-2xl text-center mt-4 px-4"
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3, type: "spring", stiffness: 50 }}
         >
-          Juega a juegos arcade modernos
+          Play modern arcade games
         </motion.p>
         {/* Call to Action Button */}
         {/* <motion.button
@@ -159,21 +159,19 @@ const Public = () => {
       <section className="flex flex-col items-center justify-center py-32 bg-gradient-to-b from-gray-900 to-black">
         {/* Section Title */}
         <motion.h1
-          className="font-press-start md:text-5xl text-3xl text-center text-color1 mb-12"
+          className="font-press-start md:text-5xl text-3xl text-center text-white mb-12 uppercase"
           initial={{ opacity: 0, y: -50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          Juegos Disponibles
+          Available Games
         </motion.h1>
 
         {/* Server Message */}
         {msg ? (
-          <p className="p-2 text-center text-red-500">
-            Mensaje del servidor: {msg}
-          </p>
+          <p className="p-2 text-center text-red-500">Server message: {msg}</p>
         ) : (
-          <div className="w-full md:w-[90vw] lg:w-[80vw] xl:w-[70vw] m-auto">
+          <div className="w-full md:w-[90vw] lg:w-[80vw] xl:w-[70vw] m-auto p-10">
             <Swiper
               modules={[Autoplay, Pagination, Navigation]}
               spaceBetween={30}
@@ -235,7 +233,7 @@ const Public = () => {
                             Status: {each.Running ? "Running" : "Not Running"}
                           </p>
                           <button className="mt-4 px-6 py-2 bg-color1 text-black font-semibold rounded-full hover:bg-color1 transition-colors">
-                            Ver más
+                            See more
                           </button>
                         </div>
                       </div>
@@ -290,12 +288,12 @@ const Public = () => {
                 animate={shineControls}
               />
 
-              <div className="relative z-10">
-                <h2 className="md:text-4xl text-2xl font-bold text-white">
-                  Experimenta la nostalgia!
+              <div className="relative z-10 bg-black rounded-full p-2">
+                <h2 className="md:text-4xl text-3xl font-bold text-white">
+                  Experience nostalgia!
                 </h2>
-                <p className="mt-2 text-white">
-                  Revive juegos arcade clásicos con un giro moderno.
+                <p className="mt-2 text-xl text-color1">
+                  Revive classic arcade games with a modern twist.
                 </p>
               </div>
             </motion.div>
@@ -306,7 +304,7 @@ const Public = () => {
       {/* Testimonials Section */}
       <div className="testimonials-section my-12">
         <h2 className="text-2xl text-center font-bold mb-6">
-          Lo que dicen los jugadores
+          What Players Say
         </h2>
         <div className="flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-6 p-6">
           <motion.div
@@ -315,8 +313,7 @@ const Public = () => {
             transition={{ type: "spring", stiffness: 300 }}
           >
             <p>
-              &quot;¡Esta sala de juegos es increíble! Me encanta el aire
-              retro&quot;
+              &quot;This arcade hall is amazing! I love the retro vibe&quot;
             </p>
             <h3 className="mt-4 font-bold">- Player One</h3>
           </motion.div>
@@ -325,9 +322,7 @@ const Public = () => {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <p>
-              &quot;Un gran lugar para relajarse y jugar juegos clásicos.&quot;
-            </p>
+            <p>&quot;A great place to relax and play classic games.&quot;</p>
             <h3 className="mt-4 font-bold">- Player Two</h3>
           </motion.div>
           <motion.div
@@ -335,7 +330,7 @@ const Public = () => {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <p>&quot;Muy recomendable para todos los entusiastas&quot;</p>
+            <p>&quot;Highly recommended for all enthusiasts&quot;</p>
             <h3 className="mt-4 font-bold">- Player Three</h3>
           </motion.div>
         </div>
@@ -343,7 +338,7 @@ const Public = () => {
 
       {/* Call to Action Section */}
       <div className="cta-section bg-color1 text-center py-12">
-        <h2 className="text-3xl font-bold text-white">Unete a la comunidad!</h2>
+        <h2 className="text-3xl font-bold text-white">Join the community!</h2>
       </div>
     </div>
   );

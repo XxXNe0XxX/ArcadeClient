@@ -10,7 +10,7 @@ import {
   faToggleOff,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useModal } from "../context/ModalProvider";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -44,9 +44,9 @@ const Table = ({
           className="text-gray-400"
         />
         <p className="text-gray-600 mt-2">
-          No hay informacion disponible por el momento.
+          No information available at the moment.
         </p>
-        <p className="text-gray-500">Intente mas tarde.</p>
+        <p className="text-gray-500">Try again later.</p>
       </div>
     );
 
@@ -57,8 +57,11 @@ const Table = ({
       (column) =>
         row[column] !== null &&
         row[column] !== undefined &&
-        row[column].toString().toLowerCase().includes(searchQuery.toLowerCase())
-    )
+        row[column]
+          .toString()
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()),
+    ),
   );
 
   const sortedData = [...filteredData].sort((a, b) => {
@@ -111,7 +114,7 @@ const Table = ({
   const handleDeleteClick = (item) => {
     openModal({
       type: "confirmation",
-      message: `Confirmar?`,
+      message: `Confirm?`,
       onConfirm: () => {
         if (onDelete) {
           onDelete(item);
@@ -134,7 +137,7 @@ const Table = ({
           <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
           <input
             type="text"
-            placeholder="Buscar"
+            placeholder="Search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="my-2 rounded-md px-1 border max-w-[40vw]"
@@ -229,7 +232,7 @@ const Table = ({
           {"<"}
         </button>
         <span>
-          Pagina {currentPage} de {totalPages}
+          Page {currentPage} of {totalPages}
         </span>
         <button
           onClick={handleNextPage}
@@ -257,7 +260,7 @@ const Table = ({
                 className="text-color2 flex flex-col items-center gap-2"
                 onClick={() => onEdit(selectedRow)}
               >
-                <span className="text-xs">Editar</span>
+                <span className="text-xs">Edit</span>
                 <FontAwesomeIcon className="text-color3" icon={faEdit} />
               </button>
             )}
@@ -266,7 +269,7 @@ const Table = ({
                 className="text-color2 flex flex-col items-center gap-2"
                 onClick={() => handleDeleteClick(selectedRow)}
               >
-                <span className="text-xs">Eliminar</span>
+                <span className="text-xs">Delete</span>
                 <FontAwesomeIcon className="text-red-600" icon={faTrash} />
               </button>
             )}
@@ -275,7 +278,7 @@ const Table = ({
                 className="text-color2 flex flex-col items-center gap-2"
                 onClick={() => onStatistics(selectedRow)}
               >
-                <span className="text-xs">Estadisticas</span>
+                <span className="text-xs">Statistics</span>
                 <FontAwesomeIcon className="text-color2" icon={faChartBar} />
               </button>
             )}
@@ -289,8 +292,8 @@ const Table = ({
               >
                 <span className="text-xs">
                   {selectedRow.Running || selectedRow.Active
-                    ? "Activado"
-                    : "Desactivado"}
+                    ? "Activated"
+                    : "Deactivated"}
                 </span>
                 <FontAwesomeIcon
                   className="text-color1"

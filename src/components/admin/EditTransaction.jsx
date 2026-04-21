@@ -17,7 +17,7 @@ const EditTransaction = () => {
     const getTransaction = async () => {
       try {
         const response = await axiosPrivate.get(
-          `/api/transactions/${transactionId}`
+          `/api/transactions/${transactionId}`,
         );
         setInfo(response?.data);
       } catch (error) {
@@ -36,15 +36,15 @@ const EditTransaction = () => {
   //Edit Transaction
   const handleSubmit = async (formData) => {
     if (formData === info) {
-      return openModal({ message: "Al menos un campo debe ser modificado" });
+      return openModal({ message: "At least one field must be modified" });
     }
     try {
       const response = await axiosPrivate.patch(
         `/api/transactions/${transactionId}`,
-        JSON.stringify({ ...formData })
+        JSON.stringify({ ...formData }),
       );
       if (response.status === 204) {
-        openModal({ message: "Transaccion actualizada" });
+        openModal({ message: "Transaction updated" });
       }
       setRefetch(!refetch);
     } catch (error) {
@@ -57,22 +57,22 @@ const EditTransaction = () => {
   };
   const fields = [
     {
-      id: "Cantidad Cobrada",
+      id: "Amount Charged",
       name: "amountCharged",
       type: "input",
-      placeholder: "Cantidad Cobrada",
+      placeholder: "Amount Charged",
     },
     {
-      id: "Cantidad de Creditos",
+      id: "Credit Amount",
       name: "creditAmount",
       type: "input",
-      placeholder: "Cantidad de Creditos",
+      placeholder: "Credit Amount",
     },
     {
-      id: "Moneda",
+      id: "Currency",
       name: "currency",
       type: "select",
-      placeholder: "Selecciona la Moneda",
+      placeholder: "Select Currency",
       options: [
         { value: "MLC", label: "MLC" },
         { value: "USD", label: "USD" },
@@ -81,10 +81,10 @@ const EditTransaction = () => {
       ],
     },
     {
-      id: "Tipo de transaccion",
+      id: "Transaction Type",
       name: "typeOfTransaction",
       type: "select",
-      placeholder: "Selecciona el tipo",
+      placeholder: "Select type",
       options: [
         { value: "ADD", label: "ADD" },
         { value: "SUBTRACT", label: "SUBTRACT" },
@@ -92,13 +92,13 @@ const EditTransaction = () => {
       ],
     },
     {
-      id: "Descripcion",
+      id: "Description",
       name: "description",
       type: "textarea",
-      placeholder: "Descripcion",
+      placeholder: "Description",
     },
     {
-      id: "Tasa de cambio",
+      id: "Exchange Rate",
       name: "exchangeRate",
       type: "input",
       placeholder: "",
@@ -108,7 +108,7 @@ const EditTransaction = () => {
   return (
     <Form
       onSubmit={handleSubmit}
-      title="Editar Transaccion"
+      title="Edit Transaction"
       fields={fields}
       initialValues={info}
     ></Form>

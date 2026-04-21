@@ -32,7 +32,7 @@ const EditMachine = () => {
     const getMachine = async () => {
       try {
         const response = await axiosPrivate.get(
-          `/api/arcademachines/${machineId}`
+          `/api/arcademachines/${machineId}`,
         );
         if (response?.status === 200) {
           setInfo(response.data);
@@ -57,7 +57,7 @@ const EditMachine = () => {
     try {
       const response = await axiosPrivate.patch(
         `/api/arcademachines/${machineId}`,
-        JSON.stringify({ ...modifiedFields })
+        JSON.stringify({ ...modifiedFields }),
       );
       if (response?.status === 204) {
         openModal({ message: "Arcade actualizado" });
@@ -110,7 +110,7 @@ const EditMachine = () => {
     <>
       <Form
         onSubmit={editMachine}
-        title="Editar Arcade"
+        title="Edit Arcade"
         fields={fields}
         initialValues={info}
       ></Form>

@@ -38,15 +38,15 @@ const EditUser = () => {
   const handleSubmit = async (formData) => {
     const modifiedFields = getModifiedFields(info, formData);
     if (Object.keys(modifiedFields).length < 1) {
-      return openModal({ message: "Al menos un campo debe ser modificado" });
+      return openModal({ message: "At least one field must be modified" });
     }
     try {
       const response = await axiosPrivate.patch(
         `/api/users/${userId}`,
-        JSON.stringify({ ...modifiedFields })
+        JSON.stringify({ ...modifiedFields }),
       );
       if (response.status === 200) {
-        openModal({ message: "Cliente actualizado" });
+        openModal({ message: "Client updated" });
       }
     } catch (error) {
       if (error.response && error.response.data.errors) {
@@ -58,52 +58,52 @@ const EditUser = () => {
     setRefetch(!refetch);
   };
   const fields = [
-    { id: "Nombre", name: "name", type: "input", placeholder: "Nombre" },
+    { id: "Name", name: "name", type: "input", placeholder: "Name" },
     {
-      id: "Apellido",
+      id: "Last Name",
       name: "lastName",
       type: "input",
-      placeholder: "Apellido",
+      placeholder: "Last Name",
     },
 
-    { id: "Contacto", name: "contact", type: "input", placeholder: "12345678" },
+    { id: "Contact", name: "contact", type: "input", placeholder: "12345678" },
     {
-      id: "Correo",
+      id: "Email",
       name: "email",
       type: "input",
-      placeholder: "correo@mail.com",
+      placeholder: "email@mail.com",
     },
 
     {
-      id: "Provincia",
+      id: "Province",
       name: "province",
       type: "select",
-      placeholder: "Selecciona la provincia",
+      placeholder: "Select the province",
       options: Object.keys(regions).map((each) => {
         return { value: each, label: each };
       }),
     },
     {
-      id: "Municipio",
+      id: "Municipality",
       name: "municipality",
       type: "select",
-      placeholder: "Selecciona el municipio",
+      placeholder: "Select the municipality",
       dependentField: "province",
     },
     {
-      id: "Direccion",
+      id: "Address",
       name: "address",
       type: "input",
-      placeholder: "Calle a entre b y c",
+      placeholder: "Street between and",
     },
     {
-      id: "Tipo de usuario",
+      id: "User Type",
       name: "role",
       type: "select",
-      placeholder: "Selecciona el tipo",
+      placeholder: "Select type",
       options: [
-        { value: "CLIENT", label: "Cliente" },
-        { value: "TECHNICIAN", label: "Tecnico" },
+        { value: "CLIENT", label: "Client" },
+        { value: "TECHNICIAN", label: "Technician" },
       ],
     },
   ];
@@ -111,7 +111,7 @@ const EditUser = () => {
     <>
       <Form
         fields={fields}
-        title="Editar Usuario"
+        title="Edit User"
         initialValues={info}
         onSubmit={handleSubmit}
       ></Form>

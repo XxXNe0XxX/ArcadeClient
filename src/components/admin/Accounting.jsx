@@ -15,11 +15,11 @@ const Accounting = () => {
     const fetchData = async () => {
       try {
         const response = await axiosPrivate.get(
-          `/api/accounting?currency=${currency}`
+          `/api/accounting?currency=${currency}`,
         );
         setStatistics(response.data);
       } catch (error) {
-        setError("Error al obtener los datos");
+        setError("Error retrieving data");
       }
     };
 
@@ -31,7 +31,7 @@ const Accounting = () => {
   }
 
   if (!statistics) {
-    return <div>Cargando...</div>;
+    return <div>Loading...</div>;
   }
 
   const {
@@ -58,7 +58,7 @@ const Accounting = () => {
       {
         label: `${label} (${currency})`,
         data: monthlyLabels?.map((month) =>
-          data[month]?.[currency]?.toFixed(2)
+          data[month]?.[currency]?.toFixed(2),
         ),
         borderColor: "#DC5F00", // Line color
         backgroundColor: "#373A40", // Background color
@@ -108,14 +108,14 @@ const Accounting = () => {
 
   const netProfitData = generateChartData(
     monthlyNetProfit,
-    "Ganancia Neta Mensual"
+    "Monthly Net Profit",
   );
 
   const topClientsData = {
     labels: topClients?.map((client) => client.clientID),
     datasets: [
       {
-        label: `Ingresos (${currency})`,
+        label: `Revenue (${currency})`,
         data: topClients?.map((client) => client.revenue[currency]?.toFixed(2)),
         backgroundColor: "#DC5F00", // Bar color
       },
@@ -124,47 +124,47 @@ const Accounting = () => {
 
   const summaryData = [
     {
-      label: `Ingresos Totales (${currency})`,
+      label: `Total Revenue (${currency})`,
       value: totalRevenue?.[currency]?.toFixed(2),
     },
     {
-      label: `Gastos Totales (${currency})`,
+      label: `Total Expenses (${currency})`,
       value: totalExpenses?.[currency]?.toFixed(2),
     },
     {
-      label: `Ganancia Neta (${currency})`,
+      label: `Net Profit (${currency})`,
       value: netProfit?.[currency]?.toFixed(2),
     },
     {
-      label: `Margen de Ganancia Neta (${currency})`,
+      label: `Net Profit Margin (${currency})`,
       value: `${netProfitMargin?.[currency]?.toFixed(2)}%`,
     },
     {
-      label: "Total de Clientes",
+      label: "Total Clients",
       value: totalClients,
     },
     {
-      label: `Ingreso Promedio por Usuario (${currency})`,
+      label: `Average Revenue per User (${currency})`,
       value: averageRevenuePerUser?.[currency]?.toFixed(2),
     },
     {
-      label: `Tasa de Crecimiento de Ingresos (${currency})`,
+      label: `Revenue Growth Rate (${currency})`,
       value: `${revenueGrowthRate?.[currency]?.toFixed(2)}%`,
     },
     {
-      label: `Tasa de Crecimiento de Gastos (${currency})`,
+      label: `Expense Growth Rate (${currency})`,
       value: `${expenseGrowthRate?.[currency]?.toFixed(2)}%`,
     },
     {
-      label: `Valor Promedio de Transacción (ADD) (${currency})`,
+      label: `Average Transaction Value (ADD) (${currency})`,
       value: averageTransactionValue.ADD[currency]?.toFixed(2),
     },
     {
-      label: `Valor Promedio de Transacción (SUBTRACT) (${currency})`,
+      label: `Average Transaction Value (SUBTRACT) (${currency})`,
       value: averageTransactionValue.SUBTRACT[currency]?.toFixed(2),
     },
     {
-      label: `Valor Promedio de Transacción (EXPENSE) (${currency})`,
+      label: `Average Transaction Value (EXPENSE) (${currency})`,
       value: averageTransactionValue.EXPENSE[currency]?.toFixed(2),
     },
   ];
@@ -172,9 +172,9 @@ const Accounting = () => {
   return (
     <div className="flex-col items-center ">
       <div className="w-full flex flex-wrap sm:justify-between justify-center items-center p-1 gap-2">
-        <h1 className="text-xl">Contabilidad y finanzas</h1>
+        <h1 className="text-xl">Accounting and Finance</h1>
         <div className="flex items-center gap-2">
-          <h1>Selecciona la moneda: </h1>
+          <h1>Select currency: </h1>
           <select
             onChange={(e) => setCurrency(e.target.value)}
             className="p-1 border rounded-md"
@@ -187,30 +187,30 @@ const Accounting = () => {
       </div>
       <div className="flex flex-wrap justify-center gap-6">
         <div className="max-w-[800px] w-full h-96  text-color4 border border-color1 p-2 rounded-md">
-          <h2>Ingresos Mensuales</h2>
+          <h2>Monthly Revenue</h2>
           <Line
-            data={generateChartData(monthlyRevenue, "Ingresos Mensuales")}
+            data={generateChartData(monthlyRevenue, "Monthly Revenue")}
             options={chartOptions}
           />
         </div>
         <div className="max-w-[800px] w-full h-96  text-color4 border border-color1 p-2 rounded-md">
-          <h2>Gastos Mensuales</h2>
+          <h2>Monthly Expenses</h2>
           <Line
-            data={generateChartData(monthlyExpenses, "Gastos Mensuales")}
+            data={generateChartData(monthlyExpenses, "Monthly Expenses")}
             options={chartOptions}
           />
         </div>
         <div className="max-w-[800px] w-full h-96  text-color4 border border-color1 p-2 rounded-md">
-          <h2>Ganancia Neta Mensual</h2>
+          <h2>Monthly Net Profit</h2>
           <Line data={netProfitData} options={chartOptions} />
         </div>
         <div className="max-w-[800px] w-full h-96  text-color4 border border-color1 p-2 rounded-md">
-          <h2>Principales Clientes por ingreso</h2>
+          <h2>Top Clients by Revenue</h2>
           <Bar data={topClientsData} options={chartOptions} />
         </div>
       </div>
       <div className=" max-w-[800px] m-auto my-10">
-        <Table data={summaryData} title="Resumen de Estadísticas" />
+        <Table data={summaryData} title="Statistics Summary" />
       </div>
     </div>
   );

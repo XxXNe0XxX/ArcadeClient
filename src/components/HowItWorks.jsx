@@ -3,18 +3,18 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const steps = [
   {
-    title: "Ir a una tienda",
-    description: "Dirígete a un local que tenga una máquina arcade.",
+    title: "Visit a Store",
+    description: "Head to a location that has an arcade machine.",
     image: "/assets/images/howto1.webp",
   },
   {
-    title: "Comprar QR",
-    description: "Adquiere un QR con la persona a cargo del local.",
+    title: "Buy QR Code",
+    description: "Get a QR code from the person in charge of the location.",
     image: "/assets/images/howto2.jpg",
   },
   {
-    title: "Escanear QR",
-    description: "Usa tu código QR en la máquina para comenzar una partida.",
+    title: "Scan QR Code",
+    description: "Use your QR code on the machine to start a game.",
     image: "/assets/images/howto3.webp",
   },
 ];
@@ -42,9 +42,9 @@ const HowItWorks = () => {
       {/* Title Section */}
       <div className="text-center py-5">
         <h1 className="text-4xl font-press-start font-bold text-orange-500">
-          Cómo Funciona
+          How It Works
         </h1>
-        <p className="text-gray-600 mt-2">Sigue estos sencillos pasos</p>
+        <p className="text-gray-600 mt-2">Follow these simple steps</p>
       </div>
 
       {/* Steps Indicator */}
@@ -118,7 +118,7 @@ const HowItWorks = () => {
               }`} // Disable button when animating
               disabled={isAnimating}
             >
-              Anterior
+              Previous
             </button>
           ) : (
             <div className="w-24"></div>
@@ -131,7 +131,7 @@ const HowItWorks = () => {
               }`} // Disable button when animating
               disabled={isAnimating}
             >
-              Siguiente
+              Next
             </button>
           ) : (
             <div className="w-24"></div>
