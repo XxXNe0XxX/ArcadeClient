@@ -24,7 +24,7 @@ const DashHeader = () => {
   }, [location]);
 
   return (
-    <nav className="text-color4 z-20 sticky w-full p-1 flex items-center justify-between bg-color4 font-pixel-emulator tracking-tighter ">
+    <nav className="text-color4 z-20 sticky w-full p-4 flex items-center justify-between bg-color4 font-pixel-emulator tracking-tighter ">
       <div
         className={` ${
           open ? "w-[250px]" : "w-0"
