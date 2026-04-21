@@ -39,12 +39,12 @@ const Navbar = () => {
     <>
       {!location.pathname.includes("/dash") &&
         !location.pathname.includes("/clientdash") && (
-          <nav className="text-color4 z-20 flex items-center justify-between bg-repeat bg-bottom bg-contain fixed top-0 left-0 w-full shadow-lg bg-[url('/assets/images/bricks.png')]">
+          <nav className="text-color4 z-20 flex items-center justify-between bg-repeat bg-bottom bg-contain fixed top-0 left-0 w-full shadow-lg bg-[url('/assets/images/bricks.png')]  p-2">
             {/* Background Overlay */}
-            <div className="flex absolute justify-center w-full h-full -z-30 ">
-              <div className="bg-black opacity-20 flex-grow h-16"></div>
+            <div className="flex absolute justify-center w-full h-full -z-30">
+              <div className="bg-black opacity-20 flex-grow h-20"></div>
               <div
-                className="bg-black opacity-20 w-[60px] hover:bg-transparent hover:opacity-100 transition-all h-16"
+                className="bg-black opacity-20 w-[60px] hover:bg-transparent hover:opacity-100 transition-all h-20"
                 onClick={() => {
                   setCount((prev) => prev - 1);
                 }}
@@ -55,7 +55,7 @@ const Navbar = () => {
                   </Link>
                 )}
               </div>
-              <div className="bg-black opacity-20 flex-grow h-16"></div>
+              <div className="bg-black opacity-20 flex-grow h-20"></div>
             </div>
 
             {/* Sidebar Menu */}
