@@ -40,7 +40,7 @@ const ClientExchangeRates = () => {
           )}
         </div>
       ) : (
-        <div>No hay tasas de cambio disponibles</div>
+        <div>No exchange rates available</div>
       )}
     </>
   );

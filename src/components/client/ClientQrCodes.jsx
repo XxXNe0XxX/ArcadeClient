@@ -36,7 +36,7 @@ const ClientQrCodes = () => {
 
   return (
     <div className="">
-      <Table data={qrCodes} title={"Codigos QR"} onEdit={handleEdit} />
+      <Table data={qrCodes} title={"QR Codes"} onEdit={handleEdit} />
     </div>
   );
 };

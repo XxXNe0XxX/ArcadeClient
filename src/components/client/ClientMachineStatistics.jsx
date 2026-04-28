@@ -29,7 +29,7 @@ const ClientMachineStatistics = () => {
     <div>
       {data && (
         <div>
-          <Table data={data} title={"Estadisticas de uso"} />
+          <Table data={data} title={"Usage Statistics"} />
         </div>
       )}
     </div>

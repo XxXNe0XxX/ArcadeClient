@@ -18,66 +18,65 @@ const ClientDashHeader = () => {
   }, [location]);
 
   return (
-    <nav className="text-color4 z-20 sticky w-scree p-1 flex items-center justify-between bg-color4 font-pixel-emulator tracking-tighter ">
+    <nav className="text-color4 z-20 sticky w-full p-4 flex items-center justify-between bg-color4 font-pixel-emulator tracking-tighter ">
       <div
         className={` ${
           open ? "w-[250px]" : "w-0"
-        } fixed h-full z-10 top-0 left-0 bg-color2 overflow-x-hidden transition-all py-3 flex flex-col`}
-      >
+        } fixed h-full z-10 top-0 left-0 bg-color2 overflow-x-hidden transition-all py-3 flex flex-col`}>
         <div className="flex justify-between">
           <Link to={"profile"}>
-            <button className="text-color1 border bg-color4  ml-2 px-2 rounded-md text-3xl">
+            <button className="text-color1 border bg-color4 ml-2 px-2 rounded-md text-3xl">
               {localStorage.getItem("email").charAt(0)}
             </button>
           </Link>
           <button
-            className=" group text-end px-2 "
+            className="group text-end px-2"
             onClick={() => setIsOpen(!open)}
           >
-            <span className="group-hover:border-color1 group-hover:text-color1 transition-colors border p-1  ">
+            <span className="group-hover:border-color1 group-hover:text-color1 transition-colors border p-1">
               X
             </span>
           </button>
         </div>
-        <ul className="p-3  *:h-8 flex flex-col justify-center gap-6 ">
+        <ul className="p-3 *:h-8 flex flex-col justify-center gap-6 overflow-hidden">
           <Link to="/clientdash">
-            <li className="hover:border-color1 hover:text-color1 border p-1 transition-all">
-              <FontAwesomeIcon icon={faHouseChimney} /> Inicio
+            <li className="hover:border-color1 hover:rounded-none rounded-lg hover:text-color1 border p-1 transition-all w-full">
+              <FontAwesomeIcon icon={faHouseChimney} /> Home
             </li>
           </Link>
           <Link to="transactions">
-            <li className="hover:border-color1  hover:text-color1 border p-1 transition-all">
-              <FontAwesomeIcon icon={faArrowRightArrowLeft} /> Transacciones
+            <li className="hover:border-color1 hover:rounded-none rounded-lg hover:text-color1 border p-1 transition-all w-full">
+              <FontAwesomeIcon icon={faArrowRightArrowLeft} /> Transactions
             </li>
           </Link>
           <Link to="recoverqr">
-            <li className="hover:border-color1  hover:text-color1 border p-1 transition-all">
-              <FontAwesomeIcon icon={faQrcode} /> Recuperar QR
+            <li className="hover:border-color1 hover:rounded-none rounded-lg hover:text-color1 border p-1 transition-all w-full">
+              <FontAwesomeIcon icon={faQrcode} /> Recover QR
             </li>
           </Link>
           <Link to="generate">
-            <li className="hover:border-color1 hover:text-color1 border p-1 transition-all ">
-              <FontAwesomeIcon icon={faQrcode} /> Generar QR
+            <li className="hover:border-color1 hover:rounded-none rounded-lg hover:text-color1 border p-1 transition-all w-full">
+              <FontAwesomeIcon icon={faQrcode} /> Generate QR
             </li>
           </Link>
           <Link to="sessions">
-            <li className="hover:border-color1 hover:text-color1 border p-1 transition-all ">
-              <FontAwesomeIcon icon={faChartBar} /> Sesiones
+            <li className="hover:border-color1 hover:rounded-none rounded-lg hover:text-color1 border p-1 transition-all w-full">
+              <FontAwesomeIcon icon={faChartBar} /> Sessions
             </li>
           </Link>
           <Link to="statistics">
-            <li className="hover:border-color1 hover:text-color1 border p-1 transition-all ">
-              <FontAwesomeIcon icon={faChartBar} /> Estadisticas
+            <li className="hover:border-color1 hover:rounded-none rounded-lg hover:text-color1 border p-1 transition-all w-full">
+              <FontAwesomeIcon icon={faChartBar} /> Statistics
             </li>
           </Link>
           <Link to="qrcodes">
-            <li className="hover:border-color1 hover:text-color1 border p-1 transition-all ">
-              <FontAwesomeIcon icon={faQrcode} /> Codigos QR
+            <li className="hover:border-color1 hover:rounded-none rounded-lg hover:text-color1 border p-1 transition-all w-full">
+              <FontAwesomeIcon icon={faQrcode} /> QR Codes
             </li>
           </Link>
           <Link to="support">
-            <li className="hover:border-color1 hover:text-color1 border p-1 transition-all ">
-              <FontAwesomeIcon icon={faWrench} /> Soporte
+            <li className="hover:border-color1 hover:rounded-none rounded-lg hover:text-color1 border p-1 transition-all w-full">
+              <FontAwesomeIcon icon={faWrench} /> Support
             </li>
           </Link>
         </ul>
@@ -86,7 +85,7 @@ const ClientDashHeader = () => {
         className="text-color2 flex gap-2"
         onClick={() => setIsOpen(true)}
       >
-        <img className="h-6 w-6" src="/assets/icons/joystick.png"></img>Menu
+        <img className="h-6 w-6" src="/assets/icons/joystick.png" alt="Menu icon" />Menu
       </button>
       <h1 className="text-color1">
         <Logout />

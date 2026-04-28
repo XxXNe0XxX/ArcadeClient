@@ -33,8 +33,8 @@ const GrowthRate = () => {
 
   return (
     <div className=" flex flex-col gap-2 items bg-color2 rounded-md h-fit p-1">
-      <div className="flex text-sm items-center bg-color2  w-full justify-between rounded-md">
-        Tasa de crecimiento
+      <div className="flex text-sm items-center bg-color2 w-full justify-between rounded-md">
+        Growth Rate
         <h1 className="bg-color1 p-1 rounded-md">{data?.salesGrowthRate} %</h1>
       </div>
       <div className=" flex gap-2">

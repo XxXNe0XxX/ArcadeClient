@@ -37,19 +37,19 @@ const ProfitMargin = () => {
       <div className="flex flex-col  items-start bg-color2 p-1 w-full justify-center  rounded-md">
         <div className="flex text-sm gap-2 w-full *:flex-grow ">
           <div className="flex flex-col ">
-            <h1 className="text-center">Ganancias</h1>
-            <ul className="bg-color1 p-1  rounded-md ">
+            <h1 className="text-center">Profit</h1>
+            <ul className="bg-color1 p-1 rounded-md">
               {data?.map((each, i) => {
                 return (
                   <li key={i}>
                     {each.currency} {each.profit}
                   </li>
                 );
-              })}{" "}
+              })}
             </ul>
           </div>
-          <div className="flex flex-col  h-full ">
-            <h1 className="text-center">Gastos</h1>
+          <div className="flex flex-col h-full">
+            <h1 className="text-center">Cost</h1>
             <ul className="bg-color3 p-1 rounded-md">
               {data?.map((each, i) => {
                 return (
@@ -57,11 +57,11 @@ const ProfitMargin = () => {
                     {each.currency} {each.cost}
                   </li>
                 );
-              })}{" "}
+              })}
             </ul>
           </div>
-          <div className="flex flex-col  h-full">
-            <h1 className="text-center">Ingresos</h1>
+          <div className="flex flex-col h-full">
+            <h1 className="text-center">Revenue</h1>
             <ul className="bg-color3 p-1 rounded-md">
               {data?.map((each, i) => {
                 return (
@@ -69,7 +69,7 @@ const ProfitMargin = () => {
                     {each.currency} {each.revenue}
                   </li>
                 );
-              })}{" "}
+              })}
             </ul>
           </div>
         </div>
@@ -87,10 +87,10 @@ const ProfitMargin = () => {
           className="border rounded-md p-1 w-full"
           defaultValue={"month"}
         >
-          <option value={"day"}>Dia</option>
-          <option value={"week"}>Semana</option>
-          <option value={"month"}>Mes</option>
-          <option value={"year"}>Año</option>
+          <option value={"day"}>Day</option>
+          <option value={"week"}>Week</option>
+          <option value={"month"}>Month</option>
+          <option value={"year"}>Year</option>
         </select>
       </div>
     </div>

@@ -27,13 +27,13 @@ const ClientProfile = () => {
   return (
     <section className=" max-w-[800px] m-auto flex flex-col items-start justify-start h-full gap-2 w-full p-4 ">
       <ul className="flex flex-col gap-2 bg-color2 p-2 rounded-md w-full">
-        <li>Nombre: {info?.User?.Name}</li>
-        <li>Apellido: {info?.User?.Name}</li>
-        <li>Correo: {info?.User?.Email}</li>
-        <li>Contacto: {info?.User?.Contact}</li>
-        <li>Direccion: {info?.User?.Address}</li>
-        <li>Municipio: {info?.User?.Municipality}</li>
-        <li>Provincia: {info?.User?.Province}</li>
+        <li>Name: {info?.User?.Name}</li>
+        <li>Last Name: {info?.User?.Name}</li>
+        <li>Email: {info?.User?.Email}</li>
+        <li>Contact: {info?.User?.Contact}</li>
+        <li>Address: {info?.User?.Address}</li>
+        <li>Municipality: {info?.User?.Municipality}</li>
+        <li>Province: {info?.User?.Province}</li>
         <li className="bg-color1 rounded-md p-1 w-fit">
           Balance: {info?.Credit_balance}
         </li>

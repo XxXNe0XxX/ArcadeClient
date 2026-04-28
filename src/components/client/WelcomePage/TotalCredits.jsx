@@ -47,19 +47,19 @@ const TotalCredits = () => {
 
   return (
     <div className="flex flex-col gap-2 items bg-color2 rounded-md h-fit p-1">
-      <div className="flex text-sm items-center bg-color2  w-full justify-between rounded-md">
-        Creditos vendidos
+      <div className="flex text-sm items-center bg-color2 w-full justify-between rounded-md">
+        Credits Sold
         <h1 className="bg-color1 p-1 rounded-md">
           {creditsSold?.totalCreditsSold}{" "}
         </h1>
       </div>
-      <div className="flex text-sm items-center bg-color2  w-full justify-between rounded-md">
-        Promedio de creditos vendidos por cliente
+      <div className="flex text-sm items-center bg-color2 w-full justify-between rounded-md">
+        Average Credits Sold per Transaction
         <h1 className="bg-color1 p-1 rounded-md">
           {averageCreditsSold?.averageCreditsSoldPerTransaction}{" "}
         </h1>
       </div>
-      <div className=" flex gap-2">
+      <div className="flex gap-2">
         <input
           onChange={(e) => {
             setQuery({ ...query, date: e.target.value });
@@ -72,10 +72,10 @@ const TotalCredits = () => {
           className="border rounded-md p-1 w-full"
           defaultValue={"week"}
         >
-          <option value={"day"}>Dia</option>
-          <option value={"week"}>Semana</option>
-          <option value={"month"}>Mes</option>
-          <option value={"year"}>Año</option>
+          <option value={"day"}>Day</option>
+          <option value={"week"}>Week</option>
+          <option value={"month"}>Month</option>
+          <option value={"year"}>Year</option>
         </select>
       </div>
     </div>

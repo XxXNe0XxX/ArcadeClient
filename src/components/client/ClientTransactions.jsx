@@ -30,7 +30,7 @@ const ClientTransactions = () => {
 
   return (
     <>
-      <Table data={data} title={"Transacciones"} />
+      <Table data={data} title={"Transactions"} />
     </>
   );
 };

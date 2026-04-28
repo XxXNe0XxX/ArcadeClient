@@ -83,7 +83,7 @@ const GenerateQR = () => {
             min="0"
             value={creditAmount}
             onChange={(e) => setCreditAmount(e.target.value)}
-            placeholder="Creditos"
+            placeholder="Credits"
             className="w-full text-color4  p-2 mx-2"
             required
           />

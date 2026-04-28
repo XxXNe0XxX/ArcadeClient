@@ -35,7 +35,7 @@ const ClientGameSessions = () => {
 
   return (
     <div className="">
-      <Table data={sessions} title={"Sesiones"} />
+      <Table data={sessions} title={"Sessions"} />
     </div>
   );
 };

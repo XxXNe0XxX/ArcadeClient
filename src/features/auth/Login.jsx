@@ -125,11 +125,22 @@ const Login = () => {
       className="mt-[25vh] justify-center h-full rounded-md flex max-w-[600px] p-2 min-w-[350px] m-auto flex-col bg-color2"
     >
       <h1 className="text-3xl font-press-start py-2 text-center">LOGIN</h1>
-      <div className="p-4 m-4 border-color1 border-2 animate-pulse">
+      <div className="p-4 m-4 border-color1 border-2 animate-pulse font-sans">
         <p className="text-5xl text-color1 text-center pb-2">DEMO ONLY</p>
-        <p className="text-center text-xl">Use credentials below to login</p>
-        <p className="pl-7 pt-3">Email: admin@gmail.com</p>
-        <p className="pl-7 pt-1">Password: admin</p>
+        <div className="p-2 flex items-center justify-start">
+          <p className=" text-xl">Login to admin dashboard</p>
+          <div className="w-full">
+            <p className="pl-7 pt-3">Email: admin@gmail.com</p>
+            <p className="pl-7 pt-1">Password: admin</p>
+          </div>
+        </div>
+        <div className="p-2 flex items-center justify-start">
+          <p className=" text-xl">Login to business client dashboard</p>
+          <div className="w-full">
+            <p className="pl-7 pt-3">Email: tapanes@gmail.com</p>
+            <p className="pl-7 pt-1">Password: luistapanes</p>
+          </div>
+        </div>
       </div>
       <input
         className="border-color3 border-2 mx-4 my-1 p-2"
