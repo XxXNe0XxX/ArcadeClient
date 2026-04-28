@@ -126,7 +126,7 @@ const Public = () => {
         {/* Animated Headline */}
         <div className="relative -mb-40"></div>
         <motion.h1
-          className="relative text-white text-5xl md:text-6xl font-bold font-press-start text-center px-4"
+          className="relative text-white text-3xl md:text-6xl font-bold font-press-start text-center px-4"
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 50 }}
