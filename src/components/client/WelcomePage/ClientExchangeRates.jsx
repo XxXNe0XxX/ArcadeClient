@@ -36,7 +36,7 @@ const ClientExchangeRates = () => {
                     {`${each.Rate}CUP`}
                   </h1>
                 </div>
-              )
+              ),
           )}
         </div>
       ) : (

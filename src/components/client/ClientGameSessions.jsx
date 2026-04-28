@@ -18,7 +18,7 @@ const ClientGameSessions = () => {
           signal: controller.signal,
         });
         const flattenedData = response.data.map((machine) =>
-          flattenObject(machine)
+          flattenObject(machine),
         );
         console.log(flattenedData);
         isMounted && setSessions(flattenedData);

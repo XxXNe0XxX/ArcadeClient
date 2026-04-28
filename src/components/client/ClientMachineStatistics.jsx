@@ -10,7 +10,7 @@ const ClientMachineStatistics = () => {
     const fetchMachineStatistics = async () => {
       try {
         const response = await axiosPrivate.get(
-          `api/client/machinestatistics/`
+          `api/client/machinestatistics/`,
         );
 
         setData(response.data);

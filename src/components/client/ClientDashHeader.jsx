@@ -22,7 +22,8 @@ const ClientDashHeader = () => {
       <div
         className={` ${
           open ? "w-[250px]" : "w-0"
-        } fixed h-full z-10 top-0 left-0 bg-color2 overflow-x-hidden transition-all py-3 flex flex-col`}>
+        } fixed h-full z-10 top-0 left-0 bg-color2 overflow-x-hidden transition-all py-3 flex flex-col`}
+      >
         <div className="flex justify-between">
           <Link to={"profile"}>
             <button className="text-color1 border bg-color4 ml-2 px-2 rounded-md text-3xl">
@@ -85,7 +86,12 @@ const ClientDashHeader = () => {
         className="text-color2 flex gap-2"
         onClick={() => setIsOpen(true)}
       >
-        <img className="h-6 w-6" src="/assets/icons/joystick.png" alt="Menu icon" />Menu
+        <img
+          className="h-6 w-6"
+          src="/assets/icons/joystick.png"
+          alt="Menu icon"
+        />
+        Menu
       </button>
       <h1 className="text-color1">
         <Logout />
