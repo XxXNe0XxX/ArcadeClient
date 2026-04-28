@@ -254,9 +254,9 @@ const Public = () => {
             backgroundImage: 'url("/assets/images/heroHD.png")',
           }}
         >
-          <div className="text-center p-5 absolute flex flex-col items-center justify-center h-full w-full">
+          <div className="text-center p-7 absolute flex flex-col items-center justify-center h-full w-full">
             <motion.div
-              className="relative p-6 rounded-full bg-black/50 overflow-hidden border border-white shadow-lg"
+              className="relative p-10 rounded-full bg-black/50 overflow-hidden border border-white shadow-lg"
               initial={{ opacity: 0, y: 50 }}
               whileInView="visible"
               viewport={{ once: true }}
